@@ -6,6 +6,25 @@
 		<!--android:orderInCategory="100"-->
 		<!--android:title="@string/action_settings"-->
 		<!--app:showAsAction="never"/>-->
+	<!--<item-->
+	<!--android:id="@+id/mm_qr_read"-->
+	<!--android:icon="@drawable/ic_menu_camera"-->
+	<!--android:title="@string/menu_qr_read"/>-->
+
+	<!--<item-->
+		<!--android:id="@+id/mm_call_main"-->
+		<!--android:icon="@drawable/ic_menu_slideshow"-->
+		<!--android:title="@string/menu_call_main"/>-->
+
+	<item
+		android:id="@+id/mm_call_web"
+		android:icon="@drawable/ic_menu_send"
+		android:title="@string/menu_call_web"/>
+	<!--<item-->
+		<!--android:id="@+id/mm_stand_alone"-->
+		<!--android:icon="@drawable/ic_menu_gallery"-->
+		<!--android:title="@string/menu_stand_alone"/>-->
+
 	<item
 		android:id="@+id/mm_prefarence"
 		android:icon="@drawable/ic_menu_manage"

@@ -1,0 +1,71 @@
+<?xml version="1.0" encoding="utf-8"?>
+<menu xmlns:android="http://schemas.android.com/apk/res/android"
+	  xmlns:app="http://schemas.android.com/apk/res-auto"
+	  xmlns:tools="http://schemas.android.com/tools">
+
+	<!--<group android:checkableBehavior="single">-->
+
+	<item
+		android:id="@+id/close_web_menu"
+		android:icon="@android:drawable/ic_lock_power_off"
+		android:title="@string/wd_web_menu_closs"/>
+
+	<item
+		android:id="@+id/web_menu_rewrite"
+		android:checkable="false"
+		android:checked="false"
+		android:title="@string/wv_menu_rewrite"/>
+	<!--</group>-->
+	<item android:title="@string/wv_menu_movement">
+		<menu
+			>
+			<item
+				android:id="@+id/web_menu_url_change"
+				android:checkable="false"
+				android:title="@string/wv_menu_url_change"/>
+			<item
+				android:id="@+id/web_menu_hysteresis"
+				android:checkable="false"
+				android:title="@string/wv_menu_hysteresis"/>
+			<item
+				android:id="@+id/web_menu_backpage"
+				android:title="@string/wv_menu_backpage"/>
+			<item
+				android:id="@+id/web_menu_prepage"
+				android:title="@string/wv_menu_prepage"/>
+		</menu>
+	</item>
+
+	<item
+		android:title="@string/wv_menu_bookmark">
+		<menu
+			>
+			<item
+				android:id="@+id/web_menu_bookmark_set"
+				android:title="@string/wv_menu_bookmark_set"/>
+			<item
+				android:id="@+id/web_menu_bookmark_get"
+				android:title="@string/wv_menu_bookmark_select"/>
+		</menu>
+	</item>
+
+	<item
+		android:title="@string/mm_other">
+		<menu>
+			<item
+				android:id="@+id/web_menu_rescaling"
+				android:checkable="false"
+				android:title="@string/wv_menu_rescaling"/>
+			<item
+				android:id="@+id/web_menu_zoom_enable"
+				android:checkable="false"
+				android:icon="@android:drawable/ic_menu_directions"
+				android:title="@string/wv_menu_zoom_enable"/>
+			<item
+			android:id="@+id/web_menu_quit"
+			android:checkable="false"
+			android:icon="@android:drawable/ic_lock_power_off"
+			android:title="終了"/>
+		</menu>
+	</item>
+</menu>
