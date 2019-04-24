@@ -22,7 +22,7 @@ import java.text.SimpleDateFormat;
 import java.util.Date;
 
 
-public class CS_Util {
+public class Util {
 	Context context;
 
 	//	public CS_Util(Context context){

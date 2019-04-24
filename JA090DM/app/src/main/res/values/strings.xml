@@ -1,5 +1,5 @@
 <resources>
-    <string name="app_name">JA090DM</string>
+	<string name="app_name">JA090DM</string>
 	<string name="banner_ad_unit_id">ca-app-pub-3940256099942544/6300978111</string>
 
 	<string name="nend_apiKey">c5cb8bc474345961c6e7a9778c947957ed8e1e4f</string>
@@ -70,7 +70,10 @@
 	<string name="menu_qr_read">QRコードから接続</string>
 	<string name="menu_call_main">メイン画面として接続</string>
 	<string name="menu_stand_alone">スタート</string>
+	<string name="menu_call_top">トップ画面</string>
 	<string name="menu_call_web">ウェブ</string>
+	<string name="menu_call_web2">別画面ウェブ</string>
+
 
 	<string name="menu_setting">設定</string>
 	<string name="menu_quit">終了</string>
@@ -231,9 +234,15 @@
 	</string-array>
 
 	<array name="url_array">
-		<item>@string/rootUrlStr</item>
-		<item>@string/companyUrlStr</item>
-		<item>@string/homeUrlStr</item>
+		<item>
+			@string/rootUrlStr
+		</item>
+		<item>
+			@string/companyUrlStr
+		</item>
+		<item>
+			@string/homeUrlStr
+		</item>
 	</array>
 
 	<string-array name="typeSelectList">

@@ -14,12 +14,12 @@ import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
 import android.os.Bundle;
 //
-//public class CS_Web_Activity extends AppCompatActivity {
+//public class Web_Activity extends AppCompatActivity {
 //
 //	@Override
 //	protected void onCreate(Bundle savedInstanceState) {
 //		super.onCreate(savedInstanceState);
-//		setContentView(R.layout.activity_cs_web);
+//		setContentView(R.layout.activity_web);
 //	}
 //}
 
@@ -60,7 +60,7 @@ import android.widget.Toast;
 //import android.widget.TextView;
 //import android.widget.Toast;
 
-public class CS_Web_Activity extends AppCompatActivity  implements NavigationView.OnNavigationItemSelectedListener  {
+public class Web_Activity extends AppCompatActivity  implements NavigationView.OnNavigationItemSelectedListener  {
 
 	public WebView webView;
 	public WebSettings settings;
@@ -142,7 +142,7 @@ public class CS_Web_Activity extends AppCompatActivity  implements NavigationVie
 			requestWindowFeature(Window.FEATURE_NO_TITLE);                            //タイトルバーを非表示
 
 			requestWindowFeature(Window.FEATURE_INDETERMINATE_PROGRESS);        //ローディングをタイトルバーのアイコンとして表示☆リソースを読み込む前にセットする
-			setContentView(R.layout.activity_cs_web);
+			setContentView(R.layout.activity_web);
 			initDrawer();
 
 			webView = ( WebView ) findViewById(R.id.webview);        // Webビューの作成
@@ -299,7 +299,7 @@ public class CS_Web_Activity extends AppCompatActivity  implements NavigationVie
 					boolean retBool = false;
 					try {
 						retBool = funcSelected(menuItem);
-						CS_Web_Activity.this.drawer.closeDrawers();
+						Web_Activity.this.drawer.closeDrawers();
 					} catch (Exception e) {
 						myLog(TAG, dbMsg + "で" + e.toString());
 						return false;
@@ -536,7 +536,7 @@ public class CS_Web_Activity extends AppCompatActivity  implements NavigationVie
 
 				case R.id.md_prefarence:      //設定
 				case R.id.mm_prefarence:      //設定
-					Intent settingsIntent = new Intent(CS_Web_Activity.this , MyPreferencesActivty.class);
+					Intent settingsIntent = new Intent(Web_Activity.this , MyPreferencesActivty.class);
 					startActivityForResult(settingsIntent , REQUEST_PREF);//		StartActivity(intent);
 					break;
 //				case R.id.md_quit:
@@ -582,7 +582,7 @@ public class CS_Web_Activity extends AppCompatActivity  implements NavigationVie
 //			if(result != null) {
 //				String dataURI  = result.getContents();
 //				dbMsg = ",dataURI="+dataURI;
-//				Intent webIntent = new Intent(this , CS_Web_Activity.class);
+//				Intent webIntent = new Intent(this , Web_Activity.class);
 //				webIntent.putExtra("dataURI" , dataURI);
 //				startActivity(webIntent);
 //			} else {
@@ -924,17 +924,17 @@ public class CS_Web_Activity extends AppCompatActivity  implements NavigationVie
 
 	///////////////////////////////////////////////////////////////////////////////////
 	public void messageShow(String titolStr , String mggStr) {
-		CS_Util UTIL = new CS_Util();
-		UTIL.messageShow(titolStr , mggStr , CS_Web_Activity.this);
+		Util UTIL = new Util();
+		UTIL.messageShow(titolStr , mggStr , Web_Activity.this);
 	}
 
 	public static void myLog(String TAG , String dbMsg) {
-		CS_Util UTIL = new CS_Util();
+		Util UTIL = new Util();
 		UTIL.myLog(TAG , dbMsg);
 	}
 
 	public static void myErrorLog(String TAG , String dbMsg) {
-		CS_Util UTIL = new CS_Util();
+		Util UTIL = new Util();
 		UTIL.myErrorLog(TAG , dbMsg);
 	}
 

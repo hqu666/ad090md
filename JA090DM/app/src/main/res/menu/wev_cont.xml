@@ -61,11 +61,12 @@
 				android:checkable="false"
 				android:icon="@android:drawable/ic_menu_directions"
 				android:title="@string/wv_menu_zoom_enable"/>
-			<item
-			android:id="@+id/web_menu_quit"
-			android:checkable="false"
-			android:icon="@android:drawable/ic_lock_power_off"
-			android:title="終了"/>
 		</menu>
 	</item>
+	<item
+		android:id="@+id/web_menu_quit"
+		android:checkable="false"
+		android:icon="@android:drawable/ic_lock_power_off"
+		android:title="終了"/>
+
 </menu>
