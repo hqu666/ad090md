@@ -1,0 +1,38 @@
+<resources>
+    <string name="app_name">JA090DM</string>
+	<string name="banner_ad_unit_id">ca-app-pub-3940256099942544/6300978111</string>
+
+	<string name="nend_apiKey">c5cb8bc474345961c6e7a9778c947957ed8e1e4f</string>
+	<string name="nend_spotID">3174</string>
+
+	<string
+		name="navigation_drawer_open">
+		Open
+		navigation
+		drawer
+	</string>
+	<string
+		name="navigation_drawer_close">
+		Close
+		navigation
+		drawer
+	</string>
+	<string
+		name="nav_header_title">
+		Android
+		Studio
+	</string>
+	<string
+		name="nav_header_subtitle">
+		android.studio@android.com
+	</string>
+	<string
+		name="nav_header_desc">
+		Navigation
+		header
+	</string>
+	<string
+		name="action_settings">
+		Settings
+	</string>
+</resources>
