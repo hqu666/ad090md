@@ -12,19 +12,19 @@ public final class R {
     public static final class attr {
         private attr() {}
 
-        public static final int adSize = 0x7f03002b;
-        public static final int adSizes = 0x7f03002c;
-        public static final int adUnitId = 0x7f03002d;
+        public static final int adSize = 0x7f04002b;
+        public static final int adSizes = 0x7f04002c;
+        public static final int adUnitId = 0x7f04002d;
     }
     public static final class style {
         private style() {}
 
-        public static final int Theme_IAPTheme = 0x7f0f015a;
+        public static final int Theme_IAPTheme = 0x7f11015a;
     }
     public static final class styleable {
         private styleable() {}
 
-        public static final int[] AdsAttrs = { 0x7f03002b, 0x7f03002c, 0x7f03002d };
+        public static final int[] AdsAttrs = { 0x7f04002b, 0x7f04002c, 0x7f04002d };
         public static final int AdsAttrs_adSize = 0;
         public static final int AdsAttrs_adSizes = 1;
         public static final int AdsAttrs_adUnitId = 2;
