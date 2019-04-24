@@ -1,9 +1,9 @@
 -- Merging decision tree log ---
 manifest
-ADDED from H:\develop\an\workspace\a090jdm\JA090DM\app\src\main\AndroidManifest.xml:2:1-37:12
-INJECTED from H:\develop\an\workspace\a090jdm\JA090DM\app\src\main\AndroidManifest.xml:2:1-37:12
-INJECTED from H:\develop\an\workspace\a090jdm\JA090DM\app\src\main\AndroidManifest.xml:2:1-37:12
-INJECTED from H:\develop\an\workspace\a090jdm\JA090DM\app\src\main\AndroidManifest.xml:2:1-37:12
+ADDED from H:\develop\an\workspace\ad090md\JA090DM\app\src\main\AndroidManifest.xml:2:1-37:12
+INJECTED from H:\develop\an\workspace\ad090md\JA090DM\app\src\main\AndroidManifest.xml:2:1-37:12
+INJECTED from H:\develop\an\workspace\ad090md\JA090DM\app\src\main\AndroidManifest.xml:2:1-37:12
+INJECTED from H:\develop\an\workspace\ad090md\JA090DM\app\src\main\AndroidManifest.xml:2:1-37:12
 MERGED from [com.android.support:design:28.0.0] H:\develop\an\.gradle\caches\transforms-1\files-1.1\design-28.0.0.aar\30621e802d4ad14abb4bbf9c50a0341b\AndroidManifest.xml:17:1-24:12
 MERGED from [com.android.support:appcompat-v7:28.0.0] H:\develop\an\.gradle\caches\transforms-1\files-1.1\appcompat-v7-28.0.0.aar\524eb6776f871a754dec44b4953a41b0\AndroidManifest.xml:17:1-22:12
 MERGED from [com.google.android.gms:play-services-ads:17.2.0] H:\develop\an\.gradle\caches\transforms-1\files-1.1\play-services-ads-17.2.0.aar\c1b277041488e3536199781381db31de\AndroidManifest.xml:17:1-25:12
@@ -22,7 +22,7 @@ MERGED from [com.android.support.constraint:constraint-layout:1.1.3] H:\develop\
 MERGED from [com.android.support:support-media-compat:28.0.0] H:\develop\an\.gradle\caches\transforms-1\files-1.1\support-media-compat-28.0.0.aar\ed5857729c06f584e0e16df1d96438a6\AndroidManifest.xml:17:1-22:12
 MERGED from [com.android.support:animated-vector-drawable:28.0.0] H:\develop\an\.gradle\caches\transforms-1\files-1.1\animated-vector-drawable-28.0.0.aar\0ece7430697d19b71975e383b733c3ea\AndroidManifest.xml:17:1-22:12
 MERGED from [com.android.support:customtabs:28.0.0] H:\develop\an\.gradle\caches\transforms-1\files-1.1\customtabs-28.0.0.aar\a2f328918a1620e61bdb70c7afba58eb\AndroidManifest.xml:17:1-22:12
-MERGED from [:nendSDK-5.1.0] H:\develop\an\.gradle\caches\transforms-1\files-1.1\nendSDK-5.1.0.aar\44c692e99562b4d8450c73ce6e0bef3b\AndroidManifest.xml:2:1-42:12
+MERGED from [:nendSDK-5.1.0] H:\develop\an\.gradle\caches\transforms-1\files-1.1\nendSDK-5.1.0.aar\965ef4efa8e75fab634d3632d671a0e0\AndroidManifest.xml:2:1-42:12
 MERGED from [com.android.support:support-fragment:28.0.0] H:\develop\an\.gradle\caches\transforms-1\files-1.1\support-fragment-28.0.0.aar\0425d8f44b33ce560ffc14fe8ba69a92\AndroidManifest.xml:17:1-22:12
 MERGED from [com.android.support:recyclerview-v7:28.0.0] H:\develop\an\.gradle\caches\transforms-1\files-1.1\recyclerview-v7-28.0.0.aar\cd5d4cb0e1b5bbae8276b5f9c3b08497\AndroidManifest.xml:17:1-22:12
 MERGED from [com.android.support:support-core-ui:28.0.0] H:\develop\an\.gradle\caches\transforms-1\files-1.1\support-core-ui-28.0.0.aar\591af106a864b453cee99da3e8b9b363\AndroidManifest.xml:17:1-22:12
@@ -51,45 +51,45 @@ MERGED from [android.arch.lifecycle:livedata:1.1.1] H:\develop\an\.gradle\caches
 MERGED from [android.arch.lifecycle:livedata-core:1.1.1] H:\develop\an\.gradle\caches\transforms-1\files-1.1\livedata-core-1.1.1.aar\d682bf766466baaf0cdf64abc3eff4ff\AndroidManifest.xml:17:1-22:12
 MERGED from [android.arch.core:runtime:1.1.1] H:\develop\an\.gradle\caches\transforms-1\files-1.1\runtime-1.1.1.aar\7cd31df2dabc9f637ed7df851f741ee3\AndroidManifest.xml:17:1-22:12
 MERGED from [com.google.android.gms:play-services-ads-base:17.2.0] H:\develop\an\.gradle\caches\transforms-1\files-1.1\play-services-ads-base-17.2.0.aar\dade8fb525f67e953830276e443d215f\AndroidManifest.xml:2:1-9:12
-INJECTED from H:\develop\an\workspace\a090jdm\JA090DM\app\src\main\AndroidManifest.xml:2:1-37:12
-INJECTED from H:\develop\an\workspace\a090jdm\JA090DM\app\src\main\AndroidManifest.xml:2:1-37:12
-INJECTED from H:\develop\an\workspace\a090jdm\JA090DM\app\src\main\AndroidManifest.xml:2:1-37:12
+INJECTED from H:\develop\an\workspace\ad090md\JA090DM\app\src\main\AndroidManifest.xml:2:1-37:12
+INJECTED from H:\develop\an\workspace\ad090md\JA090DM\app\src\main\AndroidManifest.xml:2:1-37:12
+INJECTED from H:\develop\an\workspace\ad090md\JA090DM\app\src\main\AndroidManifest.xml:2:1-37:12
 	package
-		ADDED from H:\develop\an\workspace\a090jdm\JA090DM\app\src\main\AndroidManifest.xml:3:5-42
-		INJECTED from H:\develop\an\workspace\a090jdm\JA090DM\app\src\main\AndroidManifest.xml
-		INJECTED from H:\develop\an\workspace\a090jdm\JA090DM\app\src\main\AndroidManifest.xml
+		ADDED from H:\develop\an\workspace\ad090md\JA090DM\app\src\main\AndroidManifest.xml:3:5-42
+		INJECTED from H:\develop\an\workspace\ad090md\JA090DM\app\src\main\AndroidManifest.xml
+		INJECTED from H:\develop\an\workspace\ad090md\JA090DM\app\src\main\AndroidManifest.xml
 	android:versionName
-		INJECTED from H:\develop\an\workspace\a090jdm\JA090DM\app\src\main\AndroidManifest.xml
-		ADDED from H:\develop\an\workspace\a090jdm\JA090DM\app\src\main\AndroidManifest.xml:2:1-37:12
-		INJECTED from H:\develop\an\workspace\a090jdm\JA090DM\app\src\main\AndroidManifest.xml
+		INJECTED from H:\develop\an\workspace\ad090md\JA090DM\app\src\main\AndroidManifest.xml
+		ADDED from H:\develop\an\workspace\ad090md\JA090DM\app\src\main\AndroidManifest.xml:2:1-37:12
+		INJECTED from H:\develop\an\workspace\ad090md\JA090DM\app\src\main\AndroidManifest.xml
 	android:versionCode
-		INJECTED from H:\develop\an\workspace\a090jdm\JA090DM\app\src\main\AndroidManifest.xml
-		ADDED from H:\develop\an\workspace\a090jdm\JA090DM\app\src\main\AndroidManifest.xml:2:1-37:12
-		INJECTED from H:\develop\an\workspace\a090jdm\JA090DM\app\src\main\AndroidManifest.xml
+		INJECTED from H:\develop\an\workspace\ad090md\JA090DM\app\src\main\AndroidManifest.xml
+		ADDED from H:\develop\an\workspace\ad090md\JA090DM\app\src\main\AndroidManifest.xml:2:1-37:12
+		INJECTED from H:\develop\an\workspace\ad090md\JA090DM\app\src\main\AndroidManifest.xml
 	xmlns:android
-		ADDED from H:\develop\an\workspace\a090jdm\JA090DM\app\src\main\AndroidManifest.xml:2:11-69
+		ADDED from H:\develop\an\workspace\ad090md\JA090DM\app\src\main\AndroidManifest.xml:2:11-69
 uses-permission#android.permission.INTERNET
-ADDED from H:\develop\an\workspace\a090jdm\JA090DM\app\src\main\AndroidManifest.xml:4:2-63
+ADDED from H:\develop\an\workspace\ad090md\JA090DM\app\src\main\AndroidManifest.xml:4:2-63
 MERGED from [com.google.android.gms:play-services-ads-lite:17.2.0] H:\develop\an\.gradle\caches\transforms-1\files-1.1\play-services-ads-lite-17.2.0.aar\6b2a5c16bc40728485d9294d119dd04b\AndroidManifest.xml:23:5-67
 MERGED from [com.google.android.gms:play-services-ads-lite:17.2.0] H:\develop\an\.gradle\caches\transforms-1\files-1.1\play-services-ads-lite-17.2.0.aar\6b2a5c16bc40728485d9294d119dd04b\AndroidManifest.xml:23:5-67
 MERGED from [com.google.android.gms:play-services-measurement-sdk-api:16.3.0] H:\develop\an\.gradle\caches\transforms-1\files-1.1\play-services-measurement-sdk-api-16.3.0.aar\341bcf5f1b988aeba699abab84daf190\AndroidManifest.xml:23:5-67
 MERGED from [com.google.android.gms:play-services-measurement-sdk-api:16.3.0] H:\develop\an\.gradle\caches\transforms-1\files-1.1\play-services-measurement-sdk-api-16.3.0.aar\341bcf5f1b988aeba699abab84daf190\AndroidManifest.xml:23:5-67
-MERGED from [:nendSDK-5.1.0] H:\develop\an\.gradle\caches\transforms-1\files-1.1\nendSDK-5.1.0.aar\44c692e99562b4d8450c73ce6e0bef3b\AndroidManifest.xml:9:5-67
-MERGED from [:nendSDK-5.1.0] H:\develop\an\.gradle\caches\transforms-1\files-1.1\nendSDK-5.1.0.aar\44c692e99562b4d8450c73ce6e0bef3b\AndroidManifest.xml:9:5-67
+MERGED from [:nendSDK-5.1.0] H:\develop\an\.gradle\caches\transforms-1\files-1.1\nendSDK-5.1.0.aar\965ef4efa8e75fab634d3632d671a0e0\AndroidManifest.xml:9:5-67
+MERGED from [:nendSDK-5.1.0] H:\develop\an\.gradle\caches\transforms-1\files-1.1\nendSDK-5.1.0.aar\965ef4efa8e75fab634d3632d671a0e0\AndroidManifest.xml:9:5-67
 	android:name
-		ADDED from H:\develop\an\workspace\a090jdm\JA090DM\app\src\main\AndroidManifest.xml:4:19-61
+		ADDED from H:\develop\an\workspace\ad090md\JA090DM\app\src\main\AndroidManifest.xml:4:19-61
 uses-permission#android.permission.ACCESS_NETWORK_STATE
-ADDED from H:\develop\an\workspace\a090jdm\JA090DM\app\src\main\AndroidManifest.xml:5:2-75
+ADDED from H:\develop\an\workspace\ad090md\JA090DM\app\src\main\AndroidManifest.xml:5:2-75
 MERGED from [com.google.android.gms:play-services-ads-lite:17.2.0] H:\develop\an\.gradle\caches\transforms-1\files-1.1\play-services-ads-lite-17.2.0.aar\6b2a5c16bc40728485d9294d119dd04b\AndroidManifest.xml:24:5-79
 MERGED from [com.google.android.gms:play-services-ads-lite:17.2.0] H:\develop\an\.gradle\caches\transforms-1\files-1.1\play-services-ads-lite-17.2.0.aar\6b2a5c16bc40728485d9294d119dd04b\AndroidManifest.xml:24:5-79
 MERGED from [com.google.android.gms:play-services-measurement-sdk-api:16.3.0] H:\develop\an\.gradle\caches\transforms-1\files-1.1\play-services-measurement-sdk-api-16.3.0.aar\341bcf5f1b988aeba699abab84daf190\AndroidManifest.xml:24:5-79
 MERGED from [com.google.android.gms:play-services-measurement-sdk-api:16.3.0] H:\develop\an\.gradle\caches\transforms-1\files-1.1\play-services-measurement-sdk-api-16.3.0.aar\341bcf5f1b988aeba699abab84daf190\AndroidManifest.xml:24:5-79
-MERGED from [:nendSDK-5.1.0] H:\develop\an\.gradle\caches\transforms-1\files-1.1\nendSDK-5.1.0.aar\44c692e99562b4d8450c73ce6e0bef3b\AndroidManifest.xml:10:5-79
-MERGED from [:nendSDK-5.1.0] H:\develop\an\.gradle\caches\transforms-1\files-1.1\nendSDK-5.1.0.aar\44c692e99562b4d8450c73ce6e0bef3b\AndroidManifest.xml:10:5-79
+MERGED from [:nendSDK-5.1.0] H:\develop\an\.gradle\caches\transforms-1\files-1.1\nendSDK-5.1.0.aar\965ef4efa8e75fab634d3632d671a0e0\AndroidManifest.xml:10:5-79
+MERGED from [:nendSDK-5.1.0] H:\develop\an\.gradle\caches\transforms-1\files-1.1\nendSDK-5.1.0.aar\965ef4efa8e75fab634d3632d671a0e0\AndroidManifest.xml:10:5-79
 	android:name
-		ADDED from H:\develop\an\workspace\a090jdm\JA090DM\app\src\main\AndroidManifest.xml:5:19-73
+		ADDED from H:\develop\an\workspace\ad090md\JA090DM\app\src\main\AndroidManifest.xml:5:19-73
 application
-ADDED from H:\develop\an\workspace\a090jdm\JA090DM\app\src\main\AndroidManifest.xml:7:2-35:16
+ADDED from H:\develop\an\workspace\ad090md\JA090DM\app\src\main\AndroidManifest.xml:7:2-35:16
 MERGED from [com.android.support:design:28.0.0] H:\develop\an\.gradle\caches\transforms-1\files-1.1\design-28.0.0.aar\30621e802d4ad14abb4bbf9c50a0341b\AndroidManifest.xml:22:5-20
 MERGED from [com.android.support:design:28.0.0] H:\develop\an\.gradle\caches\transforms-1\files-1.1\design-28.0.0.aar\30621e802d4ad14abb4bbf9c50a0341b\AndroidManifest.xml:22:5-20
 MERGED from [com.google.android.gms:play-services-location:16.0.0] H:\develop\an\.gradle\caches\transforms-1\files-1.1\play-services-location-16.0.0.aar\88881ca9e47db33ae4a1dd7f0e34fda6\AndroidManifest.xml:7:5-20
@@ -114,8 +114,8 @@ MERGED from [com.google.android.gms:play-services-basement:16.0.1] H:\develop\an
 MERGED from [com.google.android.gms:play-services-basement:16.0.1] H:\develop\an\.gradle\caches\transforms-1\files-1.1\play-services-basement-16.0.1.aar\0e920d6d18405845c16f779fa4f1ce63\AndroidManifest.xml:22:5-26:19
 MERGED from [com.android.support.constraint:constraint-layout:1.1.3] H:\develop\an\.gradle\caches\transforms-1\files-1.1\constraint-layout-1.1.3.aar\b4dd2f64ee814477c4db36621be8a612\AndroidManifest.xml:9:5-20
 MERGED from [com.android.support.constraint:constraint-layout:1.1.3] H:\develop\an\.gradle\caches\transforms-1\files-1.1\constraint-layout-1.1.3.aar\b4dd2f64ee814477c4db36621be8a612\AndroidManifest.xml:9:5-20
-MERGED from [:nendSDK-5.1.0] H:\develop\an\.gradle\caches\transforms-1\files-1.1\nendSDK-5.1.0.aar\44c692e99562b4d8450c73ce6e0bef3b\AndroidManifest.xml:12:5-40:19
-MERGED from [:nendSDK-5.1.0] H:\develop\an\.gradle\caches\transforms-1\files-1.1\nendSDK-5.1.0.aar\44c692e99562b4d8450c73ce6e0bef3b\AndroidManifest.xml:12:5-40:19
+MERGED from [:nendSDK-5.1.0] H:\develop\an\.gradle\caches\transforms-1\files-1.1\nendSDK-5.1.0.aar\965ef4efa8e75fab634d3632d671a0e0\AndroidManifest.xml:12:5-40:19
+MERGED from [:nendSDK-5.1.0] H:\develop\an\.gradle\caches\transforms-1\files-1.1\nendSDK-5.1.0.aar\965ef4efa8e75fab634d3632d671a0e0\AndroidManifest.xml:12:5-40:19
 MERGED from [com.android.support:support-compat:28.0.0] H:\develop\an\.gradle\caches\transforms-1\files-1.1\support-compat-28.0.0.aar\78c33361e0f0fe9ef59693854c0a7634\AndroidManifest.xml:22:5-94
 MERGED from [com.android.support:support-compat:28.0.0] H:\develop\an\.gradle\caches\transforms-1\files-1.1\support-compat-28.0.0.aar\78c33361e0f0fe9ef59693854c0a7634\AndroidManifest.xml:22:5-94
 MERGED from [com.android.support:versionedparcelable:28.0.0] H:\develop\an\.gradle\caches\transforms-1\files-1.1\versionedparcelable-28.0.0.aar\0fc20cae875ecac89a312d5fb13e098e\AndroidManifest.xml:22:5-23:19
@@ -125,51 +125,51 @@ MERGED from [com.google.android.gms:play-services-ads-base:17.2.0] H:\develop\an
 	android:appComponentFactory
 		ADDED from [com.android.support:support-compat:28.0.0] H:\develop\an\.gradle\caches\transforms-1\files-1.1\support-compat-28.0.0.aar\78c33361e0f0fe9ef59693854c0a7634\AndroidManifest.xml:22:18-91
 	android:supportsRtl
-		ADDED from H:\develop\an\workspace\a090jdm\JA090DM\app\src\main\AndroidManifest.xml:12:3-29
+		ADDED from H:\develop\an\workspace\ad090md\JA090DM\app\src\main\AndroidManifest.xml:12:3-29
 	android:label
-		ADDED from H:\develop\an\workspace\a090jdm\JA090DM\app\src\main\AndroidManifest.xml:10:3-35
+		ADDED from H:\develop\an\workspace\ad090md\JA090DM\app\src\main\AndroidManifest.xml:10:3-35
 	android:roundIcon
-		ADDED from H:\develop\an\workspace\a090jdm\JA090DM\app\src\main\AndroidManifest.xml:11:3-48
+		ADDED from H:\develop\an\workspace\ad090md\JA090DM\app\src\main\AndroidManifest.xml:11:3-48
 	android:icon
-		ADDED from H:\develop\an\workspace\a090jdm\JA090DM\app\src\main\AndroidManifest.xml:9:3-37
+		ADDED from H:\develop\an\workspace\ad090md\JA090DM\app\src\main\AndroidManifest.xml:9:3-37
 	android:allowBackup
-		ADDED from H:\develop\an\workspace\a090jdm\JA090DM\app\src\main\AndroidManifest.xml:8:3-29
+		ADDED from H:\develop\an\workspace\ad090md\JA090DM\app\src\main\AndroidManifest.xml:8:3-29
 	android:theme
-		ADDED from H:\develop\an\workspace\a090jdm\JA090DM\app\src\main\AndroidManifest.xml:13:3-34
+		ADDED from H:\develop\an\workspace\ad090md\JA090DM\app\src\main\AndroidManifest.xml:13:3-34
 meta-data#com.google.android.gms.ads.AD_MANAGER_APP
-ADDED from H:\develop\an\workspace\a090jdm\JA090DM\app\src\main\AndroidManifest.xml:14:3-16:26
+ADDED from H:\develop\an\workspace\ad090md\JA090DM\app\src\main\AndroidManifest.xml:14:3-16:26
 	android:value
-		ADDED from H:\develop\an\workspace\a090jdm\JA090DM\app\src\main\AndroidManifest.xml:16:4-24
+		ADDED from H:\develop\an\workspace\ad090md\JA090DM\app\src\main\AndroidManifest.xml:16:4-24
 	android:name
-		ADDED from H:\develop\an\workspace\a090jdm\JA090DM\app\src\main\AndroidManifest.xml:15:4-60
+		ADDED from H:\develop\an\workspace\ad090md\JA090DM\app\src\main\AndroidManifest.xml:15:4-60
 activity#com.hijiyama_koubou.ja090dm.MainActivity
-ADDED from H:\develop\an\workspace\a090jdm\JA090DM\app\src\main\AndroidManifest.xml:19:3-34:14
+ADDED from H:\develop\an\workspace\ad090md\JA090DM\app\src\main\AndroidManifest.xml:19:3-34:14
 	android:label
-		ADDED from H:\develop\an\workspace\a090jdm\JA090DM\app\src\main\AndroidManifest.xml:21:4-36
+		ADDED from H:\develop\an\workspace\ad090md\JA090DM\app\src\main\AndroidManifest.xml:21:4-36
 	android:theme
-		ADDED from H:\develop\an\workspace\a090jdm\JA090DM\app\src\main\AndroidManifest.xml:22:4-47
+		ADDED from H:\develop\an\workspace\ad090md\JA090DM\app\src\main\AndroidManifest.xml:22:4-47
 	android:name
-		ADDED from H:\develop\an\workspace\a090jdm\JA090DM\app\src\main\AndroidManifest.xml:20:4-32
+		ADDED from H:\develop\an\workspace\ad090md\JA090DM\app\src\main\AndroidManifest.xml:20:4-32
 meta-data#com.google.android.gms.ads.APPLICATION_ID
-ADDED from H:\develop\an\workspace\a090jdm\JA090DM\app\src\main\AndroidManifest.xml:26:4-28:48
+ADDED from H:\develop\an\workspace\ad090md\JA090DM\app\src\main\AndroidManifest.xml:26:4-28:48
 	android:value
-		ADDED from H:\develop\an\workspace\a090jdm\JA090DM\app\src\main\AndroidManifest.xml:28:5-46
+		ADDED from H:\develop\an\workspace\ad090md\JA090DM\app\src\main\AndroidManifest.xml:28:5-46
 	android:name
-		ADDED from H:\develop\an\workspace\a090jdm\JA090DM\app\src\main\AndroidManifest.xml:27:5-61
+		ADDED from H:\develop\an\workspace\ad090md\JA090DM\app\src\main\AndroidManifest.xml:27:5-61
 intent-filter#action:name:android.intent.action.MAIN+category:name:android.intent.category.LAUNCHER
-ADDED from H:\develop\an\workspace\a090jdm\JA090DM\app\src\main\AndroidManifest.xml:29:4-33:20
+ADDED from H:\develop\an\workspace\ad090md\JA090DM\app\src\main\AndroidManifest.xml:29:4-33:20
 action#android.intent.action.MAIN
-ADDED from H:\develop\an\workspace\a090jdm\JA090DM\app\src\main\AndroidManifest.xml:30:5-56
+ADDED from H:\develop\an\workspace\ad090md\JA090DM\app\src\main\AndroidManifest.xml:30:5-56
 	android:name
-		ADDED from H:\develop\an\workspace\a090jdm\JA090DM\app\src\main\AndroidManifest.xml:30:13-54
+		ADDED from H:\develop\an\workspace\ad090md\JA090DM\app\src\main\AndroidManifest.xml:30:13-54
 category#android.intent.category.LAUNCHER
-ADDED from H:\develop\an\workspace\a090jdm\JA090DM\app\src\main\AndroidManifest.xml:32:5-64
+ADDED from H:\develop\an\workspace\ad090md\JA090DM\app\src\main\AndroidManifest.xml:32:5-64
 	android:name
-		ADDED from H:\develop\an\workspace\a090jdm\JA090DM\app\src\main\AndroidManifest.xml:32:15-62
+		ADDED from H:\develop\an\workspace\ad090md\JA090DM\app\src\main\AndroidManifest.xml:32:15-62
 uses-sdk
-INJECTED from H:\develop\an\workspace\a090jdm\JA090DM\app\src\main\AndroidManifest.xml reason: use-sdk injection requested
-INJECTED from H:\develop\an\workspace\a090jdm\JA090DM\app\src\main\AndroidManifest.xml
-INJECTED from H:\develop\an\workspace\a090jdm\JA090DM\app\src\main\AndroidManifest.xml
+INJECTED from H:\develop\an\workspace\ad090md\JA090DM\app\src\main\AndroidManifest.xml reason: use-sdk injection requested
+INJECTED from H:\develop\an\workspace\ad090md\JA090DM\app\src\main\AndroidManifest.xml
+INJECTED from H:\develop\an\workspace\ad090md\JA090DM\app\src\main\AndroidManifest.xml
 MERGED from [com.android.support:design:28.0.0] H:\develop\an\.gradle\caches\transforms-1\files-1.1\design-28.0.0.aar\30621e802d4ad14abb4bbf9c50a0341b\AndroidManifest.xml:20:5-44
 MERGED from [com.android.support:design:28.0.0] H:\develop\an\.gradle\caches\transforms-1\files-1.1\design-28.0.0.aar\30621e802d4ad14abb4bbf9c50a0341b\AndroidManifest.xml:20:5-44
 MERGED from [com.android.support:appcompat-v7:28.0.0] H:\develop\an\.gradle\caches\transforms-1\files-1.1\appcompat-v7-28.0.0.aar\524eb6776f871a754dec44b4953a41b0\AndroidManifest.xml:20:5-44
@@ -206,8 +206,8 @@ MERGED from [com.android.support:animated-vector-drawable:28.0.0] H:\develop\an\
 MERGED from [com.android.support:animated-vector-drawable:28.0.0] H:\develop\an\.gradle\caches\transforms-1\files-1.1\animated-vector-drawable-28.0.0.aar\0ece7430697d19b71975e383b733c3ea\AndroidManifest.xml:20:5-44
 MERGED from [com.android.support:customtabs:28.0.0] H:\develop\an\.gradle\caches\transforms-1\files-1.1\customtabs-28.0.0.aar\a2f328918a1620e61bdb70c7afba58eb\AndroidManifest.xml:20:5-44
 MERGED from [com.android.support:customtabs:28.0.0] H:\develop\an\.gradle\caches\transforms-1\files-1.1\customtabs-28.0.0.aar\a2f328918a1620e61bdb70c7afba58eb\AndroidManifest.xml:20:5-44
-MERGED from [:nendSDK-5.1.0] H:\develop\an\.gradle\caches\transforms-1\files-1.1\nendSDK-5.1.0.aar\44c692e99562b4d8450c73ce6e0bef3b\AndroidManifest.xml:7:5-44
-MERGED from [:nendSDK-5.1.0] H:\develop\an\.gradle\caches\transforms-1\files-1.1\nendSDK-5.1.0.aar\44c692e99562b4d8450c73ce6e0bef3b\AndroidManifest.xml:7:5-44
+MERGED from [:nendSDK-5.1.0] H:\develop\an\.gradle\caches\transforms-1\files-1.1\nendSDK-5.1.0.aar\965ef4efa8e75fab634d3632d671a0e0\AndroidManifest.xml:7:5-44
+MERGED from [:nendSDK-5.1.0] H:\develop\an\.gradle\caches\transforms-1\files-1.1\nendSDK-5.1.0.aar\965ef4efa8e75fab634d3632d671a0e0\AndroidManifest.xml:7:5-44
 MERGED from [com.android.support:support-fragment:28.0.0] H:\develop\an\.gradle\caches\transforms-1\files-1.1\support-fragment-28.0.0.aar\0425d8f44b33ce560ffc14fe8ba69a92\AndroidManifest.xml:20:5-44
 MERGED from [com.android.support:support-fragment:28.0.0] H:\develop\an\.gradle\caches\transforms-1\files-1.1\support-fragment-28.0.0.aar\0425d8f44b33ce560ffc14fe8ba69a92\AndroidManifest.xml:20:5-44
 MERGED from [com.android.support:recyclerview-v7:28.0.0] H:\develop\an\.gradle\caches\transforms-1\files-1.1\recyclerview-v7-28.0.0.aar\cd5d4cb0e1b5bbae8276b5f9c3b08497\AndroidManifest.xml:20:5-44
@@ -264,18 +264,18 @@ MERGED from [android.arch.core:runtime:1.1.1] H:\develop\an\.gradle\caches\trans
 MERGED from [android.arch.core:runtime:1.1.1] H:\develop\an\.gradle\caches\transforms-1\files-1.1\runtime-1.1.1.aar\7cd31df2dabc9f637ed7df851f741ee3\AndroidManifest.xml:20:5-44
 MERGED from [com.google.android.gms:play-services-ads-base:17.2.0] H:\develop\an\.gradle\caches\transforms-1\files-1.1\play-services-ads-base-17.2.0.aar\dade8fb525f67e953830276e443d215f\AndroidManifest.xml:5:5-44
 MERGED from [com.google.android.gms:play-services-ads-base:17.2.0] H:\develop\an\.gradle\caches\transforms-1\files-1.1\play-services-ads-base-17.2.0.aar\dade8fb525f67e953830276e443d215f\AndroidManifest.xml:5:5-44
-INJECTED from H:\develop\an\workspace\a090jdm\JA090DM\app\src\main\AndroidManifest.xml
-INJECTED from H:\develop\an\workspace\a090jdm\JA090DM\app\src\main\AndroidManifest.xml
+INJECTED from H:\develop\an\workspace\ad090md\JA090DM\app\src\main\AndroidManifest.xml
+INJECTED from H:\develop\an\workspace\ad090md\JA090DM\app\src\main\AndroidManifest.xml
 	tools:overrideLibrary
 		ADDED from [com.google.android.gms:play-services-ads:17.2.0] H:\develop\an\.gradle\caches\transforms-1\files-1.1\play-services-ads-17.2.0.aar\c1b277041488e3536199781381db31de\AndroidManifest.xml:23:9-59
 	android:targetSdkVersion
-		INJECTED from H:\develop\an\workspace\a090jdm\JA090DM\app\src\main\AndroidManifest.xml
-		ADDED from H:\develop\an\workspace\a090jdm\JA090DM\app\src\main\AndroidManifest.xml
-		INJECTED from H:\develop\an\workspace\a090jdm\JA090DM\app\src\main\AndroidManifest.xml
+		INJECTED from H:\develop\an\workspace\ad090md\JA090DM\app\src\main\AndroidManifest.xml
+		ADDED from H:\develop\an\workspace\ad090md\JA090DM\app\src\main\AndroidManifest.xml
+		INJECTED from H:\develop\an\workspace\ad090md\JA090DM\app\src\main\AndroidManifest.xml
 	android:minSdkVersion
-		INJECTED from H:\develop\an\workspace\a090jdm\JA090DM\app\src\main\AndroidManifest.xml
-		ADDED from H:\develop\an\workspace\a090jdm\JA090DM\app\src\main\AndroidManifest.xml
-		INJECTED from H:\develop\an\workspace\a090jdm\JA090DM\app\src\main\AndroidManifest.xml
+		INJECTED from H:\develop\an\workspace\ad090md\JA090DM\app\src\main\AndroidManifest.xml
+		ADDED from H:\develop\an\workspace\ad090md\JA090DM\app\src\main\AndroidManifest.xml
+		INJECTED from H:\develop\an\workspace\ad090md\JA090DM\app\src\main\AndroidManifest.xml
 activity#com.google.android.gms.ads.AdActivity
 ADDED from [com.google.android.gms:play-services-ads-lite:17.2.0] H:\develop\an\.gradle\caches\transforms-1\files-1.1\play-services-ads-lite-17.2.0.aar\6b2a5c16bc40728485d9294d119dd04b\AndroidManifest.xml:29:9-33:64
 	android:exported
@@ -315,56 +315,56 @@ ADDED from [com.google.android.gms:play-services-basement:16.0.1] H:\develop\an\
 	android:name
 		ADDED from [com.google.android.gms:play-services-basement:16.0.1] H:\develop\an\.gradle\caches\transforms-1\files-1.1\play-services-basement-16.0.1.aar\0e920d6d18405845c16f779fa4f1ce63\AndroidManifest.xml:24:13-58
 activity#net.nend.android.internal.ui.activities.fullboard.NendAdFullBoardActivity
-ADDED from [:nendSDK-5.1.0] H:\develop\an\.gradle\caches\transforms-1\files-1.1\nendSDK-5.1.0.aar\44c692e99562b4d8450c73ce6e0bef3b\AndroidManifest.xml:13:9-16:86
+ADDED from [:nendSDK-5.1.0] H:\develop\an\.gradle\caches\transforms-1\files-1.1\nendSDK-5.1.0.aar\965ef4efa8e75fab634d3632d671a0e0\AndroidManifest.xml:13:9-16:86
 	android:hardwareAccelerated
-		ADDED from [:nendSDK-5.1.0] H:\develop\an\.gradle\caches\transforms-1\files-1.1\nendSDK-5.1.0.aar\44c692e99562b4d8450c73ce6e0bef3b\AndroidManifest.xml:15:13-47
+		ADDED from [:nendSDK-5.1.0] H:\develop\an\.gradle\caches\transforms-1\files-1.1\nendSDK-5.1.0.aar\965ef4efa8e75fab634d3632d671a0e0\AndroidManifest.xml:15:13-47
 	android:theme
-		ADDED from [:nendSDK-5.1.0] H:\develop\an\.gradle\caches\transforms-1\files-1.1\nendSDK-5.1.0.aar\44c692e99562b4d8450c73ce6e0bef3b\AndroidManifest.xml:16:13-83
+		ADDED from [:nendSDK-5.1.0] H:\develop\an\.gradle\caches\transforms-1\files-1.1\nendSDK-5.1.0.aar\965ef4efa8e75fab634d3632d671a0e0\AndroidManifest.xml:16:13-83
 	android:name
-		ADDED from [:nendSDK-5.1.0] H:\develop\an\.gradle\caches\transforms-1\files-1.1\nendSDK-5.1.0.aar\44c692e99562b4d8450c73ce6e0bef3b\AndroidManifest.xml:14:13-101
+		ADDED from [:nendSDK-5.1.0] H:\develop\an\.gradle\caches\transforms-1\files-1.1\nendSDK-5.1.0.aar\965ef4efa8e75fab634d3632d671a0e0\AndroidManifest.xml:14:13-101
 activity#net.nend.android.internal.ui.activities.interstitial.NendAdInterstitialActivity
-ADDED from [:nendSDK-5.1.0] H:\develop\an\.gradle\caches\transforms-1\files-1.1\nendSDK-5.1.0.aar\44c692e99562b4d8450c73ce6e0bef3b\AndroidManifest.xml:17:9-21:64
+ADDED from [:nendSDK-5.1.0] H:\develop\an\.gradle\caches\transforms-1\files-1.1\nendSDK-5.1.0.aar\965ef4efa8e75fab634d3632d671a0e0\AndroidManifest.xml:17:9-21:64
 	android:screenOrientation
-		ADDED from [:nendSDK-5.1.0] H:\develop\an\.gradle\caches\transforms-1\files-1.1\nendSDK-5.1.0.aar\44c692e99562b4d8450c73ce6e0bef3b\AndroidManifest.xml:20:13-47
+		ADDED from [:nendSDK-5.1.0] H:\develop\an\.gradle\caches\transforms-1\files-1.1\nendSDK-5.1.0.aar\965ef4efa8e75fab634d3632d671a0e0\AndroidManifest.xml:20:13-47
 	android:configChanges
-		ADDED from [:nendSDK-5.1.0] H:\develop\an\.gradle\caches\transforms-1\files-1.1\nendSDK-5.1.0.aar\44c692e99562b4d8450c73ce6e0bef3b\AndroidManifest.xml:19:13-122
+		ADDED from [:nendSDK-5.1.0] H:\develop\an\.gradle\caches\transforms-1\files-1.1\nendSDK-5.1.0.aar\965ef4efa8e75fab634d3632d671a0e0\AndroidManifest.xml:19:13-122
 	android:theme
-		ADDED from [:nendSDK-5.1.0] H:\develop\an\.gradle\caches\transforms-1\files-1.1\nendSDK-5.1.0.aar\44c692e99562b4d8450c73ce6e0bef3b\AndroidManifest.xml:21:13-61
+		ADDED from [:nendSDK-5.1.0] H:\develop\an\.gradle\caches\transforms-1\files-1.1\nendSDK-5.1.0.aar\965ef4efa8e75fab634d3632d671a0e0\AndroidManifest.xml:21:13-61
 	android:name
-		ADDED from [:nendSDK-5.1.0] H:\develop\an\.gradle\caches\transforms-1\files-1.1\nendSDK-5.1.0.aar\44c692e99562b4d8450c73ce6e0bef3b\AndroidManifest.xml:18:13-107
+		ADDED from [:nendSDK-5.1.0] H:\develop\an\.gradle\caches\transforms-1\files-1.1\nendSDK-5.1.0.aar\965ef4efa8e75fab634d3632d671a0e0\AndroidManifest.xml:18:13-107
 activity#net.nend.android.internal.ui.activities.video.NendAdInterstitialVideoActivity
-ADDED from [:nendSDK-5.1.0] H:\develop\an\.gradle\caches\transforms-1\files-1.1\nendSDK-5.1.0.aar\44c692e99562b4d8450c73ce6e0bef3b\AndroidManifest.xml:22:9-27:74
+ADDED from [:nendSDK-5.1.0] H:\develop\an\.gradle\caches\transforms-1\files-1.1\nendSDK-5.1.0.aar\965ef4efa8e75fab634d3632d671a0e0\AndroidManifest.xml:22:9-27:74
 	android:screenOrientation
-		ADDED from [:nendSDK-5.1.0] H:\develop\an\.gradle\caches\transforms-1\files-1.1\nendSDK-5.1.0.aar\44c692e99562b4d8450c73ce6e0bef3b\AndroidManifest.xml:26:13-47
+		ADDED from [:nendSDK-5.1.0] H:\develop\an\.gradle\caches\transforms-1\files-1.1\nendSDK-5.1.0.aar\965ef4efa8e75fab634d3632d671a0e0\AndroidManifest.xml:26:13-47
 	android:hardwareAccelerated
-		ADDED from [:nendSDK-5.1.0] H:\develop\an\.gradle\caches\transforms-1\files-1.1\nendSDK-5.1.0.aar\44c692e99562b4d8450c73ce6e0bef3b\AndroidManifest.xml:25:13-47
+		ADDED from [:nendSDK-5.1.0] H:\develop\an\.gradle\caches\transforms-1\files-1.1\nendSDK-5.1.0.aar\965ef4efa8e75fab634d3632d671a0e0\AndroidManifest.xml:25:13-47
 	android:configChanges
-		ADDED from [:nendSDK-5.1.0] H:\develop\an\.gradle\caches\transforms-1\files-1.1\nendSDK-5.1.0.aar\44c692e99562b4d8450c73ce6e0bef3b\AndroidManifest.xml:24:13-170
+		ADDED from [:nendSDK-5.1.0] H:\develop\an\.gradle\caches\transforms-1\files-1.1\nendSDK-5.1.0.aar\965ef4efa8e75fab634d3632d671a0e0\AndroidManifest.xml:24:13-170
 	android:theme
-		ADDED from [:nendSDK-5.1.0] H:\develop\an\.gradle\caches\transforms-1\files-1.1\nendSDK-5.1.0.aar\44c692e99562b4d8450c73ce6e0bef3b\AndroidManifest.xml:27:13-71
+		ADDED from [:nendSDK-5.1.0] H:\develop\an\.gradle\caches\transforms-1\files-1.1\nendSDK-5.1.0.aar\965ef4efa8e75fab634d3632d671a0e0\AndroidManifest.xml:27:13-71
 	android:name
-		ADDED from [:nendSDK-5.1.0] H:\develop\an\.gradle\caches\transforms-1\files-1.1\nendSDK-5.1.0.aar\44c692e99562b4d8450c73ce6e0bef3b\AndroidManifest.xml:23:13-105
+		ADDED from [:nendSDK-5.1.0] H:\develop\an\.gradle\caches\transforms-1\files-1.1\nendSDK-5.1.0.aar\965ef4efa8e75fab634d3632d671a0e0\AndroidManifest.xml:23:13-105
 activity#net.nend.android.internal.ui.activities.video.NendAdRewardedVideoActivity
-ADDED from [:nendSDK-5.1.0] H:\develop\an\.gradle\caches\transforms-1\files-1.1\nendSDK-5.1.0.aar\44c692e99562b4d8450c73ce6e0bef3b\AndroidManifest.xml:28:9-33:74
+ADDED from [:nendSDK-5.1.0] H:\develop\an\.gradle\caches\transforms-1\files-1.1\nendSDK-5.1.0.aar\965ef4efa8e75fab634d3632d671a0e0\AndroidManifest.xml:28:9-33:74
 	android:screenOrientation
-		ADDED from [:nendSDK-5.1.0] H:\develop\an\.gradle\caches\transforms-1\files-1.1\nendSDK-5.1.0.aar\44c692e99562b4d8450c73ce6e0bef3b\AndroidManifest.xml:32:13-47
+		ADDED from [:nendSDK-5.1.0] H:\develop\an\.gradle\caches\transforms-1\files-1.1\nendSDK-5.1.0.aar\965ef4efa8e75fab634d3632d671a0e0\AndroidManifest.xml:32:13-47
 	android:hardwareAccelerated
-		ADDED from [:nendSDK-5.1.0] H:\develop\an\.gradle\caches\transforms-1\files-1.1\nendSDK-5.1.0.aar\44c692e99562b4d8450c73ce6e0bef3b\AndroidManifest.xml:31:13-47
+		ADDED from [:nendSDK-5.1.0] H:\develop\an\.gradle\caches\transforms-1\files-1.1\nendSDK-5.1.0.aar\965ef4efa8e75fab634d3632d671a0e0\AndroidManifest.xml:31:13-47
 	android:configChanges
-		ADDED from [:nendSDK-5.1.0] H:\develop\an\.gradle\caches\transforms-1\files-1.1\nendSDK-5.1.0.aar\44c692e99562b4d8450c73ce6e0bef3b\AndroidManifest.xml:30:13-170
+		ADDED from [:nendSDK-5.1.0] H:\develop\an\.gradle\caches\transforms-1\files-1.1\nendSDK-5.1.0.aar\965ef4efa8e75fab634d3632d671a0e0\AndroidManifest.xml:30:13-170
 	android:theme
-		ADDED from [:nendSDK-5.1.0] H:\develop\an\.gradle\caches\transforms-1\files-1.1\nendSDK-5.1.0.aar\44c692e99562b4d8450c73ce6e0bef3b\AndroidManifest.xml:33:13-71
+		ADDED from [:nendSDK-5.1.0] H:\develop\an\.gradle\caches\transforms-1\files-1.1\nendSDK-5.1.0.aar\965ef4efa8e75fab634d3632d671a0e0\AndroidManifest.xml:33:13-71
 	android:name
-		ADDED from [:nendSDK-5.1.0] H:\develop\an\.gradle\caches\transforms-1\files-1.1\nendSDK-5.1.0.aar\44c692e99562b4d8450c73ce6e0bef3b\AndroidManifest.xml:29:13-101
+		ADDED from [:nendSDK-5.1.0] H:\develop\an\.gradle\caches\transforms-1\files-1.1\nendSDK-5.1.0.aar\965ef4efa8e75fab634d3632d671a0e0\AndroidManifest.xml:29:13-101
 activity#net.nend.android.internal.ui.activities.formats.FullscreenVideoPlayingActivity
-ADDED from [:nendSDK-5.1.0] H:\develop\an\.gradle\caches\transforms-1\files-1.1\nendSDK-5.1.0.aar\44c692e99562b4d8450c73ce6e0bef3b\AndroidManifest.xml:34:9-39:74
+ADDED from [:nendSDK-5.1.0] H:\develop\an\.gradle\caches\transforms-1\files-1.1\nendSDK-5.1.0.aar\965ef4efa8e75fab634d3632d671a0e0\AndroidManifest.xml:34:9-39:74
 	android:screenOrientation
-		ADDED from [:nendSDK-5.1.0] H:\develop\an\.gradle\caches\transforms-1\files-1.1\nendSDK-5.1.0.aar\44c692e99562b4d8450c73ce6e0bef3b\AndroidManifest.xml:38:13-45
+		ADDED from [:nendSDK-5.1.0] H:\develop\an\.gradle\caches\transforms-1\files-1.1\nendSDK-5.1.0.aar\965ef4efa8e75fab634d3632d671a0e0\AndroidManifest.xml:38:13-45
 	android:hardwareAccelerated
-		ADDED from [:nendSDK-5.1.0] H:\develop\an\.gradle\caches\transforms-1\files-1.1\nendSDK-5.1.0.aar\44c692e99562b4d8450c73ce6e0bef3b\AndroidManifest.xml:37:13-47
+		ADDED from [:nendSDK-5.1.0] H:\develop\an\.gradle\caches\transforms-1\files-1.1\nendSDK-5.1.0.aar\965ef4efa8e75fab634d3632d671a0e0\AndroidManifest.xml:37:13-47
 	android:configChanges
-		ADDED from [:nendSDK-5.1.0] H:\develop\an\.gradle\caches\transforms-1\files-1.1\nendSDK-5.1.0.aar\44c692e99562b4d8450c73ce6e0bef3b\AndroidManifest.xml:36:13-170
+		ADDED from [:nendSDK-5.1.0] H:\develop\an\.gradle\caches\transforms-1\files-1.1\nendSDK-5.1.0.aar\965ef4efa8e75fab634d3632d671a0e0\AndroidManifest.xml:36:13-170
 	android:theme
-		ADDED from [:nendSDK-5.1.0] H:\develop\an\.gradle\caches\transforms-1\files-1.1\nendSDK-5.1.0.aar\44c692e99562b4d8450c73ce6e0bef3b\AndroidManifest.xml:39:13-71
+		ADDED from [:nendSDK-5.1.0] H:\develop\an\.gradle\caches\transforms-1\files-1.1\nendSDK-5.1.0.aar\965ef4efa8e75fab634d3632d671a0e0\AndroidManifest.xml:39:13-71
 	android:name
-		ADDED from [:nendSDK-5.1.0] H:\develop\an\.gradle\caches\transforms-1\files-1.1\nendSDK-5.1.0.aar\44c692e99562b4d8450c73ce6e0bef3b\AndroidManifest.xml:35:13-106
+		ADDED from [:nendSDK-5.1.0] H:\develop\an\.gradle\caches\transforms-1\files-1.1\nendSDK-5.1.0.aar\965ef4efa8e75fab634d3632d671a0e0\AndroidManifest.xml:35:13-106
