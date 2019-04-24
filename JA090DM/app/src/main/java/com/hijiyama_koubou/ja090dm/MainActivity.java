@@ -50,8 +50,10 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
 		try {
 			if ( Build.VERSION.SDK_INT >= Build.VERSION_CODES.M ) {                //(初回起動で)全パーミッションの許諾を取る
 				dbMsg = "許諾確認";
-				String[] PERMISSIONS = { Manifest.permission.INTERNET , Manifest.permission.ACCESS_NETWORK_STATE};
-//				Manifest.permission.ACCESS_NETWORK_STATE , Manifest.permission.ACCESS_WIFI_STATE , Manifest.permission.READ_EXTERNAL_STORAGE , Manifest.permission.WRITE_EXTERNAL_STORAGE ,
+				String[] PERMISSIONS = { Manifest.permission.INTERNET , Manifest.permission.ACCESS_NETWORK_STATE,
+										 Manifest.permission.READ_EXTERNAL_STORAGE , Manifest.permission.WRITE_EXTERNAL_STORAGE
+										};
+//				Manifest.permission.ACCESS_NETWORK_STATE , Manifest.permission.ACCESS_WIFI_STATE ,
 // , Manifest.permission.MODIFY_AUDIO_SETTINGS , Manifest.permission.RECORD_AUDIO ,  Manifest.permission.MODIFY_AUDIO_SETTINGS,        Manifest.permission.CAMERA
 				boolean isNeedParmissionReqest = false;
 				for ( String permissionName : PERMISSIONS ) {
@@ -69,8 +71,8 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
 				}
 			}
 //			dbMsg += ",isReadPref=" + isReadPref;
-//			MyPreferenceFragment prefs = new MyPreferenceFragment();
-//			prefs.readPref(this);
+			MyPreferenceFragment prefs = new MyPreferenceFragment();
+			prefs.readPref(this);
 //			rootUrlStr = prefs.rootUrlStr;
 //			dbMsg += ",rootUrlStr=" + rootUrlStr;
 //			readFileName = prefs.readFileName;
@@ -140,7 +142,7 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
 			dbMsg = "requestCode=" + requestCode;
 			switch ( requestCode ) {
 				case REQUEST_PREF:
-					readPref();        //ループする？
+//					readPref();        //ループする？
 					break;
 			}
 			myLog(TAG , dbMsg);
@@ -329,8 +331,8 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
 ///////////////////////////////////動作設定//
 				case R.id.md_prefarence:      //設定
 				case R.id.mm_prefarence:      //設定
-//					Intent settingsIntent = new Intent(RecoveryBrainActivity.this , MyPreferencesActivty.class);
-//					startActivityForResult(settingsIntent , REQUEST_PREF);//		StartActivity(intent);
+					Intent settingsIntent = new Intent(MainActivity.this , MyPreferencesActivty.class);
+					startActivityForResult(settingsIntent , REQUEST_PREF);//		StartActivity(intent);
 					break;
 				case R.id.md_quit:
 				case R.id.mm_quit:
@@ -482,14 +484,13 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
 
 	}
 
-	////////////////////////////////////////////////////////////////////////////
 	public void setNend() {               		//https://github.com/fan-ADN/nendSDK-Android/wiki/%E3%83%90%E3%83%8A%E3%83%BC%E5%9E%8B%E5%BA%83%E5%91%8A_%E5%AE%9F%E8%A3%85%E6%89%8B%E9%A0%86
 		int nend_spotID = Integer.parseInt(getString (R.string.nend_spotID));
 		nendAdView = new NendAdView(this,nend_spotID, getString (R.string.nend_apiKey));    		// 1 NendAdView をインスタンス化
 		nend_layout.addView(nendAdView); 		// 2 NendAdView をレイアウトに追加
 		nendAdView.loadAd();     		// 3 広告の取得を開始
 	}
-
+	////////////////////////////////////////////////////////////////////////////
 	@Override
 	public void onBackPressed() {
 		DrawerLayout drawer = ( DrawerLayout ) findViewById(R.id.drawer_layout);
@@ -514,17 +515,13 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
 		return super.onOptionsItemSelected(item);
 	}
 
-	@SuppressWarnings ( "StatementWithEmptyBody" )
 	@Override
 	public boolean onNavigationItemSelected(MenuItem menuItem) {
-		// Handle navigation view item clicks here.
-		int id = menuItem.getItemId();
 		final String TAG = "onNavigationItemSelected[initDrawer]";
 		String dbMsg = "MenuItem" + menuItem.toString();/////////////////////////////////////////////////
 		boolean retBool = false;
 		try {
 			retBool = funcSelected(menuItem);
-//			RecoveryBrainActivity.this.drawer.closeDrawers();
 			DrawerLayout drawer = ( DrawerLayout ) findViewById(R.id.drawer_layout);
 			drawer.closeDrawer(GravityCompat.START);
 		} catch (Exception e) {
