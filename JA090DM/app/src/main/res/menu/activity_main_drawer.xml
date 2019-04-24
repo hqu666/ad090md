@@ -35,4 +35,13 @@
 		</menu>
 	</item>
 
+	<item
+		android:id="@+id/md_prefarence"
+		android:icon="@drawable/ic_menu_manage"
+		android:title="@string/menu_setting"/>
+	<item
+		android:id="@+id/md_quit"
+		android:icon="@android:drawable/ic_lock_power_off"
+		android:title="@string/menu_quit"/>
+
 </menu>

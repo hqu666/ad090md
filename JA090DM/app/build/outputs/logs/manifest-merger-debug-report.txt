@@ -1,9 +1,9 @@
 -- Merging decision tree log ---
 manifest
-ADDED from H:\develop\an\workspace\ad090md\JA090DM\app\src\main\AndroidManifest.xml:2:1-37:12
-INJECTED from H:\develop\an\workspace\ad090md\JA090DM\app\src\main\AndroidManifest.xml:2:1-37:12
-INJECTED from H:\develop\an\workspace\ad090md\JA090DM\app\src\main\AndroidManifest.xml:2:1-37:12
-INJECTED from H:\develop\an\workspace\ad090md\JA090DM\app\src\main\AndroidManifest.xml:2:1-37:12
+ADDED from H:\develop\an\workspace\ad090md\JA090DM\app\src\main\AndroidManifest.xml:2:1-55:12
+INJECTED from H:\develop\an\workspace\ad090md\JA090DM\app\src\main\AndroidManifest.xml:2:1-55:12
+INJECTED from H:\develop\an\workspace\ad090md\JA090DM\app\src\main\AndroidManifest.xml:2:1-55:12
+INJECTED from H:\develop\an\workspace\ad090md\JA090DM\app\src\main\AndroidManifest.xml:2:1-55:12
 MERGED from [com.android.support:design:28.0.0] H:\develop\an\.gradle\caches\transforms-1\files-1.1\design-28.0.0.aar\30621e802d4ad14abb4bbf9c50a0341b\AndroidManifest.xml:17:1-24:12
 MERGED from [com.android.support:appcompat-v7:28.0.0] H:\develop\an\.gradle\caches\transforms-1\files-1.1\appcompat-v7-28.0.0.aar\524eb6776f871a754dec44b4953a41b0\AndroidManifest.xml:17:1-22:12
 MERGED from [com.google.android.gms:play-services-ads:17.2.0] H:\develop\an\.gradle\caches\transforms-1\files-1.1\play-services-ads-17.2.0.aar\c1b277041488e3536199781381db31de\AndroidManifest.xml:17:1-25:12
@@ -51,20 +51,20 @@ MERGED from [android.arch.lifecycle:livedata:1.1.1] H:\develop\an\.gradle\caches
 MERGED from [android.arch.lifecycle:livedata-core:1.1.1] H:\develop\an\.gradle\caches\transforms-1\files-1.1\livedata-core-1.1.1.aar\d682bf766466baaf0cdf64abc3eff4ff\AndroidManifest.xml:17:1-22:12
 MERGED from [android.arch.core:runtime:1.1.1] H:\develop\an\.gradle\caches\transforms-1\files-1.1\runtime-1.1.1.aar\7cd31df2dabc9f637ed7df851f741ee3\AndroidManifest.xml:17:1-22:12
 MERGED from [com.google.android.gms:play-services-ads-base:17.2.0] H:\develop\an\.gradle\caches\transforms-1\files-1.1\play-services-ads-base-17.2.0.aar\dade8fb525f67e953830276e443d215f\AndroidManifest.xml:2:1-9:12
-INJECTED from H:\develop\an\workspace\ad090md\JA090DM\app\src\main\AndroidManifest.xml:2:1-37:12
-INJECTED from H:\develop\an\workspace\ad090md\JA090DM\app\src\main\AndroidManifest.xml:2:1-37:12
-INJECTED from H:\develop\an\workspace\ad090md\JA090DM\app\src\main\AndroidManifest.xml:2:1-37:12
+INJECTED from H:\develop\an\workspace\ad090md\JA090DM\app\src\main\AndroidManifest.xml:2:1-55:12
+INJECTED from H:\develop\an\workspace\ad090md\JA090DM\app\src\main\AndroidManifest.xml:2:1-55:12
+INJECTED from H:\develop\an\workspace\ad090md\JA090DM\app\src\main\AndroidManifest.xml:2:1-55:12
 	package
 		ADDED from H:\develop\an\workspace\ad090md\JA090DM\app\src\main\AndroidManifest.xml:3:5-42
 		INJECTED from H:\develop\an\workspace\ad090md\JA090DM\app\src\main\AndroidManifest.xml
 		INJECTED from H:\develop\an\workspace\ad090md\JA090DM\app\src\main\AndroidManifest.xml
 	android:versionName
 		INJECTED from H:\develop\an\workspace\ad090md\JA090DM\app\src\main\AndroidManifest.xml
-		ADDED from H:\develop\an\workspace\ad090md\JA090DM\app\src\main\AndroidManifest.xml:2:1-37:12
+		ADDED from H:\develop\an\workspace\ad090md\JA090DM\app\src\main\AndroidManifest.xml:2:1-55:12
 		INJECTED from H:\develop\an\workspace\ad090md\JA090DM\app\src\main\AndroidManifest.xml
 	android:versionCode
 		INJECTED from H:\develop\an\workspace\ad090md\JA090DM\app\src\main\AndroidManifest.xml
-		ADDED from H:\develop\an\workspace\ad090md\JA090DM\app\src\main\AndroidManifest.xml:2:1-37:12
+		ADDED from H:\develop\an\workspace\ad090md\JA090DM\app\src\main\AndroidManifest.xml:2:1-55:12
 		INJECTED from H:\develop\an\workspace\ad090md\JA090DM\app\src\main\AndroidManifest.xml
 	xmlns:android
 		ADDED from H:\develop\an\workspace\ad090md\JA090DM\app\src\main\AndroidManifest.xml:2:11-69
@@ -88,8 +88,16 @@ MERGED from [:nendSDK-5.1.0] H:\develop\an\.gradle\caches\transforms-1\files-1.1
 MERGED from [:nendSDK-5.1.0] H:\develop\an\.gradle\caches\transforms-1\files-1.1\nendSDK-5.1.0.aar\965ef4efa8e75fab634d3632d671a0e0\AndroidManifest.xml:10:5-79
 	android:name
 		ADDED from H:\develop\an\workspace\ad090md\JA090DM\app\src\main\AndroidManifest.xml:5:19-73
+uses-permission#android.permission.READ_EXTERNAL_STORAGE
+ADDED from H:\develop\an\workspace\ad090md\JA090DM\app\src\main\AndroidManifest.xml:6:2-76
+	android:name
+		ADDED from H:\develop\an\workspace\ad090md\JA090DM\app\src\main\AndroidManifest.xml:6:19-74
+uses-permission#android.permission.WRITE_EXTERNAL_STORAGE
+ADDED from H:\develop\an\workspace\ad090md\JA090DM\app\src\main\AndroidManifest.xml:7:2-77
+	android:name
+		ADDED from H:\develop\an\workspace\ad090md\JA090DM\app\src\main\AndroidManifest.xml:7:19-75
 application
-ADDED from H:\develop\an\workspace\ad090md\JA090DM\app\src\main\AndroidManifest.xml:7:2-35:16
+ADDED from H:\develop\an\workspace\ad090md\JA090DM\app\src\main\AndroidManifest.xml:13:2-53:16
 MERGED from [com.android.support:design:28.0.0] H:\develop\an\.gradle\caches\transforms-1\files-1.1\design-28.0.0.aar\30621e802d4ad14abb4bbf9c50a0341b\AndroidManifest.xml:22:5-20
 MERGED from [com.android.support:design:28.0.0] H:\develop\an\.gradle\caches\transforms-1\files-1.1\design-28.0.0.aar\30621e802d4ad14abb4bbf9c50a0341b\AndroidManifest.xml:22:5-20
 MERGED from [com.google.android.gms:play-services-location:16.0.0] H:\develop\an\.gradle\caches\transforms-1\files-1.1\play-services-location-16.0.0.aar\88881ca9e47db33ae4a1dd7f0e34fda6\AndroidManifest.xml:7:5-20
@@ -125,47 +133,51 @@ MERGED from [com.google.android.gms:play-services-ads-base:17.2.0] H:\develop\an
 	android:appComponentFactory
 		ADDED from [com.android.support:support-compat:28.0.0] H:\develop\an\.gradle\caches\transforms-1\files-1.1\support-compat-28.0.0.aar\78c33361e0f0fe9ef59693854c0a7634\AndroidManifest.xml:22:18-91
 	android:supportsRtl
-		ADDED from H:\develop\an\workspace\ad090md\JA090DM\app\src\main\AndroidManifest.xml:12:3-29
+		ADDED from H:\develop\an\workspace\ad090md\JA090DM\app\src\main\AndroidManifest.xml:18:3-29
 	android:label
-		ADDED from H:\develop\an\workspace\ad090md\JA090DM\app\src\main\AndroidManifest.xml:10:3-35
+		ADDED from H:\develop\an\workspace\ad090md\JA090DM\app\src\main\AndroidManifest.xml:16:3-35
 	android:roundIcon
-		ADDED from H:\develop\an\workspace\ad090md\JA090DM\app\src\main\AndroidManifest.xml:11:3-48
+		ADDED from H:\develop\an\workspace\ad090md\JA090DM\app\src\main\AndroidManifest.xml:17:3-48
 	android:icon
-		ADDED from H:\develop\an\workspace\ad090md\JA090DM\app\src\main\AndroidManifest.xml:9:3-37
+		ADDED from H:\develop\an\workspace\ad090md\JA090DM\app\src\main\AndroidManifest.xml:15:3-37
 	android:allowBackup
-		ADDED from H:\develop\an\workspace\ad090md\JA090DM\app\src\main\AndroidManifest.xml:8:3-29
+		ADDED from H:\develop\an\workspace\ad090md\JA090DM\app\src\main\AndroidManifest.xml:14:3-29
 	android:theme
-		ADDED from H:\develop\an\workspace\ad090md\JA090DM\app\src\main\AndroidManifest.xml:13:3-34
+		ADDED from H:\develop\an\workspace\ad090md\JA090DM\app\src\main\AndroidManifest.xml:19:3-34
 meta-data#com.google.android.gms.ads.AD_MANAGER_APP
-ADDED from H:\develop\an\workspace\ad090md\JA090DM\app\src\main\AndroidManifest.xml:14:3-16:26
+ADDED from H:\develop\an\workspace\ad090md\JA090DM\app\src\main\AndroidManifest.xml:20:3-22:26
 	android:value
-		ADDED from H:\develop\an\workspace\ad090md\JA090DM\app\src\main\AndroidManifest.xml:16:4-24
+		ADDED from H:\develop\an\workspace\ad090md\JA090DM\app\src\main\AndroidManifest.xml:22:4-24
 	android:name
-		ADDED from H:\develop\an\workspace\ad090md\JA090DM\app\src\main\AndroidManifest.xml:15:4-60
+		ADDED from H:\develop\an\workspace\ad090md\JA090DM\app\src\main\AndroidManifest.xml:21:4-60
 activity#com.hijiyama_koubou.ja090dm.MainActivity
-ADDED from H:\develop\an\workspace\ad090md\JA090DM\app\src\main\AndroidManifest.xml:19:3-34:14
+ADDED from H:\develop\an\workspace\ad090md\JA090DM\app\src\main\AndroidManifest.xml:25:3-40:14
 	android:label
-		ADDED from H:\develop\an\workspace\ad090md\JA090DM\app\src\main\AndroidManifest.xml:21:4-36
+		ADDED from H:\develop\an\workspace\ad090md\JA090DM\app\src\main\AndroidManifest.xml:27:4-36
 	android:theme
-		ADDED from H:\develop\an\workspace\ad090md\JA090DM\app\src\main\AndroidManifest.xml:22:4-47
+		ADDED from H:\develop\an\workspace\ad090md\JA090DM\app\src\main\AndroidManifest.xml:28:4-47
 	android:name
-		ADDED from H:\develop\an\workspace\ad090md\JA090DM\app\src\main\AndroidManifest.xml:20:4-32
+		ADDED from H:\develop\an\workspace\ad090md\JA090DM\app\src\main\AndroidManifest.xml:26:4-32
 meta-data#com.google.android.gms.ads.APPLICATION_ID
-ADDED from H:\develop\an\workspace\ad090md\JA090DM\app\src\main\AndroidManifest.xml:26:4-28:48
+ADDED from H:\develop\an\workspace\ad090md\JA090DM\app\src\main\AndroidManifest.xml:32:4-34:48
 	android:value
-		ADDED from H:\develop\an\workspace\ad090md\JA090DM\app\src\main\AndroidManifest.xml:28:5-46
+		ADDED from H:\develop\an\workspace\ad090md\JA090DM\app\src\main\AndroidManifest.xml:34:5-46
 	android:name
-		ADDED from H:\develop\an\workspace\ad090md\JA090DM\app\src\main\AndroidManifest.xml:27:5-61
+		ADDED from H:\develop\an\workspace\ad090md\JA090DM\app\src\main\AndroidManifest.xml:33:5-61
 intent-filter#action:name:android.intent.action.MAIN+category:name:android.intent.category.LAUNCHER
-ADDED from H:\develop\an\workspace\ad090md\JA090DM\app\src\main\AndroidManifest.xml:29:4-33:20
+ADDED from H:\develop\an\workspace\ad090md\JA090DM\app\src\main\AndroidManifest.xml:35:4-39:20
 action#android.intent.action.MAIN
-ADDED from H:\develop\an\workspace\ad090md\JA090DM\app\src\main\AndroidManifest.xml:30:5-56
+ADDED from H:\develop\an\workspace\ad090md\JA090DM\app\src\main\AndroidManifest.xml:36:5-56
 	android:name
-		ADDED from H:\develop\an\workspace\ad090md\JA090DM\app\src\main\AndroidManifest.xml:30:13-54
+		ADDED from H:\develop\an\workspace\ad090md\JA090DM\app\src\main\AndroidManifest.xml:36:13-54
 category#android.intent.category.LAUNCHER
-ADDED from H:\develop\an\workspace\ad090md\JA090DM\app\src\main\AndroidManifest.xml:32:5-64
+ADDED from H:\develop\an\workspace\ad090md\JA090DM\app\src\main\AndroidManifest.xml:38:5-64
 	android:name
-		ADDED from H:\develop\an\workspace\ad090md\JA090DM\app\src\main\AndroidManifest.xml:32:15-62
+		ADDED from H:\develop\an\workspace\ad090md\JA090DM\app\src\main\AndroidManifest.xml:38:15-62
+activity#com.hijiyama_koubou.ja090dm.MyPreferencesActivty
+ADDED from H:\develop\an\workspace\ad090md\JA090DM\app\src\main\AndroidManifest.xml:50:3-51
+	android:name
+		ADDED from H:\develop\an\workspace\ad090md\JA090DM\app\src\main\AndroidManifest.xml:50:13-49
 uses-sdk
 INJECTED from H:\develop\an\workspace\ad090md\JA090DM\app\src\main\AndroidManifest.xml reason: use-sdk injection requested
 INJECTED from H:\develop\an\workspace\ad090md\JA090DM\app\src\main\AndroidManifest.xml
