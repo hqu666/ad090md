@@ -67,6 +67,6 @@
 		android:id="@+id/web_menu_quit"
 		android:checkable="false"
 		android:icon="@android:drawable/ic_lock_power_off"
-		android:title="終了"/>
+		android:title="web終了"/>
 
 </menu>

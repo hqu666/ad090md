@@ -5,19 +5,18 @@
 	xmlns:tools="http://schemas.android.com/tools"
 	android:layout_width="match_parent"
 	android:layout_height="match_parent"
-	android:orientation="vertical"
-	tools:context=".Web_Activity">
-
-	<android.support.v7.widget.Toolbar
-		android:id="@+id/toolbar"
-		android:layout_width="match_parent"
-		android:layout_height="wrap_content"
-		android:background="@color/colorPrimaryDark"
-		android:minHeight="?attr/actionBarSize"
-		android:theme="@style/NoActionBarTheme"
-		app:popupTheme="@style/ToolbarMenu"
-		>
-	</android.support.v7.widget.Toolbar>
+	android:orientation="vertical">
+	<!--tools:context=".Web_Activity"-->
+	<!--<android.support.v7.widget.Toolbar-->
+		<!--android:id="@+id/toolbar"-->
+		<!--android:layout_width="match_parent"-->
+		<!--android:layout_height="wrap_content"-->
+		<!--android:background="@color/colorPrimaryDark"-->
+		<!--android:minHeight="?attr/actionBarSize"-->
+		<!--android:theme="@style/NoActionBarTheme"-->
+		<!--app:popupTheme="@style/ToolbarMenu"-->
+		<!--&gt;-->
+	<!--</android.support.v7.widget.Toolbar>-->
 	
 	<EditText
 		android:id="@+id/url_et"

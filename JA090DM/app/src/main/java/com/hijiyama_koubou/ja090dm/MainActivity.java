@@ -8,6 +8,7 @@ import android.os.Build;
 import android.os.Bundle;
 import android.support.design.widget.FloatingActionButton;
 import android.support.design.widget.Snackbar;
+import android.support.v4.app.FragmentTransaction;
 import android.text.Editable;
 import android.text.TextWatcher;
 import android.view.KeyEvent;
@@ -259,36 +260,11 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
 			dbMsg = "id=" + id;
 			switch ( id ) {
 				case R.id.md_call_top:
-				case R.id.mm_call_top:
+//				case R.id.mm_call_top:
 					setTopView();
 					break;
-//				case R.id.rbm_job_select_setting:            //トレース元設定
-//				case R.id.rbm_direction_setting:            //変形設定
-//				case R.id.rbm_trace_setting:                //動作設定
-//					//メニューグループはまずスキップ //
-//					break;
-//				case R.id.rbm_lotet_pad:     //Padの左右
-//					dbMsg += ",isPadLeft=" + isPadLeft;
-//					if ( isPadLeft ) {
-//						isPadLeft = false;
-//					} else {
-//						isPadLeft = true;
-//					}
-//					myEditor.putBoolean("is_pad_left_key" , isPadLeft);
-//					dbMsg += ",更新";
-//					myEditor.commit();
-//					dbMsg += "完了";
-//					reStart();
-//					break;
-////				case R.id.rbm_common_back:     //戻す
-////					sa_disp_v.canvasBack();
-////					break;
-//				case R.id.md_qr_read:     //QRコードから接続
-//					Intent qra = new Intent(this , QRActivity.class);
-//					startActivity(qra);
-//					break;
 				case R.id.md_call_web2:
-				case R.id.mm_call_web2:
+//				case R.id.mm_call_web2:
 					Intent webIntent = new Intent(this , Web_Activity.class);
 					String dataURI = rootUrlStr;
 					dbMsg += "dataURI=" + dataURI;
@@ -296,48 +272,10 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
 					startActivity(webIntent);
 					break;
 				case R.id.md_call_web:
-				case R.id.mm_call_web:
-					setWebView();
+//				case R.id.mm_call_web:
+					setWebFragument("https://www.yahoo.co.jp/");
+//					setWebView();
 					break;
-/////トレース元変形////////////////////////////////
-//				case R.id.rbm_direction_org:     //オリジナルに戻す
-//					break;
-//				case R.id.rbm_roat_right:     //右90回転
-//					sa_disp_v.canvasSubstitution(R.string.rb_roat_right);
-//					break;
-//				case R.id.rbm_roat_left:     //左90回転
-//					sa_disp_v.canvasSubstitution(R.string.rb_roat_left);
-//					break;
-//				case R.id.rbm_roat_half:     //180回転
-//					sa_disp_v.canvasSubstitution(R.string.rb_roat_half);
-//					break;
-//				case R.id.rbm_flip_vertical:     //上下反転
-//					sa_disp_v.canvasSubstitution(R.string.rb_flip_vertical);
-//					break;
-//				case R.id.rbm_flip_horizontal:     //左右反転
-//					sa_disp_v.canvasSubstitution(R.string.rb_flip_horizontal);
-//					break;
-//				case R.id.rbm_make_original:     //オリジナルにする
-//					break;
-/////動作設定////////////////////////////////
-//				case R.id.rbm_auto_judge:     //自動判定
-//					scoreAuto();
-//					break;
-//				case R.id.rbm_mirror_movement_to:
-//					mirror_h_click();
-//					break;
-//				case R.id.rbm_mirror_movement_lr:
-//					mirror_v_click();
-//					break;
-////				case R.id.imgList_bt:     //トレース元画像のリスト表示
-////					stereoTypeSelect();
-////					break;
-//				case R.id.again_bt:     //戻す
-//				case R.id.rbm_hand_again:     //戻す
-//					sa_disp_v.backAgain();
-//					sa_disp_v.isPreparation = true;                    //トレーススタート前の準備中
-//					break;
-///////////////////////////////////動作設定//
 				case R.id.md_prefarence:      //設定
 				case R.id.mm_prefarence:      //設定
 					Intent settingsIntent = new Intent(MainActivity.this , MyPreferencesActivty.class);
@@ -347,11 +285,6 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
 				case R.id.mm_quit:
 					callQuit();
 					break;
-//				case R.id.close_web_menu:
-//					navigationView.getMenu().clear();
-//					navigationView.inflateMenu(R.menu.activity_web_drawer);
-////					drawer.openDrawer(GravityCompat.START);
-//					break;
 				default:
 					pendeingMessege();
 					break;
@@ -400,8 +333,7 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
 		NavigationView navigationView = ( NavigationView ) findViewById(R.id.nav_view);
 		navigationView.setNavigationItemSelectedListener(this);
 
-//		content_ll = ( LinearLayout ) findViewById(R.id.content_ll);
-		content_ll = findViewById(R.id.content_ll);
+//		content_ll = findViewById(R.id.content_ll);
 
 		//広告表示//////////////////////////////////////////////////
 		ad_layout = findViewById(R.id.ad_layout);
@@ -451,11 +383,32 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
 		final String TAG = "setTopView";
 		String dbMsg = "[MainActivity]" ;/////////////////////////////////////////////////
 		try {
-			content_ll.removeAllViews();
-  			Context context = getApplicationContext();
-			LayoutInflater inflater = LayoutInflater.from(context); // LayoutInflater inflater = (LayoutInflater)context.getSystemService(Context.LAYOUT_INFLATER_SERVICE);
-			inflater.inflate(R.layout.activity_top, content_ll);
-			nowView = R.layout.activity_top;
+//			content_ll.removeAllViews();
+//  			Context context = getApplicationContext();
+//			LayoutInflater inflater = LayoutInflater.from(context); // LayoutInflater inflater = (LayoutInflater)context.getSystemService(Context.LAYOUT_INFLATER_SERVICE);
+//			inflater.inflate(R.layout.activity_top, content_ll);
+//			nowView = R.layout.activity_top;
+			myLog(TAG , dbMsg);
+		} catch (Exception er) {
+			myErrorLog(TAG , dbMsg + "で" + er.toString());
+		}
+	}
+
+//	private String dataURI = "https://www.yahoo.co.jp/";
+	private final static String KEY_NAME = "dataURI";
+	public void setWebFragument(String dataURI) {
+		final String TAG = "setWebFragument";
+		String dbMsg = "[MainActivity]" ;/////////////////////////////////////////////////
+		try {
+			WebFragment fragment = new WebFragment();											// Fragmentを作成します
+			Bundle args = new Bundle();															// Fragmentに渡す値はBundleという型でやり取りする
+			args.putString(KEY_NAME, dataURI);													// Key/Pairの形で値をセットする
+			fragment.setArguments(args);														// Fragmentに値をセットする
+			FragmentTransaction transaction = getSupportFragmentManager().beginTransaction();	// Fragmentの追加や削除といった変更を行う際は、Transactionを利用します
+			transaction.add(R.id.container, fragment);											// 新しく追加を行うのでaddを使用します
+																								// 他にも、よく使う操作で、replace removeといったメソッドがあります
+																								// メソッドの1つ目の引数は対象のViewGroupのID、2つ目の引数は追加するfragment
+			transaction.commit();																// 最後にcommitを使用することで変更を反映します
 			myLog(TAG , dbMsg);
 		} catch (Exception er) {
 			myErrorLog(TAG , dbMsg + "で" + er.toString());
@@ -463,47 +416,45 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
 	}
 
 
-		public void setWebView() {
+	public void setWebView() {
 			final String TAG = "setWebView";
 			String dbMsg = "[MainActivity]" ;/////////////////////////////////////////////////
 			try {
-				content_ll.removeAllViews();
-				Context context = getApplicationContext();
-				LayoutInflater inflater = LayoutInflater.from(context); // LayoutInflater inflater = (LayoutInflater)context.getSystemService(Context.LAYOUT_INFLATER_SERVICE);
-				View inf =inflater.inflate(R.layout.activity_web2, content_ll);
-				webView = findViewById(R.id.webview);
-				url_et = findViewById(R.id.url_et);
-				url_et.setText(urlStr);
-				webView.setWebViewClient(new WebViewClient());
-				webView.loadUrl(urlStr);
-				nowView = R.layout.activity_web2;
-		//		url_et.setFocusable(false);
-		//		url_et.setFocusableInTouchMode(false);
-
-				url_et.addTextChangedListener(new TextWatcher() {
-					@Override
-					public void beforeTextChanged(CharSequence s, int start, int count, int after) {
-						//テキスト変更前
-					}
-
-					@Override
-					public void onTextChanged(CharSequence s, int start, int before, int count) {
-						//テキスト変更中
-					}
-
-					@Override
-					public void afterTextChanged(Editable s) {
-						urlStr = s.toString();
-						webView.loadUrl(urlStr);
-						//テキスト変更後
-					}
-				});
+//				content_ll.removeAllViews();
+//				Context context = getApplicationContext();
+//				LayoutInflater inflater = LayoutInflater.from(context); // LayoutInflater inflater = (LayoutInflater)context.getSystemService(Context.LAYOUT_INFLATER_SERVICE);
+//				View inf =inflater.inflate(R.layout.activity_web2, content_ll);
+//				webView = findViewById(R.id.webview);
+//				url_et = findViewById(R.id.url_et);
+//				url_et.setText(urlStr);
+//				webView.setWebViewClient(new WebViewClient());
+//				webView.loadUrl(urlStr);
+//				nowView = R.layout.activity_web2;
+//		//		url_et.setFocusable(false);
+//		//		url_et.setFocusableInTouchMode(false);
+//
+//				url_et.addTextChangedListener(new TextWatcher() {
+//					@Override
+//					public void beforeTextChanged(CharSequence s, int start, int count, int after) {
+//						//テキスト変更前
+//					}
+//
+//					@Override
+//					public void onTextChanged(CharSequence s, int start, int before, int count) {
+//						//テキスト変更中
+//					}
+//
+//					@Override
+//					public void afterTextChanged(Editable s) {
+//						urlStr = s.toString();
+//						webView.loadUrl(urlStr);
+//						//テキスト変更後
+//					}
+//				});
 				myLog(TAG , dbMsg);
 			} catch (Exception er) {
 				myErrorLog(TAG , dbMsg + "で" + er.toString());
 			}
-
-
 	}
 	////////////////////////////////////////////////////////////////////////////
 	public void setADSens() {
