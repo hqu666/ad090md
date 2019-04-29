@@ -1,6 +1,7 @@
 package com.hijiyama_koubou.ja090dm;
 
 import android.Manifest;
+import android.content.Context;
 import android.content.Intent;
 import android.content.pm.PackageManager;
 import android.os.Build;
@@ -10,6 +11,7 @@ import android.support.design.widget.Snackbar;
 import android.text.Editable;
 import android.text.TextWatcher;
 import android.view.KeyEvent;
+import android.view.LayoutInflater;
 import android.view.View;
 import android.support.design.widget.NavigationView;
 import android.support.v4.view.GravityCompat;
@@ -19,6 +21,7 @@ import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
 import android.view.Menu;
 import android.view.MenuItem;
+import android.view.ViewGroup;
 import android.webkit.WebView;
 import android.webkit.WebViewClient;
 import android.widget.EditText;
@@ -34,12 +37,17 @@ import net.nend.android.NendAdView;
 public class MainActivity extends AppCompatActivity implements NavigationView.OnNavigationItemSelectedListener {
 	private LinearLayout ad_layout;
 	private PublisherAdView adView;
+	private ViewGroup content_ll;
+//	private LinearLayout content_ll;
 	private LinearLayout nend_layout;
 	private NendAdView nendAdView;
 	private WebView webView;
 	private EditText url_et;
 	private String urlStr ="https://www.yahoo.co.jp/";
 	private String AdUnitID ="";			//"ca-app-pub-3940256099942544/6300978111";
+
+	private String rootUrlStr  ="https://www.yahoo.co.jp/";
+	private int nowView = R.layout.activity_top;
 
 	/**
 	 * このアプリケーションの設定ファイル読出し
@@ -118,7 +126,7 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
 //			if(result != null) {
 //				String dataURI  = result.getContents();
 //				dbMsg = ",dataURI="+dataURI;
-//				Intent webIntent = new Intent(this , CS_Web_Activity.class);
+//				Intent webIntent = new Intent(this , Web_Activity.class);
 //				webIntent.putExtra("dataURI" , dataURI);
 //				startActivity(webIntent);
 //			} else {
@@ -187,11 +195,15 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
 //			myEditor = sharedPref.edit();
 ////			myEditor.putString("peer_id_key" , "");      //使用した
 ////			boolean kakikomi = myEditor.commit();
-			this.finish();
-			if ( Build.VERSION.SDK_INT >= Build.VERSION_CODES.LOLLIPOP ) {
-				finishAndRemoveTask();                      //アプリケーションのタスクを消去する事でデバッガーも停止する。
-			} else {
-				moveTaskToBack(true);                       //ホームボタン相当でアプリケーション全体が中断状態
+			if(nowView == R.layout.activity_top){
+				this.finish();
+				if ( Build.VERSION.SDK_INT >= Build.VERSION_CODES.LOLLIPOP ) {
+					finishAndRemoveTask();                      //アプリケーションのタスクを消去する事でデバッガーも停止する。
+				} else {
+					moveTaskToBack(true);                       //ホームボタン相当でアプリケーション全体が中断状態
+				}
+			}else{
+				setTopView();
 			}
 			myLog(TAG , dbMsg);
 		} catch (Exception er) {
@@ -246,6 +258,10 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
 			int id = item.getItemId();
 			dbMsg = "id=" + id;
 			switch ( id ) {
+				case R.id.md_call_top:
+				case R.id.mm_call_top:
+					setTopView();
+					break;
 //				case R.id.rbm_job_select_setting:            //トレース元設定
 //				case R.id.rbm_direction_setting:            //変形設定
 //				case R.id.rbm_trace_setting:                //動作設定
@@ -271,25 +287,18 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
 //					Intent qra = new Intent(this , QRActivity.class);
 //					startActivity(qra);
 //					break;
-//				case R.id.md_call_main:          //web
-//				case R.id.mm_call_main:          //web
-////					Uri uri = Uri.parse("http://ec2-52-197-173-40.ap-northeast-1.compute.amazonaws.com:3080/");
-////					Intent webIntent = new Intent(Intent.ACTION_VIEW,uri);
-////					startActivity(webIntent);
-//					Intent webIntent = new Intent(this , CS_Web_Activity.class);
-//					String dataURI = rootUrlStr;
-//					dbMsg += "dataURI=" + dataURI;
-////					final Date date = new Date(System.currentTimeMillis());
-////					final DateFormat df = new SimpleDateFormat("yyyyMMddHHmmss");
-////					dataURI += "/?room=" +df.format(date);
-//////					CS_Util UTIL = new CS_Util();
-//////					dataURI += "/?room=" + UTIL.retDateStr(date , "yyyyMMddhhmmss");
-////					dbMsg += ">>" + dataURI;
-//					webIntent.putExtra("dataURI" , dataURI);                        //最初に表示するページのパス
-////					baseUrl = "file://"+extras.getString("baseUrl");				//最初に表示するページを受け取る
-////					fType = extras.getString("fType");							//データタイプ
-//					startActivity(webIntent);
-//					break;
+				case R.id.md_call_web2:
+				case R.id.mm_call_web2:
+					Intent webIntent = new Intent(this , Web_Activity.class);
+					String dataURI = rootUrlStr;
+					dbMsg += "dataURI=" + dataURI;
+					webIntent.putExtra("dataURI" , dataURI);                        //最初に表示するページのパス
+					startActivity(webIntent);
+					break;
+				case R.id.md_call_web:
+				case R.id.mm_call_web:
+					setWebView();
+					break;
 /////トレース元変形////////////////////////////////
 //				case R.id.rbm_direction_org:     //オリジナルに戻す
 //					break;
@@ -345,10 +354,6 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
 //					break;
 				default:
 					pendeingMessege();
-//					String titolStr = "制作中です";
-//					String mggStr = "最終リリースをお待ちください";
-//					messageShow(titolStr , mggStr);
-//					onContextItemSelected(item);
 					break;
 			}
 //			if (drawer.isDrawerOpen(GravityCompat.START)) {
@@ -369,8 +374,7 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
 		}
 		return false;
 	}
-	///////////////////////////////////////////
-
+	/////////////////////////////////////////////////////////////////////////////////////////////////////////////
 
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
@@ -395,19 +399,22 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
 
 		NavigationView navigationView = ( NavigationView ) findViewById(R.id.nav_view);
 		navigationView.setNavigationItemSelectedListener(this);
-		
+
+//		content_ll = ( LinearLayout ) findViewById(R.id.content_ll);
+		content_ll = findViewById(R.id.content_ll);
+
+		//広告表示//////////////////////////////////////////////////
 		ad_layout = findViewById(R.id.ad_layout);
 		nend_layout = findViewById(R.id.nend_layout);
-		webView = findViewById(R.id.webView);
-		url_et = findViewById(R.id.url_et);
-		//広告表示//////////////////////////////////////////////////
 		AdUnitID = getString (R.string.banner_ad_unit_id);
 		MobileAds.initialize(this,getResources ().getString (R.string.banner_ad_unit_id));       //Mobile Ads SDK を初期化
-
 	}
+
 	public void onWindowFocusChanged(boolean hasFocus) {
 		super.onWindowFocusChanged(hasFocus);
-		setWebView();
+
+		setTopView();
+//		setWebView();
 		setADSens();//広告表示//////////////////////////////////////////////////
 		setNend();
 	}
@@ -440,31 +447,63 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
 	}
 
 	////////////////////////////////////////////////////////////////////////////
-	public void setWebView() {
-		url_et.setText(urlStr);
-		webView.setWebViewClient(new WebViewClient());
-		webView.loadUrl(urlStr);
-//		url_et.setFocusable(false);
-//		url_et.setFocusableInTouchMode(false);
+	public void setTopView() {
+		final String TAG = "setTopView";
+		String dbMsg = "[MainActivity]" ;/////////////////////////////////////////////////
+		try {
+			content_ll.removeAllViews();
+  			Context context = getApplicationContext();
+			LayoutInflater inflater = LayoutInflater.from(context); // LayoutInflater inflater = (LayoutInflater)context.getSystemService(Context.LAYOUT_INFLATER_SERVICE);
+			inflater.inflate(R.layout.activity_top, content_ll);
+			nowView = R.layout.activity_top;
+			myLog(TAG , dbMsg);
+		} catch (Exception er) {
+			myErrorLog(TAG , dbMsg + "で" + er.toString());
+		}
+	}
 
-		url_et.addTextChangedListener(new TextWatcher() {
-			@Override
-			public void beforeTextChanged(CharSequence s, int start, int count, int after) {
-				//テキスト変更前
-			}
 
-			@Override
-			public void onTextChanged(CharSequence s, int start, int before, int count) {
-				//テキスト変更中
-			}
-
-			@Override
-			public void afterTextChanged(Editable s) {
-				urlStr = s.toString();
+		public void setWebView() {
+			final String TAG = "setWebView";
+			String dbMsg = "[MainActivity]" ;/////////////////////////////////////////////////
+			try {
+				content_ll.removeAllViews();
+				Context context = getApplicationContext();
+				LayoutInflater inflater = LayoutInflater.from(context); // LayoutInflater inflater = (LayoutInflater)context.getSystemService(Context.LAYOUT_INFLATER_SERVICE);
+				View inf =inflater.inflate(R.layout.activity_web2, content_ll);
+				webView = findViewById(R.id.webview);
+				url_et = findViewById(R.id.url_et);
+				url_et.setText(urlStr);
+				webView.setWebViewClient(new WebViewClient());
 				webView.loadUrl(urlStr);
-				//テキスト変更後
+				nowView = R.layout.activity_web2;
+		//		url_et.setFocusable(false);
+		//		url_et.setFocusableInTouchMode(false);
+
+				url_et.addTextChangedListener(new TextWatcher() {
+					@Override
+					public void beforeTextChanged(CharSequence s, int start, int count, int after) {
+						//テキスト変更前
+					}
+
+					@Override
+					public void onTextChanged(CharSequence s, int start, int before, int count) {
+						//テキスト変更中
+					}
+
+					@Override
+					public void afterTextChanged(Editable s) {
+						urlStr = s.toString();
+						webView.loadUrl(urlStr);
+						//テキスト変更後
+					}
+				});
+				myLog(TAG , dbMsg);
+			} catch (Exception er) {
+				myErrorLog(TAG , dbMsg + "で" + er.toString());
 			}
-		});
+
+
 	}
 	////////////////////////////////////////////////////////////////////////////
 	public void setADSens() {
@@ -539,17 +578,17 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
 
 
 	public void messageShow(String titolStr , String mggStr) {
-		CS_Util UTIL = new CS_Util();
+		Util UTIL = new Util();
 		UTIL.messageShow(titolStr , mggStr , MainActivity.this);
 	}
 
 	public static void myLog(String TAG , String dbMsg) {
-		CS_Util UTIL = new CS_Util();
+		Util UTIL = new Util();
 		UTIL.myLog(TAG , dbMsg);
 	}
 
 	public static void myErrorLog(String TAG , String dbMsg) {
-		CS_Util UTIL = new CS_Util();
+		Util UTIL = new Util();
 		UTIL.myErrorLog(TAG , dbMsg);
 	}
 }

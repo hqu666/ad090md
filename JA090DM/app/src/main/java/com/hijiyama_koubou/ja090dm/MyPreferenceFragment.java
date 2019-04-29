@@ -3,9 +3,7 @@ package com.hijiyama_koubou.ja090dm;
 import android.content.Context;
 import android.content.SharedPreferences;
 import android.content.res.TypedArray;
-import android.media.MediaRecorder;
 import android.net.Uri;
-import android.os.Build;
 import android.os.Bundle;
 import android.os.Environment;
 import android.preference.CheckBoxPreference;
@@ -18,13 +16,11 @@ import android.preference.PreferenceScreen;
 import android.util.Log;
 import android.widget.ListAdapter;
 
-import java.io.File;
-import java.util.Arrays;
 import java.util.Map;
 
 
 public class MyPreferenceFragment extends PreferenceFragment implements SharedPreferences.OnSharedPreferenceChangeListener {
-	private CS_Util UTIL;
+	private Util UTIL;
 	private OnFragmentInteractionListener mListener;
 
 	public PreferenceScreen sps;
@@ -499,7 +495,7 @@ public class MyPreferenceFragment extends PreferenceFragment implements SharedPr
 			Map< String, ? > keys = sharedPref.getAll();                          //System.collections.Generic.IDictionary<string, object>
 			dbMsg += ",読み込み開始;keys=" + keys.size() + "件";        // keys.size()
 			if ( UTIL == null ) {
-				UTIL = new CS_Util();
+				UTIL = new Util();
 			}
 			int i = 0;
 			for ( String key : keys.keySet() ) {
@@ -525,7 +521,7 @@ public class MyPreferenceFragment extends PreferenceFragment implements SharedPr
 //					traceLineWidth = sharedPref.getString(key , traceLineWidth);
 					trace_line_width = sharedPref.getString(key , trace_line_width);
 					dbMsg += ",トレース線の太さ=" + trace_line_width;
-					UTIL = new CS_Util();
+					UTIL = new Util();
 					if( UTIL.isIntVar(trace_line_width)){
 						traceLineWidth = Integer.parseInt(trace_line_width);
 					}
@@ -549,10 +545,10 @@ public class MyPreferenceFragment extends PreferenceFragment implements SharedPr
 			}
 
 			if ( savePatht.equals("") ) {
-				UTIL = new CS_Util();
+				UTIL = new Util();
 				savePatht = UTIL.getSavePath(context , Environment.DIRECTORY_PICTURES , "Recovery_Brain");   // context.getResources().getString(R.string.app_name);
 				if ( savePatht.equals("") ) {
-					UTIL = new CS_Util();
+					UTIL = new Util();
 					savePatht = UTIL.getSavePath(context , Environment.DIRECTORY_DCIM , "Recovery_Brain");
 				}
 				dbMsg += ",作成したファイルの保存場所(初期設定)=" + savePatht;
@@ -597,14 +593,14 @@ public class MyPreferenceFragment extends PreferenceFragment implements SharedPr
 
 	public void myLog(String TAG , String dbMsg) {
 		if ( UTIL == null ) {
-			UTIL = new CS_Util();
+			UTIL = new Util();
 		}
 		UTIL.myLog(TAG , dbMsg);
 	}
 
 	public void myErrorLog(String TAG , String dbMsg) {
 		if ( UTIL == null ) {
-			UTIL = new CS_Util();
+			UTIL = new Util();
 		}
 		UTIL.myErrorLog(TAG , dbMsg);
 	}
