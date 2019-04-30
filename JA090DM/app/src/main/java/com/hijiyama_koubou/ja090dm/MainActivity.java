@@ -1,6 +1,7 @@
 package com.hijiyama_koubou.ja090dm;
 
 import android.Manifest;
+import android.app.Activity;
 import android.content.Context;
 import android.content.Intent;
 import android.content.pm.PackageManager;
@@ -11,6 +12,7 @@ import android.support.design.widget.Snackbar;
 import android.support.v4.app.FragmentTransaction;
 import android.text.Editable;
 import android.text.TextWatcher;
+import android.util.Log;
 import android.view.KeyEvent;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -33,6 +35,9 @@ import com.google.android.gms.ads.doubleclick.PublisherAdRequest;
 import com.google.android.gms.ads.doubleclick.PublisherAdView;
 import com.google.android.gms.ads.AdSize;
 import com.google.android.gms.ads.MobileAds;
+import com.google.zxing.integration.android.IntentIntegrator;
+import com.google.zxing.integration.android.IntentResult;
+
 import net.nend.android.NendAdView;
 
 public class MainActivity extends AppCompatActivity implements NavigationView.OnNavigationItemSelectedListener {
@@ -49,7 +54,13 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
 
 	private String rootUrlStr  ="https://www.yahoo.co.jp/";
 	private int topView = R.layout.activity_qr;
-	private int nowView = topView;
+	public int nowView = topView;
+	public int transitionActivity = topView;
+	public int transitionFragment = transitionActivity+1;
+	public int transitionInflater = transitionFragment+1;
+
+	public int transitionType = transitionFragment;
+
 
 	/**
 	 * このアプリケーションの設定ファイル読出し
@@ -61,10 +72,10 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
 			if ( Build.VERSION.SDK_INT >= Build.VERSION_CODES.M ) {                //(初回起動で)全パーミッションの許諾を取る
 				dbMsg = "許諾確認";
 				String[] PERMISSIONS = { Manifest.permission.INTERNET , Manifest.permission.ACCESS_NETWORK_STATE,
+										Manifest.permission.CAMERA ,
 										 Manifest.permission.READ_EXTERNAL_STORAGE , Manifest.permission.WRITE_EXTERNAL_STORAGE
 										};
-//				Manifest.permission.ACCESS_NETWORK_STATE , Manifest.permission.ACCESS_WIFI_STATE ,
-// , Manifest.permission.MODIFY_AUDIO_SETTINGS , Manifest.permission.RECORD_AUDIO ,  Manifest.permission.MODIFY_AUDIO_SETTINGS,        Manifest.permission.CAMERA
+/// , Manifest.permission.MODIFY_AUDIO_SETTINGS , Manifest.permission.RECORD_AUDIO ,  Manifest.permission.MODIFY_AUDIO_SETTINGS,
 				boolean isNeedParmissionReqest = false;
 				for ( String permissionName : PERMISSIONS ) {
 					dbMsg += "," + permissionName;
@@ -78,6 +89,12 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
 					dbMsg += "許諾処理へ";
 					requestPermissions(PERMISSIONS , REQUEST_PREF);
 					return;
+				}
+				getPackageManager().hasSystemFeature(PackageManager.FEATURE_CAMERA_FLASH);
+				if(!getPackageManager().hasSystemFeature(
+						PackageManager.FEATURE_CAMERA_FLASH))
+				{
+					dbMsg += "フラッシュライトは使えません";
 				}
 			}
 //			dbMsg += ",isReadPref=" + isReadPref;
@@ -116,24 +133,33 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
 
 	@Override
 	protected void onActivityResult(int requestCode , int resultCode , Intent data) {
-		final String TAG = "onActivityResult[MA]";
-		String dbMsg = "requestCode=" + requestCode + ",resultCode=" + resultCode;
+		final String TAG = "onActivityResult";
+		String dbMsg = "[MainActivity]";
+		dbMsg += "requestCode=" + requestCode + ",resultCode=" + resultCode;
 		try {
 			switch ( requestCode ) {
 				case REQUEST_PREF:                                //Prefarensからの戻り
 					readPref();
 					break;
+				case 49374:                                //   QR
+					IntentResult result = IntentIntegrator.parseActivityResult(requestCode, resultCode, data);
+					if(result != null) {
+						String dataURI  = result.getContents();
+						dbMsg += ",dataURI="+dataURI;
+						if(dataURI != null){
+							if( transitionType == transitionActivity) {
+								callWebIntent(dataURI);
+							}else if( transitionType == transitionFragment){
+								setWebFragument(dataURI);
+							}else if( transitionType == transitionInflater){
+
+							}
+						}
+					} else {
+						super.onActivityResult(requestCode, resultCode, data);
+					}
+					break;
 			}
-//			IntentResult result = IntentIntegrator.parseActivityResult(requestCode, resultCode, data);
-//			if(result != null) {
-//				String dataURI  = result.getContents();
-//				dbMsg = ",dataURI="+dataURI;
-//				Intent webIntent = new Intent(this , Web_Activity.class);
-//				webIntent.putExtra("dataURI" , dataURI);
-//				startActivity(webIntent);
-//			} else {
-//				super.onActivityResult(requestCode, resultCode, data);
-//			}
 
 			myLog(TAG , dbMsg);
 		} catch (Exception er) {
@@ -263,17 +289,20 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
 			switch ( id ) {
 				case R.id.md_call_top:
 //				case R.id.mm_call_top:
-					setTopFragument();
-//					setTopView();
+					if( transitionType == transitionActivity) {
+						setTopView();
+					}else if( transitionType == transitionFragment){
+						setTopFragument();
+					}else if( transitionType == transitionInflater){
+
+					}
+
 					break;
 				case R.id.md_call_web2:
 //				case R.id.mm_call_web2:
-					nowView = R.layout.activity_web; 					//表示中のview
-					Intent webIntent = new Intent(this , Web_Activity.class);
 					String dataURI = rootUrlStr;
 					dbMsg += "dataURI=" + dataURI;
-					webIntent.putExtra("dataURI" , dataURI);                        //最初に表示するページのパス
-					startActivity(webIntent);
+					callWebIntent(dataURI);
 					break;
 				case R.id.md_call_web:
 //				case R.id.mm_call_web:
@@ -322,7 +351,6 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
 		Toolbar toolbar = ( Toolbar ) findViewById(R.id.toolbar);
 		setSupportActionBar(toolbar);
 
-
 //		FloatingActionButton fab = ( FloatingActionButton ) findViewById(R.id.fab);
 //		fab.setOnClickListener(new View.OnClickListener() {
 //			@Override
@@ -339,7 +367,6 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
 		NavigationView navigationView = ( NavigationView ) findViewById(R.id.nav_view);
 		navigationView.setNavigationItemSelectedListener(this);
 
-//		content_ll = findViewById(R.id.content_ll);
 
 		//広告表示//////////////////////////////////////////////////
 		ad_layout = findViewById(R.id.ad_layout);
@@ -350,15 +377,20 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
 
 	public void onWindowFocusChanged(boolean hasFocus) {
 		super.onWindowFocusChanged(hasFocus);
+			if( transitionType == transitionActivity) {
+				setTopView();
+			}else if( transitionType == transitionFragment){
+				setTopFragument();
+			}else if( transitionType == transitionInflater){
 
-		setTopFragument();
+			}
 		setADSens();//広告表示//////////////////////////////////////////////////
 		setNend();
 	}
 
 	/** Called when leaving the activity */
 	@Override
-	public void onPause() {
+	protected void onPause() {
 		if (adView != null) {
 			adView.pause();
 		}
@@ -367,16 +399,27 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
 
 	/** Called when returning to the activity */
 	@Override
-	public void onResume() {
+	protected void onResume() {
 		super.onResume();
 		if (adView != null) {
 			adView.resume();
 		}
 	}
+	/***
+	 * フォアグラウンドでなくなった場合に呼び出される
+	 */
+	@Override
+	public void onStop() {
+		super.onStop();
+		final String TAG = "onStop";
+		String dbMsg = "[MainActivity]" ;/////////////////////////////////////////////////
+		myLog(TAG , dbMsg);
+	}
+
 
 	/** Called before the activity is destroyed */
 	@Override
-	public void onDestroy() {
+	protected void onDestroy() {
 		if (adView != null) {
 			adView.destroy();
 		}
@@ -394,7 +437,8 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
 //			args.putString(KEY_NAME, dataURI);													// Key/Pairの形で値をセットする
 //			fragment.setArguments(args);														// Fragmentに値をセットする
 			FragmentTransaction transaction = getSupportFragmentManager().beginTransaction();	// Fragmentの追加や削除といった変更を行う際は、Transactionを利用します
-			transaction.add(R.id.container, fragment);											// 新しく追加を行うのでaddを使用します
+			transaction.replace(R.id.container, fragment);											// 新しく追加を行うのでaddを使用します
+//			transaction.add(R.id.container, fragment);											// 新しく追加を行うのでaddを使用します
 			// 他にも、よく使う操作で、replace removeといったメソッドがあります
 			// メソッドの1つ目の引数は対象のViewGroupのID、2つ目の引数は追加するfragment
 			transaction.commit();																// 最後にcommitを使用することで変更を反映します
@@ -408,7 +452,7 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
 	private final static String KEY_NAME = "dataURI";
 	public void setWebFragument(String dataURI) {
 		final String TAG = "setWebFragument";
-		String dbMsg = "[MainActivity]" ;/////////////////////////////////////////////////
+		String dbMsg = "[MainActivity]dataURI=" + dataURI;/////////////////////////////////////////////////
 		try {
 			nowView = R.layout.activity_web2; 					//表示中のview
 
@@ -417,15 +461,36 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
 			args.putString(KEY_NAME, dataURI);													// Key/Pairの形で値をセットする
 			fragment.setArguments(args);														// Fragmentに値をセットする
 			FragmentTransaction transaction = getSupportFragmentManager().beginTransaction();	// Fragmentの追加や削除といった変更を行う際は、Transactionを利用します
-			transaction.add(R.id.container, fragment);											// 新しく追加を行うのでaddを使用します
+			transaction.replace(R.id.container, fragment);											// 新しく追加を行うのでaddを使用します
 																								// 他にも、よく使う操作で、replace removeといったメソッドがあります
 																								// メソッドの1つ目の引数は対象のViewGroupのID、2つ目の引数は追加するfragment
 			transaction.commit();																// 最後にcommitを使用することで変更を反映します
+			myLog(TAG , dbMsg);
+		} catch (IllegalStateException er) {
+			myErrorLog(TAG , dbMsg + "で" + er.toString());
+		} catch (Exception er) {
+			myErrorLog(TAG , dbMsg + "で" + er.toString());
+		}
+	}
+	
+	/////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+
+	public void callWebIntent(String dataURI) {
+		final String TAG = "callWebIntent";
+		String dbMsg = "[MainActivity]" ;/////////////////////////////////////////////////
+		try {
+			nowView = R.layout.activity_web; 					//表示中のview
+			Intent webIntent = new Intent(this , Web_Activity.class);
+//			dataURI = rootUrlStr;
+			dbMsg += "dataURI=" + dataURI;
+			webIntent.putExtra("dataURI" , dataURI);                        //最初に表示するページのパス
+			startActivity(webIntent);
 			myLog(TAG , dbMsg);
 		} catch (Exception er) {
 			myErrorLog(TAG , dbMsg + "で" + er.toString());
 		}
 	}
+
 
 	//classが無い小規模viewはレイアウトの呼び込み ///////////////////////////////////
 	public void setTopView() {
@@ -433,6 +498,7 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
 		String dbMsg = "[MainActivity]" ;/////////////////////////////////////////////////
 		try {
 			nowView = topView; 					//表示中のview
+			//		content_ll = findViewById(R.id.content_ll);
 
 //			content_ll.removeAllViews();
 //  			Context context = getApplicationContext();

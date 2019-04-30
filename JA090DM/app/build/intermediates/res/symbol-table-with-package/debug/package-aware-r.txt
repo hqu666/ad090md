@@ -722,6 +722,15 @@ attr windowFixedWidthMinor
 attr windowMinWidthMajor
 attr windowMinWidthMinor
 attr windowNoTitle
+attr zxing_framing_rect_height
+attr zxing_framing_rect_width
+attr zxing_possible_result_points
+attr zxing_preview_scaling_strategy
+attr zxing_result_view
+attr zxing_scanner_layout
+attr zxing_use_texture_view
+attr zxing_viewfinder_laser
+attr zxing_viewfinder_mask
 bool abc_action_bar_embed_tabs
 bool abc_allow_stacked_button_bar
 bool abc_config_actionMenuItemAllCaps
@@ -877,6 +886,16 @@ color switch_thumb_normal_material_dark
 color switch_thumb_normal_material_light
 color tooltip_background_dark
 color tooltip_background_light
+color zxing_custom_possible_result_points
+color zxing_custom_result_view
+color zxing_custom_viewfinder_laser
+color zxing_custom_viewfinder_mask
+color zxing_possible_result_points
+color zxing_result_view
+color zxing_status_text
+color zxing_transparent
+color zxing_viewfinder_laser
+color zxing_viewfinder_mask
 dimen abc_action_bar_content_inset_material
 dimen abc_action_bar_content_inset_with_nav
 dimen abc_action_bar_default_height_material
@@ -1306,6 +1325,7 @@ id SHOW_PATH
 id SHOW_PROGRESS
 id SYM
 id accelerate
+id acsess_bt
 id action0
 id action_bar
 id action_bar_activity_content
@@ -1330,6 +1350,7 @@ id ad_layout
 id add
 id adjust_height
 id adjust_width
+id advertisement_ll
 id alertTitle
 id aligned
 id all
@@ -1354,6 +1375,7 @@ id browser_actions_menu_view
 id buttonPanel
 id cancel_action
 id center
+id centerCrop
 id center_horizontal
 id center_vertical
 id chain
@@ -1364,9 +1386,11 @@ id clip_horizontal
 id clip_vertical
 id close_web_menu
 id collapseActionView
+id coment_ll
 id container
 id content
 id contentPanel
+id content_ll
 id coordinator
 id cos
 id custom
@@ -1374,6 +1398,7 @@ id customPanel
 id dark
 id decelerate
 id decor_content_parent
+id decoratedBarcodeView
 id default_activity_button
 id deltaRelative
 id description_media_view_button_cta
@@ -1403,12 +1428,13 @@ id enterAlwaysCollapsed
 id exitUntilCollapsed
 id expand_activities_button
 id expanded_menu
-id fab
 id fill
 id fill_horizontal
 id fill_parent
 id fill_vertical
 id filled
+id fitCenter
+id fitXY
 id fixed
 id flip
 id forever
@@ -1459,6 +1485,7 @@ id line3
 id linear
 id listMode
 id list_item
+id main_result_tv
 id masked
 id match_parent
 id md_call_top
@@ -1542,13 +1569,19 @@ id pin
 id position
 id positionX
 id positionY
+id prevew_ll
 id progress_circular
 id progress_horizontal
+id qr_act_bt
+id qr_result_iv
+id qr_result_tv
 id radio
 id ratio
 id rectangle_media_view_replay_cta_land
 id rectangle_media_view_replay_cta_port
 id rectangles
+id release_bt
+id rescan_bt
 id reverseSawtooth
 id right
 id right_icon
@@ -1557,6 +1590,7 @@ id save_image_matrix
 id save_non_transition_alpha
 id save_scale_type
 id sawtooth
+id scam_ll
 id screen
 id scroll
 id scrollIndicatorDown
@@ -1615,7 +1649,6 @@ id text2
 id textSpacerNoButtons
 id textSpacerNoTitle
 id textStart
-id textView
 id textView2
 id text_input_password_toggle
 id textinput_counter
@@ -1667,6 +1700,19 @@ id wide
 id withText
 id wrap
 id wrap_content
+id zxing_back_button
+id zxing_barcode_scanner
+id zxing_barcode_surface
+id zxing_camera_closed
+id zxing_camera_error
+id zxing_decode
+id zxing_decode_failed
+id zxing_decode_succeeded
+id zxing_possible_result_points
+id zxing_preview_failed
+id zxing_prewiew_size_ready
+id zxing_status_view
+id zxing_viewfinder_view
 integer abc_config_activityDefaultDur
 integer abc_config_activityShortDur
 integer app_bar_elevation_anim_duration
@@ -1720,6 +1766,7 @@ layout activity_main
 layout activity_native_land_video_fullscreen_playing
 layout activity_native_port_video_fullscreen_playing
 layout activity_nend_ad_full_board
+layout activity_qr
 layout activity_top
 layout activity_web
 layout activity_web2
@@ -1767,6 +1814,8 @@ layout select_dialog_multichoice_material
 layout select_dialog_singlechoice_material
 layout support_simple_spinner_dropdown_item
 layout view_native_media
+layout zxing_barcode_scanner
+layout zxing_capture
 menu activity_main_drawer
 menu activity_web_drawer
 menu main
@@ -1774,6 +1823,7 @@ menu wev_cont
 mipmap ic_launcher
 mipmap ic_launcher_round
 plurals message_participants
+raw zxing_beep
 string abc_action_bar_home_description
 string abc_action_bar_up_description
 string abc_action_menu_overflow_description
@@ -2014,6 +2064,10 @@ string wv_move_now
 string wv_reload_now
 string wv_set_url_msg
 string wv_set_url_titol
+string zxing_app_name
+string zxing_button_ok
+string zxing_msg_camera_framework_bug
+string zxing_msg_default_status
 style AlertDialog_AppCompat
 style AlertDialog_AppCompat_Light
 style Animation_AppCompat_Dialog
@@ -2528,6 +2582,7 @@ style Widget_MaterialComponents_TextInputLayout_OutlinedBox
 style Widget_MaterialComponents_TextInputLayout_OutlinedBox_Dense
 style Widget_MaterialComponents_Toolbar
 style Widget_Support_CoordinatorLayout
+style zxing_CaptureTheme
 styleable ActionBar background backgroundSplit backgroundStacked contentInsetEnd contentInsetEndWithActions contentInsetLeft contentInsetRight contentInsetStart contentInsetStartWithNavigation customNavigationLayout displayOptions divider elevation height hideOnContentScroll homeAsUpIndicator homeLayout icon indeterminateProgressStyle itemPadding logo navigationMode popupTheme progressBarPadding progressBarStyle subtitle subtitleTextStyle title titleTextStyle
 styleable ActionBarLayout android_layout_gravity
 styleable ActionMenuItemView android_minWidth
@@ -2635,4 +2690,7 @@ styleable Variant constraints region_heightLessThan region_heightMoreThan region
 styleable View android_theme android_focusable paddingEnd paddingStart theme
 styleable ViewBackgroundHelper android_background backgroundTint backgroundTintMode
 styleable ViewStubCompat android_id android_layout android_inflatedId
+styleable zxing_camera_preview zxing_framing_rect_height zxing_framing_rect_width zxing_preview_scaling_strategy zxing_use_texture_view
+styleable zxing_finder zxing_possible_result_points zxing_result_view zxing_viewfinder_laser zxing_viewfinder_mask
+styleable zxing_view zxing_scanner_layout
 xml preferences

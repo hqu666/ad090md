@@ -1,5 +1,6 @@
 package com.hijiyama_koubou.ja090dm;
 
+import android.app.Activity;
 import android.app.AlertDialog;
 import android.content.DialogInterface;
 import android.content.Intent;
@@ -42,7 +43,7 @@ import java.io.File;
 import java.util.ArrayList;
 import java.util.List;
 
-public class WebFragment  extends Fragment implements NavigationView.OnNavigationItemSelectedListener  {
+public class WebFragment extends Fragment implements NavigationView.OnNavigationItemSelectedListener  {
 
 	public WebView webView;
 	private EditText url_et;
@@ -122,7 +123,9 @@ public class WebFragment  extends Fragment implements NavigationView.OnNavigatio
 		}
 	}
 
-	// Fragmentで表示するViewを作成するメソッド
+	/**
+	 * Fragmentで表示するViewを作成するメソッド
+	 * */
 	@Override
 	public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
 		super.onCreateView(inflater, container, savedInstanceState);
@@ -136,7 +139,9 @@ public class WebFragment  extends Fragment implements NavigationView.OnNavigatio
 		return inflater.inflate(R.layout.activity_web2, container, false);
 	}
 
-	// Viewが生成し終わった時に呼ばれるメソッド
+	/**
+	 * Viewが生成し終わった時に呼ばれるメソッド
+	 * */
 	@Override
 	public void onViewCreated(View view, Bundle savedInstanceState) {
 		super.onViewCreated(view, savedInstanceState);
@@ -194,6 +199,25 @@ public class WebFragment  extends Fragment implements NavigationView.OnNavigatio
 		} catch (Exception er) {
 			myErrorLog(TAG , dbMsg + ";でエラー発生；" + er);
 		}
+	}
+
+
+	@Override
+	public void onAttach(Activity activity) {
+		super.onAttach(activity);
+		final String TAG = "onAttach";
+		String dbMsg = "[WebFragment]" ;/////////////////////////////////////////////////
+		myLog(TAG , dbMsg);
+	}
+	/***
+	 * Fragmentの内部のViewリソースの整理を行う
+	 */
+	@Override
+	public void onDestroyView() {
+		super.onDestroyView();
+		final String TAG = "onDestroyView";
+		String dbMsg = "[WebFragment]" ;/////////////////////////////////////////////////
+		myLog(TAG , dbMsg);
 	}
 
 //	/**

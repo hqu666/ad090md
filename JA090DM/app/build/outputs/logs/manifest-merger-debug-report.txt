@@ -1,12 +1,13 @@
 -- Merging decision tree log ---
 manifest
-ADDED from H:\develop\an\workspace\ad090md\JA090DM\app\src\main\AndroidManifest.xml:2:1-57:12
-INJECTED from H:\develop\an\workspace\ad090md\JA090DM\app\src\main\AndroidManifest.xml:2:1-57:12
-INJECTED from H:\develop\an\workspace\ad090md\JA090DM\app\src\main\AndroidManifest.xml:2:1-57:12
-INJECTED from H:\develop\an\workspace\ad090md\JA090DM\app\src\main\AndroidManifest.xml:2:1-57:12
+ADDED from H:\develop\an\workspace\ad090md\JA090DM\app\src\main\AndroidManifest.xml:2:1-63:12
+INJECTED from H:\develop\an\workspace\ad090md\JA090DM\app\src\main\AndroidManifest.xml:2:1-63:12
+INJECTED from H:\develop\an\workspace\ad090md\JA090DM\app\src\main\AndroidManifest.xml:2:1-63:12
+INJECTED from H:\develop\an\workspace\ad090md\JA090DM\app\src\main\AndroidManifest.xml:2:1-63:12
 MERGED from [com.android.support:design:28.0.0] H:\develop\an\.gradle\caches\transforms-2\files-2.1\db2100e2811764dba05e38deba8771a4\AndroidManifest.xml:17:1-24:12
 MERGED from [com.android.support.constraint:constraint-layout:2.0.0-alpha5] H:\develop\an\.gradle\caches\transforms-2\files-2.1\2a8bdf2c1b115822c83d88f397ee3295\AndroidManifest.xml:2:1-11:12
 MERGED from [com.android.support:appcompat-v7:28.0.0] H:\develop\an\.gradle\caches\transforms-2\files-2.1\6e2eb2a672111750beff30dba1e01ac8\AndroidManifest.xml:17:1-22:12
+MERGED from [com.journeyapps:zxing-android-embedded:3.6.0] H:\develop\an\.gradle\caches\transforms-2\files-2.1\edd5bb44f7632fb5044ecb5d5e46b629\AndroidManifest.xml:17:1-56:12
 MERGED from [com.google.android.gms:play-services-ads:17.2.0] H:\develop\an\.gradle\caches\transforms-2\files-2.1\4c917afc91d82ca1ae5d15d1f3439300\AndroidManifest.xml:17:1-25:12
 MERGED from [com.google.android.gms:play-services-location:16.0.0] H:\develop\an\.gradle\caches\transforms-2\files-2.1\d0b6966a1707232d5fc6e7ce9ed9b933\AndroidManifest.xml:2:1-9:12
 MERGED from [com.google.android.gms:play-services-ads-identifier:16.0.0] H:\develop\an\.gradle\caches\transforms-2\files-2.1\cc8dd70e3a07350c0bdadafa8fc5a4b5\AndroidManifest.xml:17:1-24:12
@@ -51,20 +52,20 @@ MERGED from [android.arch.lifecycle:livedata:1.1.1] H:\develop\an\.gradle\caches
 MERGED from [android.arch.lifecycle:livedata-core:1.1.1] H:\develop\an\.gradle\caches\transforms-2\files-2.1\ed50b0a1f462a155145a75c688c8601b\AndroidManifest.xml:17:1-22:12
 MERGED from [android.arch.core:runtime:1.1.1] H:\develop\an\.gradle\caches\transforms-2\files-2.1\cfa52449eca7e8fbb13d053b0678191e\AndroidManifest.xml:17:1-22:12
 MERGED from [com.google.android.gms:play-services-ads-base:17.2.0] H:\develop\an\.gradle\caches\transforms-2\files-2.1\fff5ad9a86090131943c7e9a320d6b35\AndroidManifest.xml:2:1-9:12
-INJECTED from H:\develop\an\workspace\ad090md\JA090DM\app\src\main\AndroidManifest.xml:2:1-57:12
-INJECTED from H:\develop\an\workspace\ad090md\JA090DM\app\src\main\AndroidManifest.xml:2:1-57:12
-INJECTED from H:\develop\an\workspace\ad090md\JA090DM\app\src\main\AndroidManifest.xml:2:1-57:12
+INJECTED from H:\develop\an\workspace\ad090md\JA090DM\app\src\main\AndroidManifest.xml:2:1-63:12
+INJECTED from H:\develop\an\workspace\ad090md\JA090DM\app\src\main\AndroidManifest.xml:2:1-63:12
+INJECTED from H:\develop\an\workspace\ad090md\JA090DM\app\src\main\AndroidManifest.xml:2:1-63:12
 	package
 		ADDED from H:\develop\an\workspace\ad090md\JA090DM\app\src\main\AndroidManifest.xml:3:5-42
 		INJECTED from H:\develop\an\workspace\ad090md\JA090DM\app\src\main\AndroidManifest.xml
 		INJECTED from H:\develop\an\workspace\ad090md\JA090DM\app\src\main\AndroidManifest.xml
 	android:versionName
 		INJECTED from H:\develop\an\workspace\ad090md\JA090DM\app\src\main\AndroidManifest.xml
-		ADDED from H:\develop\an\workspace\ad090md\JA090DM\app\src\main\AndroidManifest.xml:2:1-57:12
+		ADDED from H:\develop\an\workspace\ad090md\JA090DM\app\src\main\AndroidManifest.xml:2:1-63:12
 		INJECTED from H:\develop\an\workspace\ad090md\JA090DM\app\src\main\AndroidManifest.xml
 	android:versionCode
 		INJECTED from H:\develop\an\workspace\ad090md\JA090DM\app\src\main\AndroidManifest.xml
-		ADDED from H:\develop\an\workspace\ad090md\JA090DM\app\src\main\AndroidManifest.xml:2:1-57:12
+		ADDED from H:\develop\an\workspace\ad090md\JA090DM\app\src\main\AndroidManifest.xml:2:1-63:12
 		INJECTED from H:\develop\an\workspace\ad090md\JA090DM\app\src\main\AndroidManifest.xml
 	xmlns:android
 		ADDED from H:\develop\an\workspace\ad090md\JA090DM\app\src\main\AndroidManifest.xml:2:11-69
@@ -96,12 +97,28 @@ uses-permission#android.permission.WRITE_EXTERNAL_STORAGE
 ADDED from H:\develop\an\workspace\ad090md\JA090DM\app\src\main\AndroidManifest.xml:8:2-77
 	android:name
 		ADDED from H:\develop\an\workspace\ad090md\JA090DM\app\src\main\AndroidManifest.xml:8:19-75
+permission#android.permission.FLASHLIGHT
+ADDED from H:\develop\an\workspace\ad090md\JA090DM\app\src\main\AndroidManifest.xml:9:2-11:40
+	android:protectionLevel
+		ADDED from H:\develop\an\workspace\ad090md\JA090DM\app\src\main\AndroidManifest.xml:11:5-37
+	android:permissionGroup
+		ADDED from H:\develop\an\workspace\ad090md\JA090DM\app\src\main\AndroidManifest.xml:10:5-73
+	android:name
+		ADDED from H:\develop\an\workspace\ad090md\JA090DM\app\src\main\AndroidManifest.xml:9:14-58
+uses-permission#android.permission.CAMERA
+ADDED from H:\develop\an\workspace\ad090md\JA090DM\app\src\main\AndroidManifest.xml:12:2-61
+MERGED from [com.journeyapps:zxing-android-embedded:3.6.0] H:\develop\an\.gradle\caches\transforms-2\files-2.1\edd5bb44f7632fb5044ecb5d5e46b629\AndroidManifest.xml:22:5-65
+MERGED from [com.journeyapps:zxing-android-embedded:3.6.0] H:\develop\an\.gradle\caches\transforms-2\files-2.1\edd5bb44f7632fb5044ecb5d5e46b629\AndroidManifest.xml:22:5-65
+	android:name
+		ADDED from H:\develop\an\workspace\ad090md\JA090DM\app\src\main\AndroidManifest.xml:12:19-59
 application
-ADDED from H:\develop\an\workspace\ad090md\JA090DM\app\src\main\AndroidManifest.xml:10:2-55:16
+ADDED from H:\develop\an\workspace\ad090md\JA090DM\app\src\main\AndroidManifest.xml:14:2-61:16
 MERGED from [com.android.support:design:28.0.0] H:\develop\an\.gradle\caches\transforms-2\files-2.1\db2100e2811764dba05e38deba8771a4\AndroidManifest.xml:22:5-20
 MERGED from [com.android.support:design:28.0.0] H:\develop\an\.gradle\caches\transforms-2\files-2.1\db2100e2811764dba05e38deba8771a4\AndroidManifest.xml:22:5-20
 MERGED from [com.android.support.constraint:constraint-layout:2.0.0-alpha5] H:\develop\an\.gradle\caches\transforms-2\files-2.1\2a8bdf2c1b115822c83d88f397ee3295\AndroidManifest.xml:9:5-20
 MERGED from [com.android.support.constraint:constraint-layout:2.0.0-alpha5] H:\develop\an\.gradle\caches\transforms-2\files-2.1\2a8bdf2c1b115822c83d88f397ee3295\AndroidManifest.xml:9:5-20
+MERGED from [com.journeyapps:zxing-android-embedded:3.6.0] H:\develop\an\.gradle\caches\transforms-2\files-2.1\edd5bb44f7632fb5044ecb5d5e46b629\AndroidManifest.xml:46:5-54:19
+MERGED from [com.journeyapps:zxing-android-embedded:3.6.0] H:\develop\an\.gradle\caches\transforms-2\files-2.1\edd5bb44f7632fb5044ecb5d5e46b629\AndroidManifest.xml:46:5-54:19
 MERGED from [com.google.android.gms:play-services-location:16.0.0] H:\develop\an\.gradle\caches\transforms-2\files-2.1\d0b6966a1707232d5fc6e7ce9ed9b933\AndroidManifest.xml:7:5-20
 MERGED from [com.google.android.gms:play-services-location:16.0.0] H:\develop\an\.gradle\caches\transforms-2\files-2.1\d0b6966a1707232d5fc6e7ce9ed9b933\AndroidManifest.xml:7:5-20
 MERGED from [com.google.android.gms:play-services-ads-identifier:16.0.0] H:\develop\an\.gradle\caches\transforms-2\files-2.1\cc8dd70e3a07350c0bdadafa8fc5a4b5\AndroidManifest.xml:22:5-20
@@ -133,61 +150,61 @@ MERGED from [com.google.android.gms:play-services-ads-base:17.2.0] H:\develop\an
 	android:appComponentFactory
 		ADDED from [com.android.support:support-compat:28.0.0] H:\develop\an\.gradle\caches\transforms-2\files-2.1\a1d1da5b23e4b01b4fed00ad03dd89ea\AndroidManifest.xml:22:18-91
 	android:supportsRtl
-		ADDED from H:\develop\an\workspace\ad090md\JA090DM\app\src\main\AndroidManifest.xml:15:3-29
+		ADDED from H:\develop\an\workspace\ad090md\JA090DM\app\src\main\AndroidManifest.xml:19:3-29
 	android:label
-		ADDED from H:\develop\an\workspace\ad090md\JA090DM\app\src\main\AndroidManifest.xml:13:3-35
+		ADDED from H:\develop\an\workspace\ad090md\JA090DM\app\src\main\AndroidManifest.xml:17:3-35
 	android:roundIcon
-		ADDED from H:\develop\an\workspace\ad090md\JA090DM\app\src\main\AndroidManifest.xml:14:3-48
+		ADDED from H:\develop\an\workspace\ad090md\JA090DM\app\src\main\AndroidManifest.xml:18:3-48
 	android:icon
-		ADDED from H:\develop\an\workspace\ad090md\JA090DM\app\src\main\AndroidManifest.xml:12:3-37
+		ADDED from H:\develop\an\workspace\ad090md\JA090DM\app\src\main\AndroidManifest.xml:16:3-37
 	android:allowBackup
-		ADDED from H:\develop\an\workspace\ad090md\JA090DM\app\src\main\AndroidManifest.xml:11:3-29
+		ADDED from H:\develop\an\workspace\ad090md\JA090DM\app\src\main\AndroidManifest.xml:15:3-29
 	android:theme
-		ADDED from H:\develop\an\workspace\ad090md\JA090DM\app\src\main\AndroidManifest.xml:16:3-34
-activity#com.hijiyama_koubou.ja090dm.TopActivity
-ADDED from H:\develop\an\workspace\ad090md\JA090DM\app\src\main\AndroidManifest.xml:17:3-18:14
-	android:name
-		ADDED from H:\develop\an\workspace\ad090md\JA090DM\app\src\main\AndroidManifest.xml:17:13-40
+		ADDED from H:\develop\an\workspace\ad090md\JA090DM\app\src\main\AndroidManifest.xml:20:3-34
 meta-data#com.google.android.gms.ads.AD_MANAGER_APP
-ADDED from H:\develop\an\workspace\ad090md\JA090DM\app\src\main\AndroidManifest.xml:20:3-22:26
+ADDED from H:\develop\an\workspace\ad090md\JA090DM\app\src\main\AndroidManifest.xml:24:3-26:26
 	android:value
-		ADDED from H:\develop\an\workspace\ad090md\JA090DM\app\src\main\AndroidManifest.xml:22:4-24
+		ADDED from H:\develop\an\workspace\ad090md\JA090DM\app\src\main\AndroidManifest.xml:26:4-24
 	android:name
-		ADDED from H:\develop\an\workspace\ad090md\JA090DM\app\src\main\AndroidManifest.xml:21:4-60
+		ADDED from H:\develop\an\workspace\ad090md\JA090DM\app\src\main\AndroidManifest.xml:25:4-60
 activity#com.hijiyama_koubou.ja090dm.MainActivity
-ADDED from H:\develop\an\workspace\ad090md\JA090DM\app\src\main\AndroidManifest.xml:23:3-40:14
+ADDED from H:\develop\an\workspace\ad090md\JA090DM\app\src\main\AndroidManifest.xml:27:3-46:14
+	android:screenOrientation
+		ADDED from H:\develop\an\workspace\ad090md\JA090DM\app\src\main\AndroidManifest.xml:30:4-40
+	android:stateNotNeeded
+		ADDED from H:\develop\an\workspace\ad090md\JA090DM\app\src\main\AndroidManifest.xml:31:4-33
 	android:label
-		ADDED from H:\develop\an\workspace\ad090md\JA090DM\app\src\main\AndroidManifest.xml:25:4-36
+		ADDED from H:\develop\an\workspace\ad090md\JA090DM\app\src\main\AndroidManifest.xml:29:4-36
 	android:theme
-		ADDED from H:\develop\an\workspace\ad090md\JA090DM\app\src\main\AndroidManifest.xml:26:4-47
+		ADDED from H:\develop\an\workspace\ad090md\JA090DM\app\src\main\AndroidManifest.xml:32:4-47
 	android:name
-		ADDED from H:\develop\an\workspace\ad090md\JA090DM\app\src\main\AndroidManifest.xml:24:4-32
+		ADDED from H:\develop\an\workspace\ad090md\JA090DM\app\src\main\AndroidManifest.xml:28:4-32
 meta-data#com.google.android.gms.ads.APPLICATION_ID
-ADDED from H:\develop\an\workspace\ad090md\JA090DM\app\src\main\AndroidManifest.xml:31:4-33:48
+ADDED from H:\develop\an\workspace\ad090md\JA090DM\app\src\main\AndroidManifest.xml:37:4-39:48
 	android:value
-		ADDED from H:\develop\an\workspace\ad090md\JA090DM\app\src\main\AndroidManifest.xml:33:5-46
+		ADDED from H:\develop\an\workspace\ad090md\JA090DM\app\src\main\AndroidManifest.xml:39:5-46
 	android:name
-		ADDED from H:\develop\an\workspace\ad090md\JA090DM\app\src\main\AndroidManifest.xml:32:5-61
+		ADDED from H:\develop\an\workspace\ad090md\JA090DM\app\src\main\AndroidManifest.xml:38:5-61
 intent-filter#action:name:android.intent.action.MAIN+category:name:android.intent.category.LAUNCHER
-ADDED from H:\develop\an\workspace\ad090md\JA090DM\app\src\main\AndroidManifest.xml:35:4-39:20
+ADDED from H:\develop\an\workspace\ad090md\JA090DM\app\src\main\AndroidManifest.xml:41:4-45:20
 action#android.intent.action.MAIN
-ADDED from H:\develop\an\workspace\ad090md\JA090DM\app\src\main\AndroidManifest.xml:36:5-56
+ADDED from H:\develop\an\workspace\ad090md\JA090DM\app\src\main\AndroidManifest.xml:42:5-56
 	android:name
-		ADDED from H:\develop\an\workspace\ad090md\JA090DM\app\src\main\AndroidManifest.xml:36:13-54
+		ADDED from H:\develop\an\workspace\ad090md\JA090DM\app\src\main\AndroidManifest.xml:42:13-54
 category#android.intent.category.LAUNCHER
-ADDED from H:\develop\an\workspace\ad090md\JA090DM\app\src\main\AndroidManifest.xml:38:5-64
+ADDED from H:\develop\an\workspace\ad090md\JA090DM\app\src\main\AndroidManifest.xml:44:5-64
 	android:name
-		ADDED from H:\develop\an\workspace\ad090md\JA090DM\app\src\main\AndroidManifest.xml:38:15-62
+		ADDED from H:\develop\an\workspace\ad090md\JA090DM\app\src\main\AndroidManifest.xml:44:15-62
 activity#com.hijiyama_koubou.ja090dm.MyPreferencesActivty
-ADDED from H:\develop\an\workspace\ad090md\JA090DM\app\src\main\AndroidManifest.xml:50:4-52
+ADDED from H:\develop\an\workspace\ad090md\JA090DM\app\src\main\AndroidManifest.xml:56:4-52
 	android:name
-		ADDED from H:\develop\an\workspace\ad090md\JA090DM\app\src\main\AndroidManifest.xml:50:14-50
+		ADDED from H:\develop\an\workspace\ad090md\JA090DM\app\src\main\AndroidManifest.xml:56:14-50
 activity#com.hijiyama_koubou.ja090dm.Web_Activity
-ADDED from H:\develop\an\workspace\ad090md\JA090DM\app\src\main\AndroidManifest.xml:51:3-54:14
+ADDED from H:\develop\an\workspace\ad090md\JA090DM\app\src\main\AndroidManifest.xml:57:3-60:14
 	android:theme
-		ADDED from H:\develop\an\workspace\ad090md\JA090DM\app\src\main\AndroidManifest.xml:53:4-35
+		ADDED from H:\develop\an\workspace\ad090md\JA090DM\app\src\main\AndroidManifest.xml:59:4-35
 	android:name
-		ADDED from H:\develop\an\workspace\ad090md\JA090DM\app\src\main\AndroidManifest.xml:52:4-32
+		ADDED from H:\develop\an\workspace\ad090md\JA090DM\app\src\main\AndroidManifest.xml:58:4-32
 uses-sdk
 INJECTED from H:\develop\an\workspace\ad090md\JA090DM\app\src\main\AndroidManifest.xml reason: use-sdk injection requested
 INJECTED from H:\develop\an\workspace\ad090md\JA090DM\app\src\main\AndroidManifest.xml
@@ -198,6 +215,8 @@ MERGED from [com.android.support.constraint:constraint-layout:2.0.0-alpha5] H:\d
 MERGED from [com.android.support.constraint:constraint-layout:2.0.0-alpha5] H:\develop\an\.gradle\caches\transforms-2\files-2.1\2a8bdf2c1b115822c83d88f397ee3295\AndroidManifest.xml:5:5-7:41
 MERGED from [com.android.support:appcompat-v7:28.0.0] H:\develop\an\.gradle\caches\transforms-2\files-2.1\6e2eb2a672111750beff30dba1e01ac8\AndroidManifest.xml:20:5-44
 MERGED from [com.android.support:appcompat-v7:28.0.0] H:\develop\an\.gradle\caches\transforms-2\files-2.1\6e2eb2a672111750beff30dba1e01ac8\AndroidManifest.xml:20:5-44
+MERGED from [com.journeyapps:zxing-android-embedded:3.6.0] H:\develop\an\.gradle\caches\transforms-2\files-2.1\edd5bb44f7632fb5044ecb5d5e46b629\AndroidManifest.xml:20:5-44
+MERGED from [com.journeyapps:zxing-android-embedded:3.6.0] H:\develop\an\.gradle\caches\transforms-2\files-2.1\edd5bb44f7632fb5044ecb5d5e46b629\AndroidManifest.xml:20:5-44
 MERGED from [com.google.android.gms:play-services-ads:17.2.0] H:\develop\an\.gradle\caches\transforms-2\files-2.1\4c917afc91d82ca1ae5d15d1f3439300\AndroidManifest.xml:21:5-23:62
 MERGED from [com.google.android.gms:play-services-ads:17.2.0] H:\develop\an\.gradle\caches\transforms-2\files-2.1\4c917afc91d82ca1ae5d15d1f3439300\AndroidManifest.xml:21:5-23:62
 MERGED from [com.google.android.gms:play-services-location:16.0.0] H:\develop\an\.gradle\caches\transforms-2\files-2.1\d0b6966a1707232d5fc6e7ce9ed9b933\AndroidManifest.xml:5:5-44
@@ -298,6 +317,56 @@ INJECTED from H:\develop\an\workspace\ad090md\JA090DM\app\src\main\AndroidManife
 		INJECTED from H:\develop\an\workspace\ad090md\JA090DM\app\src\main\AndroidManifest.xml
 		ADDED from H:\develop\an\workspace\ad090md\JA090DM\app\src\main\AndroidManifest.xml
 		INJECTED from H:\develop\an\workspace\ad090md\JA090DM\app\src\main\AndroidManifest.xml
+uses-feature#android.hardware.camera
+ADDED from [com.journeyapps:zxing-android-embedded:3.6.0] H:\develop\an\.gradle\caches\transforms-2\files-2.1\edd5bb44f7632fb5044ecb5d5e46b629\AndroidManifest.xml:25:5-27:36
+	android:required
+		ADDED from [com.journeyapps:zxing-android-embedded:3.6.0] H:\develop\an\.gradle\caches\transforms-2\files-2.1\edd5bb44f7632fb5044ecb5d5e46b629\AndroidManifest.xml:27:9-33
+	android:name
+		ADDED from [com.journeyapps:zxing-android-embedded:3.6.0] H:\develop\an\.gradle\caches\transforms-2\files-2.1\edd5bb44f7632fb5044ecb5d5e46b629\AndroidManifest.xml:26:9-47
+uses-feature#android.hardware.camera.front
+ADDED from [com.journeyapps:zxing-android-embedded:3.6.0] H:\develop\an\.gradle\caches\transforms-2\files-2.1\edd5bb44f7632fb5044ecb5d5e46b629\AndroidManifest.xml:28:5-30:36
+	android:required
+		ADDED from [com.journeyapps:zxing-android-embedded:3.6.0] H:\develop\an\.gradle\caches\transforms-2\files-2.1\edd5bb44f7632fb5044ecb5d5e46b629\AndroidManifest.xml:30:9-33
+	android:name
+		ADDED from [com.journeyapps:zxing-android-embedded:3.6.0] H:\develop\an\.gradle\caches\transforms-2\files-2.1\edd5bb44f7632fb5044ecb5d5e46b629\AndroidManifest.xml:29:9-53
+uses-feature#android.hardware.camera.autofocus
+ADDED from [com.journeyapps:zxing-android-embedded:3.6.0] H:\develop\an\.gradle\caches\transforms-2\files-2.1\edd5bb44f7632fb5044ecb5d5e46b629\AndroidManifest.xml:33:5-35:36
+	android:required
+		ADDED from [com.journeyapps:zxing-android-embedded:3.6.0] H:\develop\an\.gradle\caches\transforms-2\files-2.1\edd5bb44f7632fb5044ecb5d5e46b629\AndroidManifest.xml:35:9-33
+	android:name
+		ADDED from [com.journeyapps:zxing-android-embedded:3.6.0] H:\develop\an\.gradle\caches\transforms-2\files-2.1\edd5bb44f7632fb5044ecb5d5e46b629\AndroidManifest.xml:34:9-57
+uses-feature#android.hardware.camera.flash
+ADDED from [com.journeyapps:zxing-android-embedded:3.6.0] H:\develop\an\.gradle\caches\transforms-2\files-2.1\edd5bb44f7632fb5044ecb5d5e46b629\AndroidManifest.xml:36:5-38:36
+	android:required
+		ADDED from [com.journeyapps:zxing-android-embedded:3.6.0] H:\develop\an\.gradle\caches\transforms-2\files-2.1\edd5bb44f7632fb5044ecb5d5e46b629\AndroidManifest.xml:38:9-33
+	android:name
+		ADDED from [com.journeyapps:zxing-android-embedded:3.6.0] H:\develop\an\.gradle\caches\transforms-2\files-2.1\edd5bb44f7632fb5044ecb5d5e46b629\AndroidManifest.xml:37:9-53
+uses-feature#android.hardware.screen.landscape
+ADDED from [com.journeyapps:zxing-android-embedded:3.6.0] H:\develop\an\.gradle\caches\transforms-2\files-2.1\edd5bb44f7632fb5044ecb5d5e46b629\AndroidManifest.xml:39:5-41:36
+	android:required
+		ADDED from [com.journeyapps:zxing-android-embedded:3.6.0] H:\develop\an\.gradle\caches\transforms-2\files-2.1\edd5bb44f7632fb5044ecb5d5e46b629\AndroidManifest.xml:41:9-33
+	android:name
+		ADDED from [com.journeyapps:zxing-android-embedded:3.6.0] H:\develop\an\.gradle\caches\transforms-2\files-2.1\edd5bb44f7632fb5044ecb5d5e46b629\AndroidManifest.xml:40:9-57
+uses-feature#android.hardware.wifi
+ADDED from [com.journeyapps:zxing-android-embedded:3.6.0] H:\develop\an\.gradle\caches\transforms-2\files-2.1\edd5bb44f7632fb5044ecb5d5e46b629\AndroidManifest.xml:42:5-44:36
+	android:required
+		ADDED from [com.journeyapps:zxing-android-embedded:3.6.0] H:\develop\an\.gradle\caches\transforms-2\files-2.1\edd5bb44f7632fb5044ecb5d5e46b629\AndroidManifest.xml:44:9-33
+	android:name
+		ADDED from [com.journeyapps:zxing-android-embedded:3.6.0] H:\develop\an\.gradle\caches\transforms-2\files-2.1\edd5bb44f7632fb5044ecb5d5e46b629\AndroidManifest.xml:43:9-45
+activity#com.journeyapps.barcodescanner.CaptureActivity
+ADDED from [com.journeyapps:zxing-android-embedded:3.6.0] H:\develop\an\.gradle\caches\transforms-2\files-2.1\edd5bb44f7632fb5044ecb5d5e46b629\AndroidManifest.xml:47:9-53:63
+	android:screenOrientation
+		ADDED from [com.journeyapps:zxing-android-embedded:3.6.0] H:\develop\an\.gradle\caches\transforms-2\files-2.1\edd5bb44f7632fb5044ecb5d5e46b629\AndroidManifest.xml:50:13-56
+	android:clearTaskOnLaunch
+		ADDED from [com.journeyapps:zxing-android-embedded:3.6.0] H:\develop\an\.gradle\caches\transforms-2\files-2.1\edd5bb44f7632fb5044ecb5d5e46b629\AndroidManifest.xml:49:13-45
+	android:stateNotNeeded
+		ADDED from [com.journeyapps:zxing-android-embedded:3.6.0] H:\develop\an\.gradle\caches\transforms-2\files-2.1\edd5bb44f7632fb5044ecb5d5e46b629\AndroidManifest.xml:51:13-42
+	android:windowSoftInputMode
+		ADDED from [com.journeyapps:zxing-android-embedded:3.6.0] H:\develop\an\.gradle\caches\transforms-2\files-2.1\edd5bb44f7632fb5044ecb5d5e46b629\AndroidManifest.xml:53:13-60
+	android:theme
+		ADDED from [com.journeyapps:zxing-android-embedded:3.6.0] H:\develop\an\.gradle\caches\transforms-2\files-2.1\edd5bb44f7632fb5044ecb5d5e46b629\AndroidManifest.xml:52:13-54
+	android:name
+		ADDED from [com.journeyapps:zxing-android-embedded:3.6.0] H:\develop\an\.gradle\caches\transforms-2\files-2.1\edd5bb44f7632fb5044ecb5d5e46b629\AndroidManifest.xml:48:13-74
 activity#com.google.android.gms.ads.AdActivity
 ADDED from [com.google.android.gms:play-services-ads-lite:17.2.0] H:\develop\an\.gradle\caches\transforms-2\files-2.1\93f435d548691d73afb518788a0cc19e\AndroidManifest.xml:29:9-33:64
 	android:exported
