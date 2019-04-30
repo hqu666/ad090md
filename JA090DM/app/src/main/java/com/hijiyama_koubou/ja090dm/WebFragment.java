@@ -171,7 +171,7 @@ public class WebFragment  extends Fragment implements NavigationView.OnNavigatio
 						tStr = webView.getTitle();
 						String dbMsg = "tStr=" + tStr;////////////////////////////////////////////////////////////////////////
 						getActivity().setTitle(webView.getTitle());    //タイトルバーに文字列を設定
-						url_et.setText(webView.getTitle());
+//						url_et.setText(webView.getTitle());
 					}
 					getActivity().setProgressBarIndeterminateVisibility(false);
 				}
