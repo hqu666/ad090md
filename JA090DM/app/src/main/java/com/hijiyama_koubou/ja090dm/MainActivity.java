@@ -48,7 +48,8 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
 	private String AdUnitID ="";			//"ca-app-pub-3940256099942544/6300978111";
 
 	private String rootUrlStr  ="https://www.yahoo.co.jp/";
-	private int nowView = R.layout.activity_top;
+	private int topView = R.layout.activity_qr;
+	private int nowView = topView;
 
 	/**
 	 * このアプリケーションの設定ファイル読出し
@@ -196,7 +197,7 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
 //			myEditor = sharedPref.edit();
 ////			myEditor.putString("peer_id_key" , "");      //使用した
 ////			boolean kakikomi = myEditor.commit();
-			if(nowView == R.layout.activity_top){
+			if(nowView == topView){
 				this.finish();
 				if ( Build.VERSION.SDK_INT >= Build.VERSION_CODES.LOLLIPOP ) {
 					finishAndRemoveTask();                      //アプリケーションのタスクを消去する事でデバッガーも停止する。
@@ -204,7 +205,8 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
 					moveTaskToBack(true);                       //ホームボタン相当でアプリケーション全体が中断状態
 				}
 			}else{
-				setTopView();
+				setTopFragument();
+//				setTopView();
 			}
 			myLog(TAG , dbMsg);
 		} catch (Exception er) {
@@ -216,10 +218,10 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
 		final String TAG = "reStart[MA}";
 		String dbMsg = "";
 		try {
-			Intent intent = new Intent();
-			intent.setClass(this , this.getClass());
-			this.startActivity(intent);
-			this.finish();
+//			Intent intent = new Intent();
+//			intent.setClass(this , this.getClass());
+//			this.startActivity(intent);
+//			this.finish();
 			myLog(TAG , dbMsg);
 		} catch (Exception er) {
 			myErrorLog(TAG , dbMsg + ";でエラー発生；" + er);
@@ -261,10 +263,12 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
 			switch ( id ) {
 				case R.id.md_call_top:
 //				case R.id.mm_call_top:
-					setTopView();
+					setTopFragument();
+//					setTopView();
 					break;
 				case R.id.md_call_web2:
 //				case R.id.mm_call_web2:
+					nowView = R.layout.activity_web; 					//表示中のview
 					Intent webIntent = new Intent(this , Web_Activity.class);
 					String dataURI = rootUrlStr;
 					dbMsg += "dataURI=" + dataURI;
@@ -278,6 +282,7 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
 					break;
 				case R.id.md_prefarence:      //設定
 				case R.id.mm_prefarence:      //設定
+					nowView = R.xml.preferences; 					//表示中のview
 					Intent settingsIntent = new Intent(MainActivity.this , MyPreferencesActivty.class);
 					startActivityForResult(settingsIntent , REQUEST_PREF);//		StartActivity(intent);
 					break;
@@ -317,13 +322,14 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
 		Toolbar toolbar = ( Toolbar ) findViewById(R.id.toolbar);
 		setSupportActionBar(toolbar);
 
-		FloatingActionButton fab = ( FloatingActionButton ) findViewById(R.id.fab);
-		fab.setOnClickListener(new View.OnClickListener() {
-			@Override
-			public void onClick(View view) {
-				Snackbar.make(view , "Replace with your own action" , Snackbar.LENGTH_LONG).setAction("Action" , null).show();
-			}
-		});
+
+//		FloatingActionButton fab = ( FloatingActionButton ) findViewById(R.id.fab);
+//		fab.setOnClickListener(new View.OnClickListener() {
+//			@Override
+//			public void onClick(View view) {
+//				Snackbar.make(view , "Replace with your own action" , Snackbar.LENGTH_LONG).setAction("Action" , null).show();
+//			}
+//		});
 
 		DrawerLayout drawer = ( DrawerLayout ) findViewById(R.id.drawer_layout);
 		ActionBarDrawerToggle toggle = new ActionBarDrawerToggle(this , drawer , toolbar , R.string.navigation_drawer_open , R.string.navigation_drawer_close);
@@ -345,8 +351,7 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
 	public void onWindowFocusChanged(boolean hasFocus) {
 		super.onWindowFocusChanged(hasFocus);
 
-		setTopView();
-//		setWebView();
+		setTopFragument();
 		setADSens();//広告表示//////////////////////////////////////////////////
 		setNend();
 	}
@@ -379,15 +384,20 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
 	}
 
 	////////////////////////////////////////////////////////////////////////////
-	public void setTopView() {
-		final String TAG = "setTopView";
+	public void setTopFragument() {
+		final String TAG = "setTopFragument";
 		String dbMsg = "[MainActivity]" ;/////////////////////////////////////////////////
 		try {
-//			content_ll.removeAllViews();
-//  			Context context = getApplicationContext();
-//			LayoutInflater inflater = LayoutInflater.from(context); // LayoutInflater inflater = (LayoutInflater)context.getSystemService(Context.LAYOUT_INFLATER_SERVICE);
-//			inflater.inflate(R.layout.activity_top, content_ll);
-//			nowView = R.layout.activity_top;
+			nowView = topView; 					//表示中のview
+			QrFragment fragment = new QrFragment();											// Fragmentを作成します
+//			Bundle args = new Bundle();															// Fragmentに渡す値はBundleという型でやり取りする
+//			args.putString(KEY_NAME, dataURI);													// Key/Pairの形で値をセットする
+//			fragment.setArguments(args);														// Fragmentに値をセットする
+			FragmentTransaction transaction = getSupportFragmentManager().beginTransaction();	// Fragmentの追加や削除といった変更を行う際は、Transactionを利用します
+			transaction.add(R.id.container, fragment);											// 新しく追加を行うのでaddを使用します
+			// 他にも、よく使う操作で、replace removeといったメソッドがあります
+			// メソッドの1つ目の引数は対象のViewGroupのID、2つ目の引数は追加するfragment
+			transaction.commit();																// 最後にcommitを使用することで変更を反映します
 			myLog(TAG , dbMsg);
 		} catch (Exception er) {
 			myErrorLog(TAG , dbMsg + "で" + er.toString());
@@ -400,6 +410,8 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
 		final String TAG = "setWebFragument";
 		String dbMsg = "[MainActivity]" ;/////////////////////////////////////////////////
 		try {
+			nowView = R.layout.activity_web2; 					//表示中のview
+
 			WebFragment fragment = new WebFragment();											// Fragmentを作成します
 			Bundle args = new Bundle();															// Fragmentに渡す値はBundleという型でやり取りする
 			args.putString(KEY_NAME, dataURI);													// Key/Pairの形で値をセットする
@@ -415,6 +427,23 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
 		}
 	}
 
+	//classが無い小規模viewはレイアウトの呼び込み ///////////////////////////////////
+	public void setTopView() {
+		final String TAG = "setTopView";
+		String dbMsg = "[MainActivity]" ;/////////////////////////////////////////////////
+		try {
+			nowView = topView; 					//表示中のview
+
+//			content_ll.removeAllViews();
+//  			Context context = getApplicationContext();
+//			LayoutInflater inflater = LayoutInflater.from(context); // LayoutInflater inflater = (LayoutInflater)context.getSystemService(Context.LAYOUT_INFLATER_SERVICE);
+//			inflater.inflate(R.layout.activity_top, content_ll);
+//			nowView = R.layout.activity_top;
+			myLog(TAG , dbMsg);
+		} catch (Exception er) {
+			myErrorLog(TAG , dbMsg + "で" + er.toString());
+		}
+	}
 
 	public void setWebView() {
 			final String TAG = "setWebView";
