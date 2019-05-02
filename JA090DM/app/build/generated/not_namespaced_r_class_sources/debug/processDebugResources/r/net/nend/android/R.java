@@ -357,10 +357,10 @@ public final class R {
     public static final class string {
         private string() {}
 
-        public static final int common_google_play_services_unknown_issue = 0x7f11004b;
-        public static final int native_video_replay = 0x7f11008a;
-        public static final int nend_full_board_ad_action_button_text = 0x7f110091;
-        public static final int status_bar_notification_info_overflow = 0x7f1100d4;
+        public static final int common_google_play_services_unknown_issue = 0x7f110045;
+        public static final int native_video_replay = 0x7f110080;
+        public static final int nend_full_board_ad_action_button_text = 0x7f110087;
+        public static final int status_bar_notification_info_overflow = 0x7f1100a0;
     }
     public static final class style {
         private style() {}

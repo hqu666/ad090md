@@ -3857,42 +3857,28 @@
 		176dp
 	</dimen><dimen name="fab_margin">
 		16dp
-	</dimen><item name="dialog_min_width_major" type="dimen">95%</item><item name="dialog_min_width_minor" type="dimen">95%</item><item name="splash_min_width_major" type="dimen">100%</item><item name="splash_min_width_minor" type="dimen">100%</item></file><file path="H:\develop\an\workspace\ad090md\JA090DM\app\src\main\res\values\strings.xml" qualifiers=""><string name="app_name">JA090DM</string><string name="banner_ad_unit_id">ca-app-pub-3940256099942544/6300978111</string><string name="nend_apiKey">c5cb8bc474345961c6e7a9778c947957ed8e1e4f</string><string name="nend_spotID">3174</string><string name="navigation_drawer_open">
-		Open
+	</dimen><item name="dialog_min_width_major" type="dimen">95%</item><item name="dialog_min_width_minor" type="dimen">95%</item><item name="splash_min_width_major" type="dimen">100%</item><item name="splash_min_width_minor" type="dimen">100%</item></file><file path="H:\develop\an\workspace\ad090md\JA090DM\app\src\main\res\values\strings.xml" qualifiers=""><string name="app_name">JA090DM</string><string name="banner_ad_unit_id">ca-app-pub-3940256099942544/6300978111</string><string name="nend_apiKey">c5cb8bc474345961c6e7a9778c947957ed8e1e4f</string><string name="nend_spotID">3174</string><string name="navigation_drawer_open">Open
 		navigation
 		drawer
-	</string><string name="navigation_drawer_close">
-		Close
+	</string><string name="navigation_drawer_close">	Close
 		navigation
 		drawer
-	</string><string name="nav_header_title">
-		Android
-		Studio
-	</string><string name="nav_header_subtitle">
-		android.studio@android.com
-	</string><string name="nav_header_desc">
-		Navigation
+	</string><string name="nav_header_title">Android	Studio</string><string name="nav_header_subtitle">	android.studio@android.com</string><string name="nav_header_desc">Navigation
 		header
-	</string><string name="action_settings">
-		Settings
-	</string><string name="common_back">戻す</string><string name="common_ten">点</string><string name="common_pixcel">px</string><string name="common_hyouka">評価</string><string name="common_yes">Yes</string><string name="common_no">No</string><string name="common_cancel">キャンセル</string><string name="common_score">スコア</string><string name="common_hitparcent">ヒット率</string><string name="common_trace_kekka">トレース結果</string><string name="common_trace_line">トレース線</string><string name="common_ga">が</string><string name="common_wo">を</string><string name="common_yomikomicyuu">読込み中・・・・・・</string><string name="common_saikidou">再起動します。</string><string name="common_kijyo">解除します。</string><string name="common_site_hannei_saremasu">して反映されます。</string><string name="common_yomikonde_imasu">読み込んでいます。</string><string name="common_hanteisite_imasu">判定しています。</string><string name="common_sekisan_hugou">×</string><string name="common_bite">バイト</string><string name="common_next">次へ</string><string name="common_again">もう一度</string><string name="common_nokori">残り</string><string name="description">icon</string><string name="rootUrlStr">http://ec2-18-182-237-90.ap-northeast-1.compute.amazonaws.com:3080</string><string name="companyUrlStr">http://192.168.100.6:3080</string><string name="homeUrlStr">http://192.168.3.14:3080</string><string name="btf_re_scan">再読取</string><string name="menu_qr_read">QRコードから接続</string><string name="menu_call_main">メイン画面として接続</string><string name="menu_stand_alone">スタート</string><string name="menu_call_top">トップ画面</string><string name="menu_call_web">ウェブ</string><string name="menu_call_web2">別画面ウェブ</string><string name="menu_setting">設定</string><string name="menu_quit">終了</string><string name="menu_web_reconect">再接続</string><string name="trace_setting">トレース設定</string><string name="trace_setting_file_name">最初に表示する元画像</string><string name="trace_setting_file_next">自動送り</string><string name="trace_setting_lwidth">トレース線の太さ</string><string name="trace_setting_is_pad_left">左側にPad</string><string name="trace_setting_is_pad_right">右側にPad</string><string name="other_setting">その他の設定</string><string name="other_setting_save_path">作成したファイルの保存先</string><string name="other_setting_lotet_cansel">自動回転阻止</string><string name="conection_setting">接続設定</string><string name="rootUrl">URL</string><string name="testUrl">URL選択</string><string name="partner_titol">接続先</string><string name="wv_set_url_titol">URL設定</string><string name="wd_web_menu_cap">webメニュー</string><string name="wv_set_url_msg">移動先のURLを入力して下さい。</string><string name="wv_reload_now"> …再読み込み中…</string><string name="wv_move_now">へ移動中…</string><string name="wd_web_menu_closs">webメニューを閉じる</string><string name="wv_menu_rewrite">再読込み</string><string name="wv_menu_movement">移動</string><string name="wv_menu_url_change">URL指定</string><string name="wv_menu_hysteresis">履歴</string><string name="wv_menu_backpage">前のページ</string><string name="wv_menu_prepage">次のページ</string><string name="wv_menu_bookmark">ブックマーク</string><string name="wv_menu_bookmark_set">登録</string><string name="wv_menu_bookmark_select">選択</string><string name="mm_other">その他</string><string name="wv_menu_rescaling">サイズ合わせ</string><string name="wv_menu_zoom_enable">ズーム有効</string><string name="rb_job_select">トレース元図形</string><string name="rb_patran_list_select">パターンリスト表示</string><string name="rb_file_read">ファイルから読み込み</string><string name="rb_hand_made">手書きで作成</string><string name="rb_hand_again">もう一度</string><string name="rb_decision_original">確定</string><string name="rb_direction_select">変形</string><string name="rb_direction_org">オリジナル</string><string name="rb_roat_right">右へ90度回転</string><string name="rb_roat_left">左へ90度回転</string><string name="rb_roat_half">180度回転</string><string name="rb_flip_vertical">上下反転</string><string name="rb_flip_horizontal">左右反転</string><string name="rb_make_original">オリジナルにする</string><string name="rb_direction_save">保存</string><string name="rb_movement">動作設定</string><string name="rb_mirror_movement">鏡面動作</string><string name="rb_mirror_movement_to">上下鏡面動作</string><string name="rb_mirror_movement_lr">左右鏡面動作</string><string name="rb_auto_judge">トレース後に自動判定</string><string name="rb_edit_tool">ツール</string><string name="rb_edit_tool_free">フリーハンド</string><string name="rb_edit_tool_line">直線</string><string name="rb_edit_tool_trigone">三角</string><string name="rb_edit_tool_rect">矩形</string><string name="rb_edit_tool_oval">楕円</string><string name="rb_edit_tool_text">テキスト</string><string name="rb_edit_tool_erasre">消しゴム</string><string name="rb_edit_tool_select_del">選択範囲を消去</string><string name="rb_edit_tool_stamp">図形スタンプ</string><string name="rb_edit_tool_colorpic">カラーピッカー</string><string name="rb_edit_tool_comp">確定</string><string name="rb_edit_tr_titol">トレース元画像の手書き編集</string><string name="rb_edit_tr_msg">現在書き込まれている元画像を消去して新規の画像を作成しますか</string><string name="can_not_conect_titol">現在接続できません</string><string name="can_not_conect_msg1">サーバからあなたの接続IDを得られません\n少し待って再接続して下さい。</string><string name="can_not_conect_msg2">接続できるお相手がログインしていません。\n接続先にログインして頂ける様、ご連絡ください。</string><string name="can_not_conect_msg3">少し時間を置いて再起動してください。</string><string name="conectlist_titol">接続先を選択して下さい。</string><string name="my_id_titol">この端末のID</string><string name="non_conect_now">現在、接続していません</string><string name="conect_now">接続しました</string><string name="call_bt_caption2conect">接続</string><string name="call_bt_caption2disconect">切断</string><string name="conect_situation_titol">接続状況</string><string name="select_dlog_msg">Backキーでキャンセル</string><string name="title_activity_bottom_bar">bottom_bar	</string><string name="service_id_titol">サービスID</string><string name="skyway_setting_titol">SkyWay接続状況</string><string name="peer_id_titol">PeerID</string><string name="partner_id_titol">接続先ID</string><string name="skyway_secret_key_titol">シークレットキー</string><string name="skyway_api_key_titol">APIキー</string><string name="available_domain_titol">利用可能ドメイン</string><string name="now_conection_meg">サーバに接続中です</string><string name="action_leave">Leave</string><string name="action_send">Send</string><string name="prompt_message">Message</string><string name="connect">接続しました</string><string name="disconnect">接続が解除されました。</string><string name="error_connect">接続できませんでした</string><string name="message_welcome">Welcome to Socket.IO Chat –</string><plurals name="message_participants">
+	</string><string name="action_settings">Settings</string><string name="common_back">戻す</string><string name="common_ten">点</string><string name="common_pixcel">px</string><string name="common_hyouka">評価</string><string name="common_yes">Yes</string><string name="common_no">No</string><string name="common_cancel">キャンセル</string><string name="common_score">スコア</string><string name="common_hitparcent">ヒット率</string><string name="common_trace_kekka">トレース結果</string><string name="common_trace_line">トレース線</string><string name="common_ga">が</string><string name="common_wo">を</string><string name="common_yomikomicyuu">読込み中・・・・・・</string><string name="common_saikidou">再起動します。</string><string name="common_kijyo">解除します。</string><string name="common_site_hannei_saremasu">して反映されます。</string><string name="common_yomikonde_imasu">読み込んでいます。</string><string name="common_hanteisite_imasu">判定しています。</string><string name="common_sekisan_hugou">×</string><string name="common_bite">バイト</string><string name="common_next">次へ</string><string name="common_again">もう一度</string><string name="common_nokori">残り</string><string name="description">icon</string><string name="rootUrlStr">https://www.yahoo.co.jp/</string><string name="companyUrlStr">https://www.google.com/?hl=ja</string><string name="homeUrlStr">https://www.google.com/maps/</string><string name="btf_re_scan">再読取</string><string name="menu_qr_read">QRコードから接続</string><string name="menu_call_main">メイン画面として接続</string><string name="menu_stand_alone">スタート</string><string name="menu_call_top">トップ画面</string><string name="menu_call_web">ウェブ</string><string name="menu_call_web2">別画面ウェブ</string><string name="menu_setting">設定</string><string name="menu_quit">終了</string><string name="menu_web_reconect">再接続</string><string name="trace_setting">トレース設定</string><string name="trace_setting_file_name">最初に表示する元画像</string><string name="trace_setting_file_next">自動送り</string><string name="trace_setting_lwidth">トレース線の太さ</string><string name="trace_setting_is_pad_left">左側にPad</string><string name="trace_setting_is_pad_right">右側にPad</string><string name="other_setting">その他の設定</string><string name="other_setting_save_path">作成したファイルの保存先</string><string name="other_setting_lotet_cansel">自動回転阻止</string><string name="conection_setting">接続設定</string><string name="rootUrl">URL</string><string name="testUrl">URL選択</string><string name="partner_titol">接続先</string><string name="wv_set_url_titol">URL設定</string><string name="wd_web_menu_cap">webメニュー</string><string name="wv_set_url_msg">移動先のURLを入力して下さい。</string><string name="wv_reload_now"> …再読み込み中…</string><string name="wv_move_now">へ移動中…</string><string name="wd_web_menu_closs">webメニューを閉じる</string><string name="wv_menu_rewrite">再読込み</string><string name="wv_menu_movement">移動</string><string name="wv_menu_url_change">URL指定</string><string name="wv_menu_hysteresis">履歴</string><string name="wv_menu_backpage">前のページ</string><string name="wv_menu_prepage">次のページ</string><string name="wv_menu_bookmark">ブックマーク</string><string name="wv_menu_bookmark_set">登録</string><string name="wv_menu_bookmark_select">選択</string><string name="mm_other">その他</string><string name="wv_menu_rescaling">サイズ合わせ</string><string name="wv_menu_zoom_enable">ズーム有効</string><string name="action_leave">Leave</string><string name="action_send">Send</string><string name="prompt_message">Message</string><string name="connect">接続しました</string><string name="disconnect">接続が解除されました。</string><string name="error_connect">接続できませんでした</string><string name="message_welcome">Welcome to Socket.IO Chat –</string><plurals name="message_participants">
 		<item quantity="one">there\'s %d participant</item>
 		<item quantity="other">there are %d participants</item>
-	</plurals><string name="message_user_joined">%s joined</string><string name="message_user_left">%s left</string><string name="user_action_typing">is typing</string><string name="socketio_setting">socket.IO設定状況</string><string name="socketio_url">接続先</string><string name="againbt_caption">もう一度</string><string name="thumbnail_list_titol">定例パターン</string><string name="file_list_titol">ファイル選択</string><string name="dtd_titol">文字入力</string><string name="dtd_input_msg">書き込む文字は</string><string name="dtd_input_msg2">書き込む文字を入力して下さい</string><string name="dtd_input_msg3">タップした位置に「</string><string name="dtd_input_msg4">PXで書き込みます</string><string name="bms_msg1">を保存しました。</string><string name="bms_msg2">保存できませんでした。</string><string name="bmr_msg1">読込みに失敗しました。</string><string name="aout_judge_msg1">トレース後は判定ボタンをタップして下さい。</string><string name="aout_judge_msg2">トレース後に自動判定を行います。</string><string-array name="jobSelectList">
-		<item>@string/rb_file_read</item>
-		<item>@string/rb_hand_made</item>
-		<item>@string/rb_hand_again</item>
-		<item>@string/rb_decision_original</item>
-	</string-array><string-array name="directionSelectList">
-		<item>@string/rb_direction_org</item>
-		<item>@string/rb_roat_right</item>
-		<item>@string/rb_roat_left</item>
-		<item>@string/rb_roat_half</item>
-		<item>@string/rb_flip_vertical</item>
-		<item>@string/rb_flip_horizontal</item>
-		<item>@string/rb_make_original</item>
-		<item>@string/rb_direction_save</item>
-	</string-array><array name="url_array">
+	</plurals><string name="message_user_joined">%s joined</string><string name="message_user_left">%s left</string><string name="user_action_typing">is typing</string><string name="socketio_setting">socket.IO設定状況</string><string name="socketio_url">接続先</string><string name="againbt_caption">もう一度</string><string name="thumbnail_list_titol">定例パターン</string><string name="file_list_titol">ファイル選択</string><string name="dtd_titol">文字入力</string><string name="dtd_input_msg">書き込む文字は</string><string name="dtd_input_msg2">書き込む文字を入力して下さい</string><string name="dtd_input_msg3">タップした位置に「</string><string name="dtd_input_msg4">PXで書き込みます</string><string name="bms_msg1">を保存しました。</string><string name="bms_msg2">保存できませんでした。</string><string name="bmr_msg1">読込みに失敗しました。</string><string name="aout_judge_msg1">トレース後は判定ボタンをタップして下さい。</string><string name="aout_judge_msg2">トレース後に自動判定を行います。</string><string name="about_text">URLを認識するとボタンに変わり、読み取ったQRコードを表示します。</string><string name="pref_transition_titol">遷移方法</string><string name="transition_actvity">activity</string><string name="transition_fragment">fragmen</string><string name="transition_inflater">inflater</string><array name="transition_type_array">
+		<item>
+			@string/transition_actvity
+		</item>
+		<item>
+			@string/transition_fragment
+		</item>
+		
+			
+		
+	</array><array name="url_array">
 		<item>
 			@string/rootUrlStr
 		</item>
@@ -3902,55 +3888,7 @@
 		<item>
 			@string/homeUrlStr
 		</item>
-	</array><string-array name="typeSelectList">
-		<item>@string/rb_edit_tool_free</item>
-		<item>@string/rb_edit_tool_line</item>
-		<item>@string/rb_edit_tool_trigone</item>
-		<item>@string/rb_edit_tool_rect</item>
-		<item>@string/rb_edit_tool_oval</item>
-		<item>@string/rb_edit_tool_text</item>
-		<item>@string/rb_edit_tool_erasre</item>
-		<item>@string/rb_edit_tool_select_del</item>
-		<item>@string/rb_edit_tool_comp</item>
-	</string-array><string-array name="typeSelectValList">
-		<item>free</item>
-		<item>text</item>
-		<item>line</item>
-		<item>stamp</item>
-		<item>erasre</item>
-	</string-array><string-array name="lineWidthSelectList">
-		<item>1</item>
-		<item>5</item>
-		<item>10</item>
-		<item>20</item>
-		<item>50</item>
-	</string-array><string-array name="lineCapSelecttList">
-		<item>丸</item>
-		<item>四角</item>
-		<item>無し</item>
-	</string-array><string-array name="lineCapSelecttValList">
-		<item>round</item>
-		<item>square</item>
-		<item>butt</item>
-	</string-array><string-array name="intervalTenList">
-		<item>0</item>
-		<item>10</item>
-		<item>20</item>
-		<item>30</item>
-		<item>40</item>
-		<item>50</item>
-		<item>60</item>
-		<item>70</item>
-		<item>80</item>
-		<item>90</item>
-		<item>100</item>
-	</string-array><string-array name="fontSizeList">
-		<item>48</item>
-		<item>96</item>
-		<item>192</item>
-		<item>288</item>
-		<item>384</item>
-	</string-array></file><file path="H:\develop\an\workspace\ad090md\JA090DM\app\src\main\res\values\styles.xml" qualifiers=""><style name="AppTheme" parent="Theme.AppCompat.Light.DarkActionBar">
+	</array></file><file path="H:\develop\an\workspace\ad090md\JA090DM\app\src\main\res\values\styles.xml" qualifiers=""><style name="AppTheme" parent="Theme.AppCompat.Light.DarkActionBar">
 		
 		<item name="colorPrimary">
 			@color/colorPrimary

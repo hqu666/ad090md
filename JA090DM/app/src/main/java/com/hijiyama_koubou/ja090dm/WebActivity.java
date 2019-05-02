@@ -60,7 +60,7 @@ import android.widget.Toast;
 //import android.widget.TextView;
 //import android.widget.Toast;
 
-public class Web_Activity extends AppCompatActivity implements NavigationView.OnNavigationItemSelectedListener  {
+public class WebActivity extends AppCompatActivity implements NavigationView.OnNavigationItemSelectedListener  {
 
 	public WebView webView;
 	public WebSettings settings;
@@ -94,7 +94,7 @@ public class Web_Activity extends AppCompatActivity implements NavigationView.On
 
 	public static SharedPreferences sharedPref;
 	public SharedPreferences.Editor myEditor;
-	public String rootUrlStr = "http://ec2-18-182-237-90.ap-northeast-1.compute.amazonaws.com:3080";					//	String dataURI = "http://192.168.3.14:3080";	//自宅
+	public String rootUrlStr;					//	String dataURI = "http://192.168.3.14:3080";	//自宅
 	public boolean isReadPref = false;
 	public boolean isRecoveryBrain = false;
 
@@ -124,8 +124,8 @@ public class Web_Activity extends AppCompatActivity implements NavigationView.On
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {        //org;publicvoid
 		super.onCreate(savedInstanceState);
-		final String TAG = "onCreate[WabA]";
-		String dbMsg = "";
+		final String TAG = "onCreate";
+		String dbMsg = "[WebActivity]";
 		try {
 			Bundle extras = getIntent().getExtras();
 			dataURI = extras.getString("dataURI");                        //最初に表示するページのパス
@@ -135,15 +135,15 @@ public class Web_Activity extends AppCompatActivity implements NavigationView.On
 			fName = testSrA[testSrA.length - 1];
 			dbMsg += "dataURI=" + dataURI + ",fType=" + fType + ",fName=" + fName + ",baseUrl=" + baseUrl;////////////////////////////////////////////////////////////////////////
 
-			if(dataURI.contains("?room=")){
-				isRecoveryBrain = true;
-			}
+//			if(dataURI.contains("?room=")){
+//				isRecoveryBrain = true;
+//			}
 			getWindow().addFlags(WindowManager.LayoutParams.FLAG_FULLSCREEN);        //タスクバーを 非表示
 			requestWindowFeature(Window.FEATURE_NO_TITLE);                            //タイトルバーを非表示
 
 			requestWindowFeature(Window.FEATURE_INDETERMINATE_PROGRESS);        //ローディングをタイトルバーのアイコンとして表示☆リソースを読み込む前にセットする
 			setContentView(R.layout.activity_web);
-			initDrawer();
+//			initDrawer();              //onPostCreateと共にエラー発生
 
 			webView = ( WebView ) findViewById(R.id.webview);        // Webビューの作成
 //			webView.setVerticalScrollbarOverlay(false);					//縦スクロール有効
@@ -187,7 +187,7 @@ public class Web_Activity extends AppCompatActivity implements NavigationView.On
 //				}
 
 			});
-			setNewPage(MLStr);
+			setNewPage(MLStr);       //loadUrl
 			myLog(TAG , dbMsg);
 		} catch (Exception er) {
 			myErrorLog(TAG , dbMsg + ";でエラー発生；" + er);
@@ -241,18 +241,18 @@ public class Web_Activity extends AppCompatActivity implements NavigationView.On
 		}
 	}
 
-	@Override
-	protected void onPostCreate(Bundle savedInstanceState) {
-		super.onPostCreate(savedInstanceState);
-		final String TAG = "onPostCreate[MA}";
-		String dbMsg = "";
-		try {
-			abdToggle.syncState();    //NaviIconの回転アニメーションなど   Attempt to invoke virtual method 'void android.support.v7.app.ActionBarDrawerToggle.syncState()' on a null object reference
-			myLog(TAG, dbMsg);
-		} catch (Exception e) {
-			myErrorLog(TAG, dbMsg + "で" + e.toString());
-		}
-	}
+//	@Override
+//	protected void onPostCreate(Bundle savedInstanceState) {
+//		super.onPostCreate(savedInstanceState);
+//		final String TAG = "onPostCreate[MA}";
+//		String dbMsg = "";
+//		try {
+//			abdToggle.syncState();    //NaviIconの回転アニメーションなど   Attempt to invoke virtual method 'void android.support.v7.app.ActionBarDrawerToggle.syncState()' on a null object reference
+//			myLog(TAG, dbMsg);
+//		} catch (Exception e) {
+//			myErrorLog(TAG, dbMsg + "で" + e.toString());
+//		}
+//	}
 
 	@Override
 	public void onConfigurationChanged(Configuration newConfig) {
@@ -273,23 +273,18 @@ public class Web_Activity extends AppCompatActivity implements NavigationView.On
 	 * https://woshidan.hatenablog.com/entry/2016/09/07/223301
 	 **/
 	public void initDrawer() {            //http://qiita.com/androhi/items/f12b566730d9f951b8ec
-		final String TAG = "initDrawer[WabA}";
-		String dbMsg = "";
+		final String TAG = "initDrawer}";
+		String dbMsg = "[WebActivity]";
 		try {
 			toolbar = ( Toolbar ) findViewById(R.id.toolbar);
 			setSupportActionBar(toolbar);
 			toolbar.setVisibility(View.GONE);
-//					nvh_img = ( ImageView ) findViewById(R.id.nvh_img);                //NaviViewヘッダーのアイコン
 			drawer = ( DrawerLayout ) findViewById(R.id.web_dl);
 			abdToggle = new ActionBarDrawerToggle(this, drawer, toolbar, R.string.navigation_drawer_open, R.string.navigation_drawer_close);
 			abdToggle.setDrawerIndicatorEnabled(true);
 			drawer.setDrawerListener(abdToggle);    //Attempt to invoke virtual method 'void android.support.v4.widget.DrawerLayout.setDrawerListener(android.support.v4.widget.DrawerLayout$DrawerListener)' on a null object reference
 			getSupportActionBar().setDisplayHomeAsUpEnabled(true);            //左矢印←アイコンになる
 			getSupportActionBar().setDisplayShowHomeEnabled(true);
-
-//			navi_head_iv = (ImageView ) findViewById(R.id.web_navi_head_iv);
-//			nave_head_main_tv = (TextView ) findViewById(R.id.web_nave_head_main_tv);
-//			navi_head_sub_tv = (TextView ) findViewById(R.id.web_navi_head_sub_tv);
 
 			navigationView = ( NavigationView ) findViewById(R.id.web_nv);
 			navigationView.setNavigationItemSelectedListener(new NavigationView.OnNavigationItemSelectedListener() {
@@ -300,7 +295,7 @@ public class Web_Activity extends AppCompatActivity implements NavigationView.On
 					boolean retBool = false;
 					try {
 						retBool = funcSelected(menuItem);
-						Web_Activity.this.drawer.closeDrawers();
+						WebActivity.this.drawer.closeDrawers();
 					} catch (Exception e) {
 						myLog(TAG, dbMsg + "で" + e.toString());
 						return false;
@@ -537,7 +532,7 @@ public class Web_Activity extends AppCompatActivity implements NavigationView.On
 
 				case R.id.md_prefarence:      //設定
 				case R.id.mm_prefarence:      //設定
-					Intent settingsIntent = new Intent(Web_Activity.this , MyPreferencesActivty.class);
+					Intent settingsIntent = new Intent(WebActivity.this , MyPreferencesActivty.class);
 					startActivityForResult(settingsIntent , REQUEST_PREF);//		StartActivity(intent);
 					break;
 //				case R.id.md_quit:
@@ -926,7 +921,7 @@ public class Web_Activity extends AppCompatActivity implements NavigationView.On
 	///////////////////////////////////////////////////////////////////////////////////
 	public void messageShow(String titolStr , String mggStr) {
 		Util UTIL = new Util();
-		UTIL.messageShow(titolStr , mggStr , Web_Activity.this);
+		UTIL.messageShow(titolStr , mggStr , WebActivity.this);
 	}
 
 	public static void myLog(String TAG , String dbMsg) {

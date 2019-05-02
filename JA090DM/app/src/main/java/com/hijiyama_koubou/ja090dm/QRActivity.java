@@ -2,10 +2,8 @@ package com.hijiyama_koubou.ja090dm;
 
 import android.content.Intent;
 import android.content.res.Configuration;
-import android.os.Build;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
-import android.util.Log;
 import android.view.KeyEvent;
 import android.view.View;
 import android.widget.Button;
@@ -166,10 +164,8 @@ public class QRActivity extends AppCompatActivity {
 					try {
 						Button button = ( Button ) v;
 						String dataURI = ( String ) button.getText();
-//				String dataURI = "http://ec2-18-182-237-90.ap-northeast-1.compute.amazonaws.com:3080";					//extras.getString("dataURI");                        //最初に表示するページのパス
-//					String dataURI = "http://192.168.3.14:3080";
 						dbMsg = ",dataURI=" + dataURI;
-						Intent webIntent = new Intent(QRActivity.this , Web_Activity.class);
+						Intent webIntent = new Intent(QRActivity.this , WebActivity.class);
 						webIntent.putExtra("dataURI" , dataURI);
 						startActivity(webIntent);
 						myLog(TAG , dbMsg);

@@ -13,6 +13,7 @@ import android.preference.PreferenceManager;
 import android.support.annotation.ColorInt;
 import android.support.design.widget.NavigationView;
 import android.support.v4.app.Fragment;
+import android.support.v4.app.FragmentTransaction;
 import android.support.v4.view.GravityCompat;
 import android.support.v4.widget.DrawerLayout;
 import android.support.v7.app.ActionBarDrawerToggle;
@@ -47,6 +48,7 @@ public class WebFragment extends Fragment implements NavigationView.OnNavigation
 
 	public WebView webView;
 	private EditText url_et;
+	private Toolbar toolbar;
 
 	public WebSettings settings;
 	public String dbMsg = "";
@@ -79,7 +81,7 @@ public class WebFragment extends Fragment implements NavigationView.OnNavigation
 
 	public static SharedPreferences sharedPref;
 	public SharedPreferences.Editor myEditor;
-	public String rootUrlStr = "http://ec2-18-182-237-90.ap-northeast-1.compute.amazonaws.com:3080";					//	String dataURI = "http://192.168.3.14:3080";	//自宅
+	public String orginTitol = "";
 	public boolean isReadPref = false;
 	public boolean isRecoveryBrain = false;
 
@@ -98,6 +100,22 @@ public class WebFragment extends Fragment implements NavigationView.OnNavigation
 	//		fragment.setArguments(args);
 	//		return fragment;
 	//	}
+
+	public static WebFragment newInstance(int count){
+		final String TAG = "WebFragment";
+		String dbMsg = "[WebFragment]";
+		WebFragment WebFragment = new WebFragment();		// インスタンス生成
+		try {
+			Bundle args = new Bundle();		// Bundle にパラメータを設定
+			args.putInt("Counter", count);
+			WebFragment.setArguments(args);
+			myLog(TAG , dbMsg);
+		} catch (Exception er) {
+			myErrorLog(TAG , dbMsg + ";でエラー発生；" + er);
+		}
+		return WebFragment;
+	}
+
 	@Override
 	public  void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
@@ -106,9 +124,9 @@ public class WebFragment extends Fragment implements NavigationView.OnNavigation
 		try {
 			Bundle extras = getArguments();
 			if(extras != null){
-				dataURI = extras.getString("dataURI");                        //最初に表示するページのパス
+				this.dataURI = extras.getString("dataURI");                        //最初に表示するページのパス
 			}else{
-				dataURI = "https://www.google.co.jp/";                        //最初に表示するページのパス
+				this.dataURI =  getString(R.string.rootUrlStr);;                        //最初に表示するページのパス
 			}
 			dbMsg += "dataURI=" + dataURI;
 	//			baseUrl = "file://" + extras.getString("baseUrl");                //最初に表示するページを受け取る
@@ -158,13 +176,12 @@ public class WebFragment extends Fragment implements NavigationView.OnNavigation
 			registerForContextMenu(webView);     //コンテキストメニューをwebViewに割付け
 			webView.clearCache(true);
 			MLStr = dataURI;
-			dbMsg += fType + "をMLStr=" + MLStr;////////////////////////////////////////////////////////////////////////
+			dbMsg += fType + "をMLStr=" + MLStr;
 			webView.setWebViewClient(new WebViewClient() {        //リンク先もこのWebViewで表示させる；端末のブラウザを起動させない
 				@Override
 				public void onPageStarted(WebView view , String url , Bitmap favicon) {
 					super.onPageStarted(view , url , favicon);
-					getActivity().setProgressBarIndeterminateVisibility(true);
-					getActivity().setTitle(url);    //タイトルバーに文字列を設定
+//					getActivity().setTitle(url);    //タイトルバーに文字列を設定
 					url_et.setText(url);
 				}
 
@@ -175,8 +192,9 @@ public class WebFragment extends Fragment implements NavigationView.OnNavigation
 						String tStr = "";
 						tStr = webView.getTitle();
 						String dbMsg = "tStr=" + tStr;////////////////////////////////////////////////////////////////////////
-						getActivity().setTitle(webView.getTitle());    //タイトルバーに文字列を設定
-//						url_et.setText(webView.getTitle());
+						if(tStr != null){
+							getActivity().setTitle(tStr);    //タイトルバーに文字列を設定
+						}
 					}
 					getActivity().setProgressBarIndeterminateVisibility(false);
 				}
@@ -216,7 +234,11 @@ public class WebFragment extends Fragment implements NavigationView.OnNavigation
 	public void onDestroyView() {
 		super.onDestroyView();
 		final String TAG = "onDestroyView";
-		String dbMsg = "[WebFragment]" ;/////////////////////////////////////////////////
+		String dbMsg = "[WebFragment]" ;
+//		Fragment fragment = (getFragmentManager().findFragmentById(R.id.container));
+//		FragmentTransaction ft = getActivity().getSupportFragmentManager().beginTransaction();
+//		ft.remove(fragment);
+//		ft.commit();
 		myLog(TAG , dbMsg);
 	}
 
@@ -273,7 +295,6 @@ public class WebFragment extends Fragment implements NavigationView.OnNavigation
 
 
 	///ハンバーガーメニュー//////////////////////////////////////////////////////////////////////////////////////////////////////////
-	private Toolbar toolbar;
 	public ActionBarDrawerToggle abdToggle;        //アニメーションインジケータ
 	public NavigationView navigationView;
 	private DrawerLayout drawer;
@@ -593,10 +614,10 @@ public class WebFragment extends Fragment implements NavigationView.OnNavigation
 					Intent settingsIntent = new Intent(getActivity() , MyPreferencesActivty.class);
 					startActivityForResult(settingsIntent , REQUEST_PREF);//		StartActivity(intent);
 					break;
-//				case R.id.md_quit:
-//				case R.id.mm_quit:
-//					callQuit();
-//					break;
+				case R.id.md_quit:
+				case R.id.mm_quit:
+					callQuit();
+					break;
 				case R.id.close_web_menu:
 					navigationView.getMenu().clear();
 					navigationView.inflateMenu(R.menu.activity_web_drawer);
@@ -662,12 +683,21 @@ public class WebFragment extends Fragment implements NavigationView.OnNavigation
 		return retStr;
 	}
 
-
-	public void callQuit() {            //このActivtyの終了
+	/**
+	 *  このFragmentの終了
+	 * */
+	public void callQuit() {
+		final String TAG = "callQuit";
+		String dbMsg = "[WebFragment]";
 		try {
-//			this.finish();
-		} catch (Exception e) {
-			Log.e("callQuit" , "wKitで" + e.toString());
+			Fragment fragment = (getFragmentManager().findFragmentById(R.id.container));
+			dbMsg += "fragment= " + fragment;
+//			FragmentTransaction ft = getActivity().getSupportFragmentManager().beginTransaction();
+//			ft.remove(fragment);
+//			ft.commit();
+			myLog(TAG , dbMsg);
+		} catch (Exception er) {
+			myErrorLog(TAG , dbMsg + ";でエラー発生；" + er);
 		}
 	}
 
@@ -751,7 +781,7 @@ public class WebFragment extends Fragment implements NavigationView.OnNavigation
 	 * 指定したURLを表示
 	 */
 	public void setNewPage(String urlStr) {
-		final String TAG = "setNewPage[WabA]";
+		final String TAG = "setNewPage";
 		String dbMsg = "[WebFragment]";
 		dbMsg += "urlStr=" + urlStr;
 		try {

@@ -3,18 +3,13 @@ import android.app.Activity;
 import android.content.Intent;
 import android.content.res.Configuration;
 import android.graphics.Bitmap;
-import android.os.Build;
 import android.support.v4.app.Fragment;
-import android.support.v7.app.AppCompatActivity;
+import android.support.v4.app.FragmentTransaction;
 import android.os.Bundle;
 import android.util.AndroidRuntimeException;
-import android.util.Log;
-import android.view.KeyEvent;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.webkit.WebView;
-import android.webkit.WebViewClient;
 import android.widget.Button;
 import android.widget.ImageButton;
 import android.widget.ImageView;
@@ -25,8 +20,6 @@ import com.google.zxing.BarcodeFormat;
 import com.google.zxing.EncodeHintType;
 import com.google.zxing.ResultPoint;
 import com.google.zxing.WriterException;
-import com.google.zxing.integration.android.IntentIntegrator;
-import com.google.zxing.integration.android.IntentResult;
 import com.google.zxing.qrcode.decoder.ErrorCorrectionLevel;
 import com.journeyapps.barcodescanner.BarcodeCallback;
 import com.journeyapps.barcodescanner.BarcodeEncoder;
@@ -49,7 +42,23 @@ public class QrFragment extends Fragment {
 	private Button acsess_bt;
 	private Button rescan_bt;
 
-	
+	private int cnt = 0;
+	public String transitionType;
+
+	public static QrFragment newInstance(int count){
+		final String TAG = "QrFragment";
+		String dbMsg = "[QrFragment]";
+		QrFragment QrFragment = new QrFragment();		// インスタンス生成
+		try {
+			Bundle args = new Bundle();		// Bundle にパラメータを設定
+			args.putInt("Counter", count);
+			QrFragment.setArguments(args);
+			myLog(TAG , dbMsg);
+		} catch (Exception er) {
+			myErrorLog(TAG , dbMsg + ";でエラー発生；" + er);
+		}
+		return QrFragment;
+	}
 
 	@Override
 	public void onCreate(Bundle savedInstanceState) {
@@ -57,6 +66,13 @@ public class QrFragment extends Fragment {
 		final String TAG = "onCreate";
 		String dbMsg = "[QrFragment]";
 		try {
+			Bundle extras = getArguments();
+			if(extras != null){
+				this.transitionType = extras.getString("transitionType");                        //最初に表示するページのパス
+			}else{
+				this.transitionType =  getString(R.string.transition_fragment);;                        //最初に表示するページのパス
+			}
+			dbMsg += "transitionType=" + transitionType;
 
 			myLog(TAG , dbMsg);
 		} catch (Exception er) {
@@ -128,7 +144,11 @@ public class QrFragment extends Fragment {
 	public void onDestroyView() {
 		super.onDestroyView();
 		final String TAG = "onDestroyView";
-		String dbMsg = "[QrFragment]" ;/////////////////////////////////////////////////
+		String dbMsg = "[QrFragment]" ;//acttyからメニューを表示したら発生する
+//		Fragment fragment = (getFragmentManager().findFragmentById(R.id.container));
+//		FragmentTransaction ft = getActivity().getSupportFragmentManager().beginTransaction();
+//		ft.remove(fragment);
+//		ft.commit();
 		myLog(TAG , dbMsg);
 	}
 
@@ -158,50 +178,7 @@ public class QrFragment extends Fragment {
 		super.onPause();
 	}
 
-////	@Override
-//	public void onActivityResult(int requestCode , int resultCode , Intent data) {         // Fragmentにはない
-//		final String TAG = "onActivityResult";
-//		String dbMsg = "[QrFragment]";
-//		dbMsg += "requestCode=" + requestCode + ",resultCode=" + resultCode;                                      //requestCode=49374,resultCode=0
-//		try {
-//			IntentResult result = IntentIntegrator.parseActivityResult(requestCode, resultCode, data);
-//			if(result != null) {
-//				String dataURI  = result.getContents();
-//				dbMsg = ",dataURI="+dataURI;
-//				Intent webIntent = new Intent(getContext() , Web_Activity.class);
-//				webIntent.putExtra("dataURI" , dataURI);
-//				startActivity(webIntent);
-//			} else {
-//				super.onActivityResult(requestCode, resultCode, data);
-//			}
-//
-//			myLog(TAG , dbMsg);
-//		} catch (Exception er) {
-//			myErrorLog(TAG , dbMsg + ";でエラー発生；" + er);
-//		}
-//	}
-
-	/////////////////////////////////////////////////////////////////////////////////////////////////////////////
-////	@Override
-//	public boolean onKeyDown(int keyCode , KeyEvent event) {
-//		final String TAG = "onKeyDown[QRA]";
-//		String dbMsg = "[QrFragment]";
-//		try {
-//			dbMsg = "keyCode=" + keyCode;//+",getDisplayLabel="+String.valueOf(MyEvent.getDisplayLabel())+",getAction="+MyEvent.getAction();////////////////////////////////
-//			myLog(TAG , dbMsg);
-//			switch ( keyCode ) {    //キーにデフォルト以外の動作を与えるもののみを記述★KEYCODE_MENUをここに書くとメニュー表示されない
-//				case KeyEvent.KEYCODE_HOME:            //3
-//				case KeyEvent.KEYCODE_BACK:            //4KEYCODE_BACK :keyCode；09SH: keyCode；4,MyEvent=KeyEvent{action=0 code=4 repeat=0 meta=0 scancode=158 mFlags=72}
-//					callQuit();
-//					return true;
-//				default:
-//					return false;
-//			}
-//		} catch (Exception er) {
-//			myErrorLog(TAG , dbMsg + ";でエラー発生；" + er);
-//			return false;
-//		}
-//	}
+	// onActivityResult,onKeyDown(KeyEvent)はFragmentにはない
 
 	public void laterCreate() {
 		final String TAG = "laterCreate";
@@ -238,14 +215,22 @@ public class QrFragment extends Fragment {
 						Button button = ( Button ) v;
 						String dataURI = ( String ) button.getText();
 						dbMsg += ",dataURI=" + dataURI;
+						dbMsg += " ,transitionType=" + transitionType;
 
 						MainActivity MA = new MainActivity();
-
-						if( MA.transitionType == MA.transitionActivity) {
-							MA.callWebIntent(dataURI);
-						}else if( MA.transitionType == MA.transitionFragment){
-							MA.setWebFragument(dataURI);
-						}else if( MA.transitionType == MA.transitionInflater){
+//						MA.qrFromMain(dataURI , transitionType);
+						
+						if( transitionType.equals(getString(R.string.transition_actvity))) {
+//							MA.callWebIntent(dataURI , getContext());
+							///上記のメソッドをここで実行/////////////////////////////////
+							MA.nowView =9999;					// R.layout.activity_web; 					//表示中のview
+							Intent webIntent = new Intent(getContext() , WebActivity.class);                       //getContext()が必要			MainActivity.this
+							webIntent.putExtra("dataURI" , dataURI);                        //最初に表示するページのパス
+							startActivity(webIntent);
+						}else if( transitionType.equals(getString(R.string.transition_fragment))) {
+							FragmentTransaction transaction = getActivity().getSupportFragmentManager().beginTransaction();	// Fragumenntからの呼出しにはgetActivity が必要
+							MA.setWebFragument(dataURI , transaction);
+						}else if( transitionType == MA.transitionInflater){
 
 						}
 						myLog(TAG , dbMsg);

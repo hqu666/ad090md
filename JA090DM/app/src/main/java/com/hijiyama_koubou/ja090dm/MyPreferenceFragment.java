@@ -29,46 +29,28 @@ public class MyPreferenceFragment extends PreferenceFragment implements SharedPr
 	public static SharedPreferences sharedPref;
 	public SharedPreferences.Editor myEditor;
 
-	public PreferenceScreen trace_setting_key;        //トレース設定
-	public EditTextPreference file_name_key;        //最初に表示する元画像
-	public CheckBoxPreference is_start_last_key;        //次回は最後に使った元画像からスタート
-	public CheckBoxPreference mirror_movement_to_key;        //上下鏡面動作
-	public CheckBoxPreference mirror_movement_lr_key;        //左右鏡面動作
-	public CheckBoxPreference auto_judge_key;        //トレース後に自動判定
-	public ListPreference trace_line_width_key;        //トレース線の太さ
-	public CheckBoxPreference is_pad_left_key;        //左側にPad
+//	public PreferenceScreen transition_setting_key;        //接続設定
+//	public EditTextPreference transition_type_key;
+	public ListPreference transition_type_list_key;        //遷移方法
+//	public PreferenceScreen conection_setting_key;        //接続設定
+//	public EditTextPreference rootUrl_key;
+	public ListPreference rootUrl_list_key;
 
-	public PreferenceScreen conection_setting_key;        //接続設定
-	public EditTextPreference rootUrl_key;
-	public ListPreference testUrlt_key;
+	public PreferenceScreen trace_setting_key;        //トレース設定
 
 	public PreferenceScreen other_setting_key;        //その他の設定
 	public EditTextPreference save_path_key;        //作成したファイルの保存場所
 	public CheckBoxPreference lotet_cansel_key;        //自動回転阻止
 
-	public String readFileName = "st001.png";        //最初に表示する元画像
-	public String is_start_last = "true";        //次回は最後に使った元画像からスタート
-	public String mirror_movement_to = "false";        //上下鏡面動作
-	public String mirror_movement_lr = "false";        //左右鏡面動作
-	public String auto_judge = "false";        //トレース後に自動判定
-	public String trace_line_width = "10";        //トレース線の太さ
-
-	public boolean isStartLast = true;        //次回は最後に使った元画像からスタート
-	public boolean is_v_Mirror = false;                //左右鏡面動作  //読み込み時、反転される
-	public boolean is_h_Mirror = false;                //上下鏡面動作
-	public boolean isAautoJudge = true;        //トレース後に自動判定
-	public int traceLineWidth = 10;        //トレース線の太さ
-	public boolean isPadLeft= false;          //左側にPad
-
-	public String rootUrlStr = "http://ec2-18-182-237-90.ap-northeast-1.compute.amazonaws.com:3080";                    //	String dataURI = "http://192.168.3.14:3080";	//自宅
-	public String testUrlStr = "http://192.168.3.14:3080";    //自宅
-	public TypedArray testUrlArray;
+	public String transitionType = "";        //遷移方法
+	public String rootUrlStr = "";
+	public String testUrlStr = "";
 
 	public String savePatht = "";        //作成したファイルの保存場所
 	public String lotet_canselt = "true";        //自動回転阻止
 	public boolean isLotetCanselt = true;        //自動回転阻止
 
-	public String trace_setting_sum_str;        //トレース設定
+	public String transition_setting_sum_str;        //遷移方法
 	public String conection_setting_sum_str;         //接続設定
 	public String other_setting_sum_str;        //その他の設定
 
@@ -77,9 +59,12 @@ public class MyPreferenceFragment extends PreferenceFragment implements SharedPr
 	public void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
 		final String TAG = "onCreate[MPF]";
-		String dbMsg = "";
+		String dbMsg = "[MyPreferenceFragment]";
 		try {
 			MyPreferenceFragment.this.addPreferencesFromResource(R.xml.preferences);
+			sps = this.getPreferenceScreen();            //☆PreferenceFragmentなら必要  .
+			dbMsg += ",sps=" + sps;
+
 			myLog(TAG , dbMsg);
 		} catch (Exception er) {
 			myErrorLog(TAG , dbMsg + "でエラー発生；" + er);
@@ -89,12 +74,13 @@ public class MyPreferenceFragment extends PreferenceFragment implements SharedPr
 	@Override
 	public void onAttach(Context context) {
 		super.onAttach(context);
-//    public void onAttach(Activity activity) {
-//        super.onAttach(activity);
-		final String TAG = "onAttach[MPF]";
-		String dbMsg = "開始";/////////////////////////////////////////////////
+		final String TAG = "onAttach";
+		String dbMsg = "[MyPreferenceFragment]";
 		try {
-			this.context = this.getActivity().getApplicationContext();    //( MainActivity ) context;
+			dbMsg += ",context;" + context.getPackageName();        // keys.size()
+			this.context = context;			//his.getActivity().getApplicationContext();    //( MainActivity ) context;
+			transitionType =  getString(R.string.transition_fragment);        //遷移方法
+			rootUrlStr =  getString(R.string.rootUrlStr);
 			readPref(context);
 			myLog(TAG , dbMsg);
 		} catch (ClassCastException e) {
@@ -110,46 +96,42 @@ public class MyPreferenceFragment extends PreferenceFragment implements SharedPr
 	@Override
 	public void onActivityCreated(Bundle savedInstanceState) {
 		super.onActivityCreated(savedInstanceState);
-		final String TAG = "onActivityCreated[MPF]";
-		String dbMsg = "開始";/////////////////////////////////////////////////
+		final String TAG = "onActivityCreated";
+		String dbMsg = "[MyPreferenceFragment]";
 		try {
-			sps = this.getPreferenceScreen();            //☆PreferenceFragmentなら必要  .
+			sps = MyPreferenceFragment.this.getPreferenceScreen();            //☆PreferenceFragmentなら必要  .
 			dbMsg += ",sps=" + sps;
 			String summaryStr = "";
-			trace_setting_key = ( PreferenceScreen ) sps.findPreference("trace_setting_key");        //
-			file_name_key = ( EditTextPreference ) sps.findPreference("file_name_key");        //
-			is_start_last_key = ( CheckBoxPreference ) sps.findPreference("is_start_last_key");
-			mirror_movement_to_key = ( CheckBoxPreference ) sps.findPreference("mirror_movement_to_key");
-			mirror_movement_lr_key = ( CheckBoxPreference ) sps.findPreference("mirror_movement_lr_key");
-			auto_judge_key = ( CheckBoxPreference ) sps.findPreference("auto_judge_key");
-			is_pad_left_key = ( CheckBoxPreference ) sps.findPreference("is_pad_left_key");
-			trace_line_width_key = ( ListPreference ) sps.findPreference("trace_line_width_key");
-
-			other_setting_key = ( PreferenceScreen ) sps.findPreference("other_setting_key");        //
-			save_path_key = ( EditTextPreference ) sps.findPreference("save_path_key");        //
-			lotet_cansel_key = ( CheckBoxPreference ) sps.findPreference("lotet_cansel_key");
-
-			rootUrl_key = ( EditTextPreference ) sps.findPreference("rootUrl_key");
-			dbMsg += ",rootUrlStr=" + rootUrlStr;
-			if ( findPreference("rootUrl_key") != null ) {
-				rootUrl_key.setDefaultValue(rootUrlStr);
-				rootUrl_key.setSummary(rootUrlStr);
-			} else {
-				(( EditTextPreference ) findPreference("rootUrl_key")).setText(rootUrlStr);
+//			transition_setting_key = ( PreferenceScreen ) sps.findPreference("transition_setting_key");        //遷移方法
+			transition_type_list_key = ( ListPreference ) sps.findPreference("transition_type_list_key");        //遷移方法
+			dbMsg += ",transition_type_list_key=" + transition_type_list_key;
+			if ( findPreference("transition_type_list_key") != null ) {
+				transition_type_list_key.setSummary(transitionType);
 			}
+//			transition_setting_key = ( PreferenceScreen ) sps.findPreference("transition_setting_key");        //遷移方法
 
-			testUrlt_key = ( ListPreference ) sps.findPreference("testUrlt_key");
-			dbMsg += ",testUrlStr=" + testUrlStr;
-			if ( findPreference("testUrlt_key") != null ) {
-				testUrlt_key.setSummary(testUrlStr);
+//			rootUrl_key = ( EditTextPreference ) sps.findPreference("rootUrl_key");
+//			dbMsg += ",rootUrlStr=" + rootUrlStr;
+//			if ( findPreference("rootUrl_key") != null ) {
+//				rootUrl_key.setDefaultValue(rootUrlStr);
+//				rootUrl_key.setSummary(rootUrlStr);
+//			} else {
+//				(( EditTextPreference ) findPreference("rootUrl_key")).setText(rootUrlStr);
+//			}
 
-//				testUrlArray = getResources().obtainTypedArray(R.array.url_array);
+			rootUrl_list_key = ( ListPreference ) sps.findPreference("rootUrl_list_key");
+//			dbMsg += ",testUrlStr=" + testUrlStr;
+			if ( findPreference("rootUrl_list_key") != null ) {
+				rootUrl_list_key.setSummary(rootUrlStr);
+ //				testUrlArray = getResources().obtainTypedArray(R.array.url_array);
 ////				testUrlArray.
 //				String[] urls = getResources().getStringArray(R.array.url_array);
 
 //				video_audio_source_key.setValue(audioSourceName);
 //				summaryStr += "," + getResources().getString(R.string.audio_source) + ":" + audioSourceName;
 			}
+//			conection_setting_key = ( PreferenceScreen ) sps.findPreference("conection_setting_key");
+
 //			isAutoFlash_key = ( CheckBoxPreference ) sps.findPreference("isAutoFlash_key");        //サブカメラに切り替え
 //			dbMsg += ",オートフラッシュ=" + isAutoFlash;
 //			if ( findPreference("isAutoFlash_key") != null ) {
@@ -158,7 +140,7 @@ public class MyPreferenceFragment extends PreferenceFragment implements SharedPr
 ////					summaryStr +=","+ getResources().getString(R.string.mm_phot_flash) ;
 ////				}
 //			}
-			setSummary();
+			setAllSummary();
 
 //			reloadSummary();
 			myLog(TAG , dbMsg);
@@ -175,7 +157,7 @@ public class MyPreferenceFragment extends PreferenceFragment implements SharedPr
 	public void onSaveInstanceState(Bundle outState) {
 		super.onSaveInstanceState(outState);
 		final String TAG = "onSaveInstanceState";
-		String dbMsg = "開始";/////////////////////////////////////////////////
+		String dbMsg = "[MyPreferenceFragment]";
 		try {
 			myLog(TAG , dbMsg);
 		} catch (Exception e) {
@@ -186,11 +168,11 @@ public class MyPreferenceFragment extends PreferenceFragment implements SharedPr
 	@Override
 	public void onResume() {
 		super.onResume();
-		final String TAG = "onResume[MPF]";
-		String dbMsg = "開始";/////////////////////////////////////////////////
+		final String TAG = "onResume]";
+		String dbMsg = "[MyPreferenceFragment]";
 		try {
 			sharedPref.registerOnSharedPreferenceChangeListener(this);   //Attempt to invoke virtual method 'android.content.SharedPreferences android.preference.PreferenceScreen.getSharedPreferences()
-			setSummary();
+//			setAllSummary();
 
 //			reloadSummary();
 			myLog(TAG , dbMsg);
@@ -202,8 +184,8 @@ public class MyPreferenceFragment extends PreferenceFragment implements SharedPr
 	@Override
 	public void onPause() {
 		super.onPause();
-		final String TAG = "onPause[MPF]";
-		String dbMsg = "開始";/////////////////////////////////////////////////
+		final String TAG = "onPause";
+		String dbMsg = "[MyPreferenceFragment]";
 		try {
 			sharedPref.unregisterOnSharedPreferenceChangeListener(this);
 			myLog(TAG , dbMsg);
@@ -216,8 +198,8 @@ public class MyPreferenceFragment extends PreferenceFragment implements SharedPr
 	@Override
 	public void onDestroy() {
 		super.onDestroy();
-		final String TAG = "onDestroy[MPF]";
-		String dbMsg = "開始";
+		final String TAG = "onDestroy";
+		String dbMsg = "[MyPreferenceFragment]";
 		try {
 			myLog(TAG , dbMsg);
 		} catch (Exception e) {
@@ -234,55 +216,40 @@ public class MyPreferenceFragment extends PreferenceFragment implements SharedPr
 	 */
 	@Override
 	public void onSharedPreferenceChanged(SharedPreferences sharedPreferences , String key) {
-		final String TAG = "onSharedPrefChd[MPF]";
-		String dbMsg = "設定変更;";/////////////////////////////////////////////////
+		final String TAG = "onSharedPrefChd";
+		String dbMsg = "[MyPreferenceFragment]";
 		try {
-			dbMsg += key;
-			if ( key.equals("file_name_key") ) {
-				dbMsg += ",最初に表示する元画像=" + readFileName +">>" + file_name_key.getText();
-				myEditor.putString(key , file_name_key.getText());
-			} else if ( key.equals("is_start_last_key") ) {
-				dbMsg += ",次回は最後に使った元画像からスタート=" + isStartLast+">>" + is_start_last_key.isChecked();
-				myEditor.putBoolean(key , is_start_last_key.isChecked());
-			} else if ( key.equals("mirror_movement_to_key") ) {
-				dbMsg += ",上下鏡面動作=" + is_v_Mirror +">>" + mirror_movement_to_key.isChecked();
-				myEditor.putBoolean(key , mirror_movement_to_key.isChecked());
-			} else if ( key.equals("mirror_movement_lr_key") ) {
-				dbMsg += ",左右鏡面動作=" + is_h_Mirror+">>" + mirror_movement_lr_key.isChecked();
-				myEditor.putBoolean(key , mirror_movement_lr_key.isChecked());
-			} else if ( key.equals("auto_judge_key") ) {
-				dbMsg += ",トレース後に自動判定=" + isAautoJudge+">>" + auto_judge_key.isChecked();
-				myEditor.putBoolean(key , auto_judge_key.isChecked());
-			} else if ( key.equals("trace_line_width_key") ) {
-				dbMsg += ",トレース線の太さ=" + traceLineWidth+">>" + trace_line_width_key.getValue();
-				myEditor.putString(key , trace_line_width_key.getValue()+"" );
+//			dbMsg += "sharedPreferences=" + sharedPreferences.getAll();
+			dbMsg += "変更されたのは " + key;
+			dbMsg += ":" + sharedPreferences.getString(key , "");
+			if ( key.equals("transition_type_list_key") ) {
+				ListPreference list_preference = (ListPreference)getPreferenceScreen().findPreference(key);
+				String var = list_preference.getValue();
+				dbMsg += ">>var = " + var;
+				transitionType  =transition_type_list_key.getValue()+"";
+				dbMsg += ">transitionTypeを　" + transitionType;
+				myEditor.putString(key , transitionType );
 
-//				myEditor.putInt(key , Integer.parseInt(trace_line_width_key.getValue()));
-//				traceLineWidth = Integer.parseInt(trace_line_width);
-//				dbMsg += ">>" + traceLineWidth;
-			} else if ( key.equals("is_pad_left_key") ) {
-				dbMsg += ",左側にPad=" + isPadLeft+">>" + is_pad_left_key.isChecked();
-				myEditor.putBoolean(key , is_pad_left_key.isChecked());
-			} else if ( key.equals("rootUrl_key") ) {       //その他の設定
-				dbMsg += ",接続先=" + savePatht +">>" + rootUrl_key.getText();
-				myEditor.putString(key , rootUrl_key.getText());
-			}else if ( key.equals("testUrlt_key") ) {
-				rootUrlStr  =testUrlt_key.getValue()+"";
-				dbMsg += ",testUrlStr=" + testUrlStr+">>" + rootUrlStr;
+				transition_type_list_key.setSummary(transitionType);
+//				PreferenceScreen screenPref = (PreferenceScreen)findPreference("transition_setting_key");
+//				screenPref.setSummary(transitionType);
+//				transition_setting_key.setSummary(list_preference.getValue());
+
+//				transition_setting_key.setSummary(transitionType);
+//			} else if ( key.equals("rootUrl_key")) {
+//				rootUrlStr = rootUrl_key.getText();
+//				dbMsg += " = " + rootUrlStr;
+//				myEditor.putString(key , rootUrlStr);
+			}else if ( key.equals("rootUrl_list_key") ) {
+				rootUrlStr  =rootUrl_list_key.getValue()+"";
+				dbMsg += " = " + rootUrlStr;
 				myEditor.putString(key , rootUrlStr );
-				myEditor.putString(key , rootUrlStr );
-				rootUrl_key.setSummary(rootUrlStr);
-			} else if ( key.equals("save_path_key") ) {       //その他の設定
-				dbMsg += ",作成したファイルの保存場所=" + savePatht +">>" + save_path_key.getText();
-				myEditor.putString(key , save_path_key.getText());
-			} else if ( key.equals("lotet_cansel_key") ) {
-				dbMsg += ",自動回転阻止=" + isLotetCanselt+">>" + is_pad_left_key.isChecked();
-				myEditor.putBoolean(key , is_pad_left_key.isChecked());
+//				myEditor.putString("rootUrl_key" , rootUrlStr);
 			}
 			dbMsg += ",更新";
 			myEditor.commit();
 			dbMsg += "完了";
-			setSummary();
+			setAllSummary();
 			myLog(TAG , dbMsg);
 		} catch (Exception er) {
 			myErrorLog(TAG , dbMsg + "でエラー発生；" + er);
@@ -293,66 +260,46 @@ public class MyPreferenceFragment extends PreferenceFragment implements SharedPr
 	/**
 	 * サマリーの更新
 	 */
-	public void setSummary() {
-		final String TAG = "setSummary[MPF]";
-		String dbMsg = "設定変更;";/////////////////////////////////////////////////
+	public void setAllSummary() {
+		final String TAG = "setAllSummary";
+		String dbMsg = "[MyPreferenceFragment]";
 		try {
-			trace_setting_sum_str ="";        //トレース設定
-			dbMsg += ",最初に表示する元画像=" + readFileName ;
-			if( ! readFileName.equals("") ){
-				trace_setting_sum_str += getString(R.string.trace_setting_file_name) + "=" +readFileName;
+			dbMsg += ",transitionType=" + transitionType ;
+			if( ! transitionType.equals("") ){
+////				transition_setting_sum_str += getString(R.string.pref_transition_titol) + "=" +transitionType;
+//				transition_setting_key.setSummary(transitionType);
+//				transition_type_list_key.setSummary(transitionType);
+////			}else{
+////				transitionType =  getString(R.string.transition_fragment);        //遷移方法
+////				dbMsg += ">>" + transitionType ;
 			}
-			dbMsg += ",次回は最後に使った元画像からスタート=" + isStartLast;
-			if(  isStartLast ){
-				trace_setting_sum_str += "," + getString(R.string.trace_setting_file_next);
-			}
-			dbMsg += ",上下鏡面動作=" + is_v_Mirror;
-			if( is_v_Mirror ){
-				trace_setting_sum_str += "," + getString(R.string.rb_mirror_movement_to);
-			}
-			dbMsg += ",左右鏡面動作=" + is_h_Mirror;
-			if( is_h_Mirror ){
-				trace_setting_sum_str += "," + getString(R.string.rb_mirror_movement_lr);
-			}
-			dbMsg += ",トレース後に自動判定=" + isAautoJudge;
-			if( isAautoJudge ){
-				trace_setting_sum_str += "," + getString(R.string.rb_auto_judge);
-			}
-			dbMsg += ",トレース線の太さ=" + traceLineWidth;
-			if(  -1 < traceLineWidth ){
-				trace_setting_sum_str += "," + getString(R.string.trace_setting_lwidth) + "=" +traceLineWidth +"%増し";
-//				traceLineWidth = Integer.parseInt(trace_line_width);
-			}
-			dbMsg += ",左側にPad=" + isPadLeft;
-			if( isPadLeft ){
-				trace_setting_sum_str += "," + getString(R.string.trace_setting_is_pad_left);
-			}else {
-				trace_setting_sum_str += "," + getString(R.string.trace_setting_is_pad_right);
-			}
-			trace_setting_key.setSummary(""+trace_setting_sum_str);
 
-			conection_setting_sum_str ="";         //接続設定
-//			dbMsg += ",rootUrlStr=" + rootUrlStr;
+//			conection_setting_sum_str ="";         //接続設定
+			dbMsg += ",rootUrlStr=" + rootUrlStr;
 			if( ! rootUrlStr.equals("") ){
-				conection_setting_sum_str += getString(R.string.partner_titol)+"= " + rootUrlStr;
-			}
-//			dbMsg += ",testUrlStr=" + testUrlStr;
-			if( ! testUrlStr.equals("") ){
-				conection_setting_sum_str += "\n(" + testUrlStr + ")";
-			}
-			dbMsg += ",conection_setting_sum_str=" + conection_setting_sum_str;
-//			conection_setting_key.setSummary(conection_setting_sum_str);
+//				conection_setting_sum_str += getString(R.string.partner_titol)+"= " + rootUrlStr;
 
-			other_setting_sum_str ="";        //その他の設定
-			dbMsg += ",作成したファイルの保存場所=" + savePatht;
-			if( ! savePatht.equals("") ){
-				other_setting_sum_str += getString(R.string.trace_setting_is_pad_right)+";" + savePatht;
+//				conection_setting_key.setSummary(rootUrlStr);
+				rootUrl_list_key.setSummary(rootUrlStr);
+//				rootUrl_key.setSummary(rootUrlStr);
+
+//				conection_setting_key.setDefaultValue(rootUrlStr);
+//				rootUrl_list_key.setDefaultValue(rootUrlStr);
+//				rootUrl_key.setDefaultValue(rootUrlStr);
+			}else{
+				rootUrlStr =  getString(R.string.rootUrlStr);
 			}
-			dbMsg += ",自動回転阻止=" + isLotetCanselt;
-			if( isLotetCanselt ){
-				other_setting_sum_str +="\n" +  getString(R.string.other_setting_lotet_cansel);
-			}
-			other_setting_key.setSummary(""+other_setting_sum_str);
+
+
+//			other_setting_sum_str ="";        //その他の設定
+//			dbMsg += ",作成したファイルの保存場所=" + savePatht;
+//				other_setting_sum_str += getString(R.string.trace_setting_is_pad_right)+";" + savePatht;
+//			}
+//			dbMsg += ",自動回転阻止=" + isLotetCanselt;
+//			if( isLotetCanselt ){
+//				other_setting_sum_str +="\n" +  getString(R.string.other_setting_lotet_cansel);
+//			}
+//			other_setting_key.setSummary(""+other_setting_sum_str);
 
 			myLog(TAG , dbMsg);
 		} catch (Exception er) {
@@ -366,8 +313,8 @@ public class MyPreferenceFragment extends PreferenceFragment implements SharedPr
 	 * 一階層目しか反映されていない
 	 */
 	private void reloadSummary() {
-		String TAG = "reloadSummary[MPF]";
-		String dbMsg = "";
+		String TAG = "reloadSummary";
+		String dbMsg = "[MyPreferenceFragment]";
 		try {
 			sps = this.getPreferenceScreen();            //☆PreferenceFragmentなら必要  .
 			ListAdapter adapter = sps.getRootAdapter();      //            var adapter = this.preferenceScreen.RootAdapter;
@@ -404,11 +351,15 @@ public class MyPreferenceFragment extends PreferenceFragment implements SharedPr
 					String key = pref.getKey();
 					String val = PreferenceManager.getDefaultSharedPreferences(this.getActivity()).getString(key , "");
 					dbMsg += ";" + key + ";" + val;
-					if ( key.equals(rootUrl_key) ) {
-						rootUrlStr = val;
-						dbMsg += ",rootUrlStr=" + val;
-						dbMsg += "," + getResources().getString(R.string.rootUrl) + "=" + rootUrlStr;
-					}
+//					if ( key.equals(transition_type_key) ) {
+//						transitionType = val;
+//						dbMsg += ",transitionType=" + transitionType;
+//					}else
+//					if ( key.equals(rootUrl_key) ) {
+//						rootUrlStr = val;
+//						dbMsg += ",rootUrlStr=" + val;
+//						dbMsg += "," + getResources().getString(R.string.rootUrl) + "=" + rootUrlStr;
+//					}
 					pref.setSummary(val);
 				} else if ( item instanceof CheckBoxPreference ) {
 					dbMsg += "CheckBoxPreference;";
@@ -431,13 +382,13 @@ public class MyPreferenceFragment extends PreferenceFragment implements SharedPr
 					int pIndex = pref.findIndexOfValue(pVal);
 					dbMsg += ";" + key + ";" + pIndex + ")" + pVal;
 					pref.setSummary(pVal);
-//					if ( key.equals("testUrlt_key") ) {
+//					if ( key.equals("rootUrl_list_key") ) {
 //						dbMsg += ",rootUrlStr=" + rootUrlStr;
 ////						String rStr = setTestURL(pIndex);
 ////						dbMsg += ">>=" + rStr;
 //						if ( rootUrlStr != key ) {
-//							myEditor.putString("testUrlt_key" , pVal) ;
-//							testUrlt_key.setSummary(pVal);
+//							myEditor.putString("rootUrl_list_key" , pVal) ;
+//							rootUrl_list_key.setSummary(pVal);
 //							myEditor.putString("rootUrl_key" , pVal) ;
 //							rootUrl_key.setSummary(pVal);
 //							;
@@ -458,12 +409,16 @@ public class MyPreferenceFragment extends PreferenceFragment implements SharedPr
 					//     List<String> vals = new ArrayList<String>();
 //					List< String > keyList = new ArrayList< String >();
 					String wrString = "";
-					if ( key.equals("conection_setting_key") ) {
-						rootUrlStr = sharedPref.getString(key , rootUrlStr);
-						testUrlStr = sharedPref.getString(key , testUrlStr);
-						wrString = getResources().getString(R.string.rootUrl) + "=" + rootUrlStr + "\n" + getResources().getString(R.string.testUrl) + "=" + testUrlStr;
-						dbMsg += ",wrString=" + wrString;
-					}
+//					if ( key.equals("transition_setting_key") ) {
+//						transitionType = sharedPref.getString(key , transitionType);
+//						wrString = getResources().getString(R.string.pref_transition_titol) + "=" + transitionType;
+//						dbMsg += ",wrString=" + wrString;
+//					}else if ( key.equals("conection_setting_key") ) {
+//						rootUrlStr = sharedPref.getString(key , rootUrlStr);
+//						testUrlStr = sharedPref.getString(key , testUrlStr);
+//						wrString = getResources().getString(R.string.rootUrl) + "=" + rootUrlStr + "\n" + getResources().getString(R.string.testUrl) + "=" + testUrlStr;
+//						dbMsg += ",wrString=" + wrString;
+//					}
 					pref.setSummary(wrString);
 				} else if ( item instanceof Preference ) {
 					dbMsg += "Preference;";
@@ -486,11 +441,12 @@ public class MyPreferenceFragment extends PreferenceFragment implements SharedPr
 	 * 全項目読み
 	 */
 	public void readPref(Context context) {
-		String TAG = "readPref[MPF]";
-		String dbMsg = "開始";
+		String TAG = "readPref";
+		String dbMsg = "[MyPreferenceFragment]";
 		try {
 			this.context = context;
-			sharedPref = PreferenceManager.getDefaultSharedPreferences(context);
+			dbMsg += ",context;" + this.context.getPackageName();        // keys.size()
+			sharedPref = PreferenceManager.getDefaultSharedPreferences(	this.context);
 			myEditor = sharedPref.edit();
 			Map< String, ? > keys = sharedPref.getAll();                          //System.collections.Generic.IDictionary<string, object>
 			dbMsg += ",読み込み開始;keys=" + keys.size() + "件";        // keys.size()
@@ -501,90 +457,61 @@ public class MyPreferenceFragment extends PreferenceFragment implements SharedPr
 			for ( String key : keys.keySet() ) {
 				i++;
 				String rStr = "";
-				dbMsg += "\n" + i + "/" + keys.size() + ")" + key;// + "は" + rStr;
-				if ( key.equals("file_name_key") ) {
-					readFileName = sharedPref.getString(key , readFileName);
-					dbMsg += ",最初に表示する元画像=" + readFileName;
-				} else if ( key.equals("is_start_last_key") ) {
-					isStartLast = sharedPref.getBoolean(key , isStartLast);
-					dbMsg += ",次回は最後に使った元画像からスタート=" + isStartLast;
-				} else if ( key.equals("mirror_movement_to_key") ) {
-					is_v_Mirror = sharedPref.getBoolean(key , is_v_Mirror);
-					dbMsg += ",上下鏡面動作=" + is_v_Mirror;
-				} else if ( key.equals("mirror_movement_lr_key") ) {
-					is_h_Mirror = sharedPref.getBoolean(key , is_h_Mirror);
-					dbMsg += ",左右鏡面動作=" + is_h_Mirror;
-				} else if ( key.equals("auto_judge_key") ) {
-					isAautoJudge = sharedPref.getBoolean(key , isAautoJudge);
-					dbMsg += ",トレース後に自動判定=" + isAautoJudge;
-				} else if ( key.equals("trace_line_width_key") ) {
-//					traceLineWidth = sharedPref.getString(key , traceLineWidth);
-					trace_line_width = sharedPref.getString(key , trace_line_width);
-					dbMsg += ",トレース線の太さ=" + trace_line_width;
-					UTIL = new Util();
-					if( UTIL.isIntVar(trace_line_width)){
-						traceLineWidth = Integer.parseInt(trace_line_width);
-					}
-					dbMsg += ">>トレース線の太さ=" + traceLineWidth;
-				} else if ( key.equals("is_pad_left_key") ) {
-					isPadLeft = sharedPref.getBoolean(key , isPadLeft);
-					dbMsg += ",左側にPad=" + isPadLeft;
-				} else if ( key.equals("rootUrl_key") ) {                                     //接続設定
+				dbMsg += "\n" + i + "/" + keys.size() + ")" + key;
+				if ( key.equals("transition_type_list_key") ) {                                     //接続設定
+					transitionType = sharedPref.getString(key , transitionType);
+					dbMsg += " = " + transitionType;
+//				} else if ( key.equals("rootUrl_key") ) {                                     //接続設定
+//					rootUrlStr = sharedPref.getString(key , rootUrlStr);
+//					dbMsg += " = " + rootUrlStr;
+				} else if ( key.equals("rootUrl_list_key")) {                                     //接続設定
 					rootUrlStr = sharedPref.getString(key , rootUrlStr);
-					dbMsg += ",rootUrlStr=" + rootUrlStr;
-				} else if ( key.equals("testUrlt_key") ) {
-					testUrlStr = sharedPref.getString(key , rootUrlStr);
-					dbMsg += ",testUrlStr=" + testUrlStr;
-				} else if ( key.equals("save_path_key") ) {
-					savePatht = sharedPref.getString(key , savePatht);       //その他の設定
-					dbMsg += ",作成したファイルの保存場所=" + savePatht;
-				} else if ( key.equals("lotet_cansel_key") ) {
-					isLotetCanselt = sharedPref.getBoolean(key , isLotetCanselt);
-					dbMsg += ",自動回転阻止=" + isLotetCanselt;
+					dbMsg += " = " + rootUrlStr;
+
+//				} else if ( key.equals("rootUrl_list_key") ) {
+//					testUrlStr = sharedPref.getString(key , rootUrlStr);
+//					dbMsg += ",testUrlStr=" + testUrlStr;
+//				} else if ( key.equals("save_path_key") ) {
+//					savePatht = sharedPref.getString(key , savePatht);       //その他の設定
+//					dbMsg += ",作成したファイルの保存場所=" + savePatht;
+//				} else if ( key.equals("lotet_cansel_key") ) {
+//					isLotetCanselt = sharedPref.getBoolean(key , isLotetCanselt);
+//					dbMsg += ",自動回転阻止=" + isLotetCanselt;
 				}
 			}
 
-			if ( savePatht.equals("") ) {
-				UTIL = new Util();
-				savePatht = UTIL.getSavePath(context , Environment.DIRECTORY_PICTURES , "Recovery_Brain");   // context.getResources().getString(R.string.app_name);
-				if ( savePatht.equals("") ) {
-					UTIL = new Util();
-					savePatht = UTIL.getSavePath(context , Environment.DIRECTORY_DCIM , "Recovery_Brain");
-				}
-				dbMsg += ",作成したファイルの保存場所(初期設定)=" + savePatht;
-				myEditor.putString("save_path_key" , savePatht);
-				dbMsg += ",更新";
-				myEditor.commit();
-				dbMsg += "完了";
+//			if ( savePatht.equals("") ) {
+//				UTIL = new Util();
+//				savePatht = UTIL.getSavePath(context , Environment.DIRECTORY_PICTURES ,  getString(R.string.app_name));   // context.getResources().getString(R.string.app_name);
+//				if ( savePatht.equals("") ) {
+//					UTIL = new Util();
+//					savePatht = UTIL.getSavePath(context , Environment.DIRECTORY_DCIM , getString(R.string.app_name));
+//				}
+//				dbMsg += ",作成したファイルの保存場所(初期設定)=" + savePatht;
+//				myEditor.putString("save_path_key" , savePatht);
+//				dbMsg += ",更新";
+//				myEditor.commit();
+//				dbMsg += "完了";
+//			}
+
+			dbMsg += "\n" + ",transitionType=" + transitionType;
+			if(transitionType.equals("") ){
+				transitionType = getResources().getString(R.string.transition_fragment);
+				dbMsg += ">>" + transitionType;
 			}
+
+			dbMsg += " ,rootUrlStr=" + rootUrlStr;
+			if(rootUrlStr.equals("") ){
+				rootUrlStr = getResources().getString(R.string.rootUrlStr);
+				dbMsg += ">>" + rootUrlStr;
+			}
+
 			myLog(TAG , dbMsg);
 		} catch (Exception er) {
 			myErrorLog(TAG , dbMsg + "でエラー発生；" + er);
 		}
 	}                                                                     //プリファレンスの読込み
 
-
-	//	public String setTestURL(int selectIndex) {
-//		final String TAG = "setTestURL[MPF]";
-//		String dbMsg = "開始";
-//		String retStr =getString(R.string.rootUrlStr);        //0
-//		try {
-//			dbMsg += ",selectIndex=" + selectIndex;
-//			switch ( selectIndex ) {
-//				case 1:
-//					retStr =getString(R.string.companyUrlStr);
-//					break;
-//				case 2:
-//					retStr =getString(R.string.companyUrlStr);
-//					break;
-//			}
-//			dbMsg += ",retStr=" + retStr;
-//			myLog(TAG , dbMsg);
-//		} catch (Exception er) {
-//			myErrorLog(TAG , dbMsg + "でエラー発生；" + er);
-//		}
-//		return retStr;
-//	}
 	/////////////////////////////////////////////////////////////////////////////////////////////////////////
 	public interface OnFragmentInteractionListener {
 		// TODO: Update argument type and name

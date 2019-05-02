@@ -1,11 +1,13 @@
 package com.hijiyama_koubou.ja090dm;
 
 import android.Manifest;
+import android.app.Activity;
 import android.content.Context;
 import android.content.Intent;
 import android.content.pm.PackageManager;
 import android.os.Build;
 import android.os.Bundle;
+import android.support.v4.app.ActivityCompat;
 import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentTransaction;
 import android.view.KeyEvent;
@@ -55,6 +57,10 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
 	public String transitionInflater ;
 	public String transitionType;
 	public String orginTitol = "";
+
+	public int frpmMain = 1;
+	public int backFrom = frpmMain;
+
 
 	public void checkMyPermission() {
 		final String TAG = "checkMyPermission";
@@ -139,7 +145,8 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
 							if( transitionType == transitionActivity) {
 								callWebIntent(dataURI , MainActivity.this);
 							}else if( transitionType == transitionFragment){
-								setWebFragument(dataURI);
+								FragmentTransaction transaction = getSupportFragmentManager().beginTransaction();	// Fragmentの追加や削除といった変更を行う際は、Transactionを利用します
+								setWebFragument(rootUrlStr , transaction);
 							}else if( transitionType == transitionInflater){
 
 							}
@@ -205,14 +212,16 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
 //		return retBool;
 //	}
 	public void callQuit() {
-		final String TAG = "callQuit[MA]";
-		String dbMsg = "";
+		final String TAG = "callQuit";
+		String dbMsg = "[MainActivity]";
 		try {
 //			sharedPref = PreferenceManager.getDefaultSharedPreferences(MainActivity.this);            //	getActivity().getBaseContext()
 //			myEditor = sharedPref.edit();
 ////			myEditor.putString("peer_id_key" , "");      //使用した
 ////			boolean kakikomi = myEditor.commit();
+			dbMsg += ",nowView="+nowView +"(" + topView + ")";
 			if(nowView == topView){
+				dbMsg += ",終了";
 				this.finish();
 				if ( Build.VERSION.SDK_INT >= Build.VERSION_CODES.LOLLIPOP ) {
 					finishAndRemoveTask();                      //アプリケーションのタスクを消去する事でデバッガーも停止する。
@@ -220,6 +229,7 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
 					moveTaskToBack(true);                       //ホームボタン相当でアプリケーション全体が中断状態
 				}
 			}else{
+				dbMsg += ",topへ；transitionType=" + transitionType;
 //				if( transitionType == transitionActivity) {
 //					setTopView();
 //				}else if( transitionType == transitionFragment){
@@ -235,8 +245,8 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
 	}
 
 	public void reStart() {
-		final String TAG = "reStart[MA}";
-		String dbMsg = "";
+		final String TAG = "reStart";
+		String dbMsg = "[MainActivity]";
 		try {
 //			Intent intent = new Intent();
 //			intent.setClass(this , this.getClass());
@@ -251,9 +261,9 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
 	@Override
 	public boolean onKeyDown(int keyCode , KeyEvent event) {
 		final String TAG = "onKeyDown";
-		String dbMsg = "開始";
+		String dbMsg = "[MainActivity]";
 		try {
-			dbMsg = "keyCode=" + keyCode;//+",getDisplayLabel="+String.valueOf(MyEvent.getDisplayLabel())+",getAction="+MyEvent.getAction();////////////////////////////////
+			dbMsg += "keyCode=" + keyCode;//+",getDisplayLabel="+String.valueOf(MyEvent.getDisplayLabel())+",getAction="+MyEvent.getAction();////////////////////////////////
 			myLog(TAG , dbMsg);
 			switch ( keyCode ) {    //キーにデフォルト以外の動作を与えるもののみを記述★KEYCODE_MENUをここに書くとメニュー表示されない
 				case KeyEvent.KEYCODE_HOME:            //3
@@ -274,7 +284,7 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
 	 */
 	public boolean funcSelected(MenuItem item) {
 		final String TAG = "funcSelected";
-		String dbMsg = "[MainActivity]MenuItem" + item.toString();/////////////////////////////////////////////////
+		String dbMsg = "[MainActivity]MenuItem" + item.toString();
 		try {
 			Bundle bundle = new Bundle();
 			CharSequence toastStr = "";
@@ -282,30 +292,37 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
 			dbMsg = "id=" + id;
 			switch ( id ) {
 				case R.id.md_call_top:
+					dbMsg = ">>トップ画面";
 					topRedrow();
 					break;
 				case R.id.md_call_web2:
 //				case R.id.mm_call_web2:
+					dbMsg = ">>別画面web";
 					String dataURI = rootUrlStr;
 					dbMsg += "dataURI=" + dataURI;
 					callWebIntent(dataURI , MainActivity.this);
 					break;
 				case R.id.md_call_web:
 //				case R.id.mm_call_web:
-					setWebFragument(rootUrlStr);
+					dbMsg = ">>fragumentへweb";
+					FragmentTransaction transaction = getSupportFragmentManager().beginTransaction();
+					setWebFragument(rootUrlStr , transaction);
 //					setWebView();
 					break;
 				case R.id.md_prefarence:      //設定
-				case R.id.mm_prefarence:      //設定
+				case R.id.mm_prefarence:      //
+					dbMsg = ">>設定";
 					nowView = R.xml.preferences; 					//表示中のview
 					Intent settingsIntent = new Intent(MainActivity.this , MyPreferencesActivty.class);
 					startActivityForResult(settingsIntent , REQUEST_PREF);//		StartActivity(intent);
 					break;
 				case R.id.md_quit:
 				case R.id.mm_quit:
+					dbMsg = ">>終了";
 					callQuit();
 					break;
 				default:
+					dbMsg = ">>制作中";
 					pendeingMessege();
 					break;
 			}
@@ -391,7 +408,11 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
 		final String TAG = "onWindowFocusChanged";
 		String dbMsg = "[MainActivity]";/////////////////////////////////////////////////
 		try {
-			topRedrow();
+			dbMsg += ",nowView= " + nowView;
+			if(nowView == topView){					//遷移先のwebなどで入力ダイアログなどに反応してしまう。
+				topRedrow();
+				nowView = topView; 					// topRedrow で切り替えると別fragmentからの戻りで　この1viewに戻した後でquitを呼ぶので終了してしまう
+			}
 			setADSens();//広告表示//////////////////////////////////////////////////
 			setNend();
 			myLog(TAG , dbMsg);
@@ -426,13 +447,12 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
 			if (adView != null) {
 				adView.resume();
 			}
-			dbMsg += "orginTitol=" + orginTitol;
-			toolbar.setTitle(orginTitol);
 			myLog(TAG , dbMsg);
 		} catch (Exception er) {
 			myErrorLog(TAG , dbMsg + "で" + er.toString());
 		}
 	}
+
 	/***
 	 * フォアグラウンドでなくなった場合に呼び出される
 	 */
@@ -488,7 +508,7 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
 		final String TAG = "setTopFragument";
 		String dbMsg = "[MainActivity]" ;/////////////////////////////////////////////////
 		try {
-			nowView = topView; 					//表示中のview
+			dbMsg += "　nowView= " + nowView;
 //			FragmentTransaction transaction = getSupportFragmentManager().beginTransaction();	// Fragmentの追加や削除といった変更を行う際は、Transactionを利用します
 //			if(nowFragment != null){
 //				transaction.remove(nowFragment);														//java.lang.IllegalStateException: Activity has been destroyed 対策
@@ -505,6 +525,8 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
 			// 他にも、よく使う操作で、replace removeといったメソッドがあります
 			// メソッドの1つ目の引数は対象のViewGroupのID、2つ目の引数は追加するfragment
 			transaction.commit();																// 最後にcommitを使用することで変更を反映します
+			dbMsg += ",orginTitol=" + orginTitol;
+			toolbar.setTitle(orginTitol);
 			myLog(TAG , dbMsg);
 		} catch (Exception er) {
 			myErrorLog(TAG , dbMsg + "で" + er.toString());
@@ -531,7 +553,8 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
 			}else if( transitionType.equals("fragment") ) {
 //			}else if( transitionType.equals(getResources().getString(R.string.transition_fragment)) ) {
 				dbMsg += ">Fragment差替え";
-				setWebFragument(dataURI);
+				FragmentTransaction transaction = getSupportFragmentManager().beginTransaction();	// Fragmentの追加や削除といった変更を行う際は、Transactionを利用します
+				setWebFragument(rootUrlStr , transaction);
 			}
 			myLog(TAG , dbMsg);
 		} catch (Exception er) {
@@ -541,21 +564,18 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
 
 //	private String dataURI = "https://www.yahoo.co.jp/";
 	private final static String KEY_NAME = "dataURI";
-	public void setWebFragument(String dataURI) {
+	public void setWebFragument(String dataURI , FragmentTransaction transaction) {
 		final String TAG = "setWebFragument";
 		String dbMsg = "[MainActivity]dataURI=" + dataURI;/////////////////////////////////////////////////
 		try {
 			nowView = R.layout.activity_web2; 					//表示中のview
-
+			dbMsg += " nowView= " + nowView;
 			WebFragment fragment = new WebFragment();											// Fragmentを作成します
 			Bundle args = new Bundle();															// Fragmentに渡す値はBundleという型でやり取りする
 			args.putString("dataURI", dataURI);													// Key/Pairの形で値をセットする
 			fragment.setArguments(args);														// Fragmentに値をセットする
-			FragmentTransaction transaction = getSupportFragmentManager().beginTransaction();	// Fragmentの追加や削除といった変更を行う際は、Transactionを利用します
-//			transaction.remove(nowFragment);														//java.lang.IllegalStateException: Activity has been destroyed 対策
-//			transaction.commit();
+//			FragmentTransaction transaction = getSupportFragmentManager().beginTransaction();	// Fragmentの追加や削除といった変更を行う際は、Transactionを利用します
 			dbMsg += "　読込み開始";
-//			transaction.add(R.id.container, fragment);         //元のfragmentの構成物が残り、remove後もtoolBarの書き戻しが必要になる
 			transaction.replace(R.id.container, fragment);									//remove() と add() を同時に行うメソッドで、主に画面遷移のために利用します。
 			// 同時に addToBackStack() を呼んでいない場合、遷移元の Fragment は Activity との関連付けが解除されますが、呼んでいる場合は View だけが破棄されている状態になり、同一Fragmentを再利用可能です。
 			dbMsg += ">>";
@@ -591,7 +611,9 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
 		final String TAG = "callWebIntent";
 		String dbMsg = "[MainActivity]dataURI=" + dataURI;/////////////////////////////////////////////////
 		try {
-			nowView = 999;			//R.layout.activity_web; 					//表示中のview
+			nowView = R.layout.activity_web; 					//表示中のview
+			dbMsg += "　nowView= " + nowView;
+
 //			Intent webIntent = new Intent(MainActivity.this , WebActivity.class);                       //MainActivity.this
 			Intent webIntent = new Intent(context , WebActivity.class);                       //MainActivity.this
 //			Intent webIntent = new Intent(getApplicationContext() , WebActivity.class);                       //MainActivity.this

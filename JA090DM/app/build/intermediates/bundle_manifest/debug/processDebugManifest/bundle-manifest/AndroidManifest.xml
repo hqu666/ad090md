@@ -12,12 +12,9 @@
     <uses-permission android:name="android.permission.ACCESS_NETWORK_STATE" />
     <uses-permission android:name="android.permission.READ_EXTERNAL_STORAGE" />
     <uses-permission android:name="android.permission.WRITE_EXTERNAL_STORAGE" />
-
-    <permission
-        android:name="android.permission.FLASHLIGHT"
-        android:permissionGroup="android.permission-group.HARDWARE_CONTROLS"
-        android:protectionLevel="normal" />
-
+    <!-- <permission android:name="android.permission.FLASHLIGHT" -->
+    <!-- android:permissionGroup="android.permission-group.HARDWARE_CONTROLS" -->
+    <!-- android:protectionLevel="normal" /> -->
     <uses-permission android:name="android.permission.CAMERA" />
 
     <!-- Don't require camera, as this requires a rear camera. This allows it to work on the Nexus 7 -->
@@ -52,8 +49,10 @@
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
         android:testOnly="true"
-        android:theme="@style/AppTheme" >
+        android:theme="@style/AppTheme"
+        android:usesCleartextTraffic="true" >
 
+        <!-- pie以降はhttpsでなければ　ERR_CLEARTEXT_NOT_PERMITTED　が発生するので　android:usesCleartextTraffic　で　平文通信を無視する -->
         <!-- <activity android:name=".TopActivity"> -->
         <!-- </activity> -->
 
@@ -91,7 +90,7 @@
         <!-- <activity android:name=".TopActivity"/> -->
         <activity android:name="com.hijiyama_koubou.ja090dm.MyPreferencesActivty" />
         <activity
-            android:name="com.hijiyama_koubou.ja090dm.Web_Activity"
+            android:name="com.hijiyama_koubou.ja090dm.WebActivity"
             android:theme="@style/AppTheme" >
         </activity>
         <activity
