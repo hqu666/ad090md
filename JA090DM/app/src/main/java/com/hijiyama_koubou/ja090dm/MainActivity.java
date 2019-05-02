@@ -1,21 +1,14 @@
 package com.hijiyama_koubou.ja090dm;
 
 import android.Manifest;
-import android.app.Activity;
 import android.content.Context;
 import android.content.Intent;
 import android.content.pm.PackageManager;
 import android.os.Build;
 import android.os.Bundle;
-import android.support.design.widget.FloatingActionButton;
-import android.support.design.widget.Snackbar;
+import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentTransaction;
-import android.text.Editable;
-import android.text.TextWatcher;
-import android.util.Log;
 import android.view.KeyEvent;
-import android.view.LayoutInflater;
-import android.view.View;
 import android.support.design.widget.NavigationView;
 import android.support.v4.view.GravityCompat;
 import android.support.v4.widget.DrawerLayout;
@@ -26,7 +19,6 @@ import android.view.Menu;
 import android.view.MenuItem;
 import android.view.ViewGroup;
 import android.webkit.WebView;
-import android.webkit.WebViewClient;
 import android.widget.EditText;
 import android.widget.LinearLayout;
 import android.widget.Toast;
@@ -41,41 +33,40 @@ import com.google.zxing.integration.android.IntentResult;
 import net.nend.android.NendAdView;
 
 public class MainActivity extends AppCompatActivity implements NavigationView.OnNavigationItemSelectedListener {
+	private Toolbar toolbar;
 	private LinearLayout ad_layout;
 	private PublisherAdView adView;
 	private ViewGroup content_ll;
 //	private LinearLayout content_ll;
 	private LinearLayout nend_layout;
 	private NendAdView nendAdView;
-	private WebView webView;
-	private EditText url_et;
+//	private WebView webView;
+//	private EditText url_et;
 	private String urlStr ="https://www.yahoo.co.jp/";
 	private String AdUnitID ="";			//"ca-app-pub-3940256099942544/6300978111";
 
 	private String rootUrlStr  ="https://www.yahoo.co.jp/";
 	private int topView = R.layout.activity_qr;
 	public int nowView = topView;
-	public int transitionActivity = topView;
-	public int transitionFragment = transitionActivity+1;
-	public int transitionInflater = transitionFragment+1;
+	public Fragment nowFragment = null;
 
-	public int transitionType = transitionFragment;
+	public String transitionActivity ;
+	public String transitionFragment;
+	public String transitionInflater ;
+	public String transitionType;
+	public String orginTitol = "";
 
-
-	/**
-	 * このアプリケーションの設定ファイル読出し
-	 **/
-	public void readPref() {
-		final String TAG = "readPref[RBS]";
-		String dbMsg = "許諾済み";//////////////////
+	public void checkMyPermission() {
+		final String TAG = "checkMyPermission";
+		String dbMsg = "[MainActivity]";
 		try {
 			if ( Build.VERSION.SDK_INT >= Build.VERSION_CODES.M ) {                //(初回起動で)全パーミッションの許諾を取る
-				dbMsg = "許諾確認";
+				dbMsg += "許諾確認";
 				String[] PERMISSIONS = { Manifest.permission.INTERNET , Manifest.permission.ACCESS_NETWORK_STATE,
-										Manifest.permission.CAMERA ,
-										 Manifest.permission.READ_EXTERNAL_STORAGE , Manifest.permission.WRITE_EXTERNAL_STORAGE
-										};
-/// , Manifest.permission.MODIFY_AUDIO_SETTINGS , Manifest.permission.RECORD_AUDIO ,  Manifest.permission.MODIFY_AUDIO_SETTINGS,
+					Manifest.permission.CAMERA ,
+					Manifest.permission.READ_EXTERNAL_STORAGE , Manifest.permission.WRITE_EXTERNAL_STORAGE
+				};
+				/// , Manifest.permission.MODIFY_AUDIO_SETTINGS , Manifest.permission.RECORD_AUDIO ,  Manifest.permission.MODIFY_AUDIO_SETTINGS,
 				boolean isNeedParmissionReqest = false;
 				for ( String permissionName : PERMISSIONS ) {
 					dbMsg += "," + permissionName;
@@ -85,45 +76,43 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
 						isNeedParmissionReqest = true;
 					}
 				}
+				dbMsg += "isNeedParmissionReqest=" + isNeedParmissionReqest;
 				if ( isNeedParmissionReqest ) {
-					dbMsg += "許諾処理へ";
+					dbMsg += "::許諾処理へ";
 					requestPermissions(PERMISSIONS , REQUEST_PREF);
 					return;
+				}else{
+					dbMsg += "::readPrefへ";
+					readPref();
 				}
-				getPackageManager().hasSystemFeature(PackageManager.FEATURE_CAMERA_FLASH);
-				if(!getPackageManager().hasSystemFeature(
-						PackageManager.FEATURE_CAMERA_FLASH))
-				{
-					dbMsg += "フラッシュライトは使えません";
-				}
+	//				getPackageManager().hasSystemFeature(PackageManager.FEATURE_CAMERA_FLASH);
+	//				if(!getPackageManager().hasSystemFeature(
+	//						PackageManager.FEATURE_CAMERA_FLASH))
+	//				{
+	//					dbMsg += "フラッシュライトは使えません";
+	//				}
+			}else{
+				readPref();
 			}
-//			dbMsg += ",isReadPref=" + isReadPref;
+			myLog(TAG , dbMsg);
+		} catch (Exception er) {
+			myErrorLog(TAG , dbMsg + ";でエラー発生；" + er);
+		}
+	}
+	/**
+	 * このアプリケーションの設定ファイル読出し
+	 **/
+	public void readPref() {
+		final String TAG = "readPref";
+		String dbMsg = "[MainActivity]";
+		try {
 			MyPreferenceFragment prefs = new MyPreferenceFragment();
 			prefs.readPref(this);
-//			rootUrlStr = prefs.rootUrlStr;
-//			dbMsg += ",rootUrlStr=" + rootUrlStr;
-//			readFileName = prefs.readFileName;
-//			dbMsg += ",readFileName=" + readFileName;
-//			savePatht = prefs.savePatht;
-//			dbMsg += ",作成したファイルの保存場所=" + savePatht;
-//			isStartLast = prefs.isStartLast;
-//			dbMsg += ",次回は最後に使った元画像からスタート=" + isStartLast;
-//			is_v_Mirror = prefs.is_v_Mirror;
-//			dbMsg += ",左右鏡面動作=" + is_v_Mirror;
-//			is_h_Mirror = prefs.is_h_Mirror;
-//			dbMsg += ",上下鏡面動作=" + is_h_Mirror;
-//			isAautoJudge = prefs.isAautoJudge;
-//			dbMsg += ",トレース後に自動判定=" + isAautoJudge;
-//			traceLineWidth = prefs.traceLineWidth;
-//			dbMsg += ",トレース線の太さ=" + traceLineWidth;
-//			isPadLeft = prefs.isPadLeft;
-//			dbMsg += ",左側にPad=" + isPadLeft;
-//			isLotetCanselt = prefs.isLotetCanselt;
-//			dbMsg += ",自動回転阻止=" + isLotetCanselt;
-//			sharedPref = PreferenceManager.getDefaultSharedPreferences(this);            //	getActivity().getBaseContext()
-//			myEditor = sharedPref.edit();
-//			stereoTypeRady( "");
-
+//			prefs.readPref(this.getApplicationContext());
+			this.transitionType = prefs.transitionType;
+			dbMsg += ",transitionType=" + transitionType;
+			this.rootUrlStr = prefs.rootUrlStr;
+			dbMsg += ",rootUrlStr=" + rootUrlStr;
 			myLog(TAG , dbMsg);
 		} catch (Exception er) {
 			myErrorLog(TAG , dbMsg + ";でエラー発生；" + er);
@@ -148,7 +137,7 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
 						dbMsg += ",dataURI="+dataURI;
 						if(dataURI != null){
 							if( transitionType == transitionActivity) {
-								callWebIntent(dataURI);
+								callWebIntent(dataURI , MainActivity.this);
 							}else if( transitionType == transitionFragment){
 								setWebFragument(dataURI);
 							}else if( transitionType == transitionInflater){
@@ -178,7 +167,7 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
 			dbMsg = "requestCode=" + requestCode;
 			switch ( requestCode ) {
 				case REQUEST_PREF:
-//					readPref();        //ループする？
+					readPref();
 					break;
 			}
 			myLog(TAG , dbMsg);
@@ -231,8 +220,13 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
 					moveTaskToBack(true);                       //ホームボタン相当でアプリケーション全体が中断状態
 				}
 			}else{
-				setTopFragument();
-//				setTopView();
+//				if( transitionType == transitionActivity) {
+//					setTopView();
+//				}else if( transitionType == transitionFragment){
+					setTopFragument();
+//				}else if( transitionType == transitionInflater){
+//
+//				}
 			}
 			myLog(TAG , dbMsg);
 		} catch (Exception er) {
@@ -279,8 +273,8 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
 	 * ドロワーと共通になるので関数化
 	 */
 	public boolean funcSelected(MenuItem item) {
-		final String TAG = "funcSelected[RBS]";
-		String dbMsg = "MenuItem" + item.toString();/////////////////////////////////////////////////
+		final String TAG = "funcSelected";
+		String dbMsg = "[MainActivity]MenuItem" + item.toString();/////////////////////////////////////////////////
 		try {
 			Bundle bundle = new Bundle();
 			CharSequence toastStr = "";
@@ -288,25 +282,17 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
 			dbMsg = "id=" + id;
 			switch ( id ) {
 				case R.id.md_call_top:
-//				case R.id.mm_call_top:
-					if( transitionType == transitionActivity) {
-						setTopView();
-					}else if( transitionType == transitionFragment){
-						setTopFragument();
-					}else if( transitionType == transitionInflater){
-
-					}
-
+					topRedrow();
 					break;
 				case R.id.md_call_web2:
 //				case R.id.mm_call_web2:
 					String dataURI = rootUrlStr;
 					dbMsg += "dataURI=" + dataURI;
-					callWebIntent(dataURI);
+					callWebIntent(dataURI , MainActivity.this);
 					break;
 				case R.id.md_call_web:
 //				case R.id.mm_call_web:
-					setWebFragument("https://www.yahoo.co.jp/");
+					setWebFragument(rootUrlStr);
 //					setWebView();
 					break;
 				case R.id.md_prefarence:      //設定
@@ -346,53 +332,86 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
-		readPref();
-		setContentView(R.layout.activity_main);
-		Toolbar toolbar = ( Toolbar ) findViewById(R.id.toolbar);
-		setSupportActionBar(toolbar);
+		final String TAG = "onCreate";
+		String dbMsg = "[MainActivity]";/////////////////////////////////////////////////
+		try {
+			transitionActivity = getString(R.string.transition_actvity);
+			transitionFragment = getString(R.string.transition_fragment);
+			transitionInflater = getString(R.string.transition_inflater);
+			transitionType = transitionFragment;
+			checkMyPermission();
+			setContentView(R.layout.activity_main);
+			toolbar = ( Toolbar ) findViewById(R.id.toolbar);
+			setSupportActionBar(toolbar);
+			orginTitol = toolbar.getTitle().toString();
+			dbMsg +=  ",orginTitol=" + orginTitol;
 
-//		FloatingActionButton fab = ( FloatingActionButton ) findViewById(R.id.fab);
-//		fab.setOnClickListener(new View.OnClickListener() {
-//			@Override
-//			public void onClick(View view) {
-//				Snackbar.make(view , "Replace with your own action" , Snackbar.LENGTH_LONG).setAction("Action" , null).show();
-//			}
-//		});
+			//		FloatingActionButton fab = ( FloatingActionButton ) findViewById(R.id.fab);
+	//		fab.setOnClickListener(new View.OnClickListener() {
+	//			@Override
+	//			public void onClick(View view) {
+	//				Snackbar.make(view , "Replace with your own action" , Snackbar.LENGTH_LONG).setAction("Action" , null).show();
+	//			}
+	//		});
 
-		DrawerLayout drawer = ( DrawerLayout ) findViewById(R.id.drawer_layout);
-		ActionBarDrawerToggle toggle = new ActionBarDrawerToggle(this , drawer , toolbar , R.string.navigation_drawer_open , R.string.navigation_drawer_close);
-		drawer.addDrawerListener(toggle);
-		toggle.syncState();
+			DrawerLayout drawer = ( DrawerLayout ) findViewById(R.id.drawer_layout);
+			ActionBarDrawerToggle toggle = new ActionBarDrawerToggle(this , drawer , toolbar , R.string.navigation_drawer_open , R.string.navigation_drawer_close);
+			drawer.addDrawerListener(toggle);
+			toggle.syncState();
 
-		NavigationView navigationView = ( NavigationView ) findViewById(R.id.nav_view);
-		navigationView.setNavigationItemSelectedListener(this);
+			NavigationView navigationView = ( NavigationView ) findViewById(R.id.nav_view);
+			navigationView.setNavigationItemSelectedListener(this);
 
-
-		//広告表示//////////////////////////////////////////////////
-		ad_layout = findViewById(R.id.ad_layout);
-		nend_layout = findViewById(R.id.nend_layout);
-		AdUnitID = getString (R.string.banner_ad_unit_id);
-		MobileAds.initialize(this,getResources ().getString (R.string.banner_ad_unit_id));       //Mobile Ads SDK を初期化
+	//		if (savedInstanceState == null) {
+	//			FragmentManager fragmentManager = getSupportFragmentManager();
+	//			FragmentTransaction fragmentTransaction = fragmentManager.beginTransaction();
+	//
+	//			// BackStackを設定
+	//			fragmentTransaction.addToBackStack(null);
+	//
+	//			// counterをパラメータとして設定
+	//			int count = 0;
+	//			fragmentTransaction.replace(R.id.container, QrFragment.newInstance(count));
+	//
+	//			fragmentTransaction.commit();
+	//		}
+			//広告表示//////////////////////////////////////////////////
+			ad_layout = findViewById(R.id.ad_layout);
+			nend_layout = findViewById(R.id.nend_layout);
+			AdUnitID = getString (R.string.banner_ad_unit_id);
+			MobileAds.initialize(this,getResources ().getString (R.string.banner_ad_unit_id));       //Mobile Ads SDK を初期化
+			myLog(TAG , dbMsg);
+		} catch (Exception er) {
+			myErrorLog(TAG , dbMsg + "で" + er.toString());
+		}
 	}
 
 	public void onWindowFocusChanged(boolean hasFocus) {
 		super.onWindowFocusChanged(hasFocus);
-			if( transitionType == transitionActivity) {
-				setTopView();
-			}else if( transitionType == transitionFragment){
-				setTopFragument();
-			}else if( transitionType == transitionInflater){
-
-			}
-		setADSens();//広告表示//////////////////////////////////////////////////
-		setNend();
+		final String TAG = "onWindowFocusChanged";
+		String dbMsg = "[MainActivity]";/////////////////////////////////////////////////
+		try {
+			topRedrow();
+			setADSens();//広告表示//////////////////////////////////////////////////
+			setNend();
+			myLog(TAG , dbMsg);
+		} catch (Exception er) {
+			myErrorLog(TAG , dbMsg + "で" + er.toString());
+		}
 	}
 
 	/** Called when leaving the activity */
 	@Override
 	protected void onPause() {
-		if (adView != null) {
-			adView.pause();
+		final String TAG = "onPause";
+		String dbMsg = "[MainActivity]";/////////////////////////////////////////////////
+		try {
+			if (adView != null) {
+				adView.pause();
+			}
+			myLog(TAG , dbMsg);
+		} catch (Exception er) {
+			myErrorLog(TAG , dbMsg + "で" + er.toString());
 		}
 		super.onPause();
 	}
@@ -401,8 +420,17 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
 	@Override
 	protected void onResume() {
 		super.onResume();
-		if (adView != null) {
-			adView.resume();
+		final String TAG = "onResume";
+		String dbMsg = "[MainActivity]";/////////////////////////////////////////////////
+		try {
+			if (adView != null) {
+				adView.resume();
+			}
+			dbMsg += "orginTitol=" + orginTitol;
+			toolbar.setTitle(orginTitol);
+			myLog(TAG , dbMsg);
+		} catch (Exception er) {
+			myErrorLog(TAG , dbMsg + "で" + er.toString());
 		}
 	}
 	/***
@@ -412,36 +440,99 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
 	public void onStop() {
 		super.onStop();
 		final String TAG = "onStop";
-		String dbMsg = "[MainActivity]" ;/////////////////////////////////////////////////
-		myLog(TAG , dbMsg);
+		String dbMsg = "[MainActivity]";/////////////////////////////////////////////////
+		try {
+			myLog(TAG , dbMsg);
+		} catch (Exception er) {
+			myErrorLog(TAG , dbMsg + "で" + er.toString());
+		}
 	}
 
 
 	/** Called before the activity is destroyed */
 	@Override
 	protected void onDestroy() {
-		if (adView != null) {
-			adView.destroy();
+		final String TAG = "onDestroy";
+		String dbMsg = "[MainActivity]";/////////////////////////////////////////////////
+		try {
+			if (adView != null) {
+				adView.destroy();
+			}
+			myLog(TAG , dbMsg);
+		} catch (Exception er) {
+			myErrorLog(TAG , dbMsg + "で" + er.toString());
 		}
 		super.onDestroy();
 	}
 
 	////////////////////////////////////////////////////////////////////////////
+	public void topRedrow() {
+		final String TAG = "topRedrow";
+		String dbMsg = "[MainActivity]" ;
+		try {
+//			if( transitionType == transitionActivity) {
+//			setTopView();
+//			}else if( transitionType == transitionFragment){
+				setTopFragument();
+//			}else if( transitionType == transitionInflater){
+//
+//			}
+			myLog(TAG , dbMsg);
+		} catch (Exception er) {
+			myErrorLog(TAG , dbMsg + "で" + er.toString());
+		}
+	}
+
+	private final static String QR_KEY_NAME = "transitionType";
 	public void setTopFragument() {
 		final String TAG = "setTopFragument";
 		String dbMsg = "[MainActivity]" ;/////////////////////////////////////////////////
 		try {
 			nowView = topView; 					//表示中のview
+//			FragmentTransaction transaction = getSupportFragmentManager().beginTransaction();	// Fragmentの追加や削除といった変更を行う際は、Transactionを利用します
+//			if(nowFragment != null){
+//				transaction.remove(nowFragment);														//java.lang.IllegalStateException: Activity has been destroyed 対策
+//				transaction.commit();
+//			}
 			QrFragment fragment = new QrFragment();											// Fragmentを作成します
-//			Bundle args = new Bundle();															// Fragmentに渡す値はBundleという型でやり取りする
-//			args.putString(KEY_NAME, dataURI);													// Key/Pairの形で値をセットする
-//			fragment.setArguments(args);														// Fragmentに値をセットする
+			nowFragment = fragment;
+			Bundle args = new Bundle();															// Fragmentに渡す値はBundleという型でやり取りする
+			args.putString("transitionType", transitionType);													// Key/Pairの形で値をセットする
+			fragment.setArguments(args);														// Fragmentに値をセットする
 			FragmentTransaction transaction = getSupportFragmentManager().beginTransaction();	// Fragmentの追加や削除といった変更を行う際は、Transactionを利用します
-			transaction.replace(R.id.container, fragment);											// 新しく追加を行うのでaddを使用します
+			transaction.replace(R.id.container, fragment);
 //			transaction.add(R.id.container, fragment);											// 新しく追加を行うのでaddを使用します
 			// 他にも、よく使う操作で、replace removeといったメソッドがあります
 			// メソッドの1つ目の引数は対象のViewGroupのID、2つ目の引数は追加するfragment
 			transaction.commit();																// 最後にcommitを使用することで変更を反映します
+			myLog(TAG , dbMsg);
+		} catch (Exception er) {
+			myErrorLog(TAG , dbMsg + "で" + er.toString());
+		}
+	}
+
+	/**
+	 * fragmentから戻されるとグローバル関数が参照できなくなる
+	 * */
+	public void qrFromMain(String dataURI , String transitionType) {
+		final String TAG = "qrFromMain";
+		String dbMsg = "[MainActivity]" ;
+		try {
+			dbMsg += ",dataURI=" + dataURI;
+			dbMsg += " ,transitionType=" + transitionType;
+			if( transitionType.equals("activity") ) {
+//			if( transitionType.equals(getResources().getString(R.string.transition_actvity)) ) {
+				dbMsg += ">actvityへ";
+				callWebIntent(dataURI ,this);
+//											nowView = 999; 					//表示中のview
+//							Intent webIntent = new Intent(this, WebActivity.class);                       //MainActivity.this
+//							webIntent.putExtra("dataURI" , dataURI);                        //最初に表示するページのパス
+//							startActivity(webIntent);
+			}else if( transitionType.equals("fragment") ) {
+//			}else if( transitionType.equals(getResources().getString(R.string.transition_fragment)) ) {
+				dbMsg += ">Fragment差替え";
+				setWebFragument(dataURI);
+			}
 			myLog(TAG , dbMsg);
 		} catch (Exception er) {
 			myErrorLog(TAG , dbMsg + "で" + er.toString());
@@ -458,13 +549,18 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
 
 			WebFragment fragment = new WebFragment();											// Fragmentを作成します
 			Bundle args = new Bundle();															// Fragmentに渡す値はBundleという型でやり取りする
-			args.putString(KEY_NAME, dataURI);													// Key/Pairの形で値をセットする
+			args.putString("dataURI", dataURI);													// Key/Pairの形で値をセットする
 			fragment.setArguments(args);														// Fragmentに値をセットする
 			FragmentTransaction transaction = getSupportFragmentManager().beginTransaction();	// Fragmentの追加や削除といった変更を行う際は、Transactionを利用します
-			transaction.replace(R.id.container, fragment);											// 新しく追加を行うのでaddを使用します
-																								// 他にも、よく使う操作で、replace removeといったメソッドがあります
-																								// メソッドの1つ目の引数は対象のViewGroupのID、2つ目の引数は追加するfragment
+//			transaction.remove(nowFragment);														//java.lang.IllegalStateException: Activity has been destroyed 対策
+//			transaction.commit();
+			dbMsg += "　読込み開始";
+//			transaction.add(R.id.container, fragment);         //元のfragmentの構成物が残り、remove後もtoolBarの書き戻しが必要になる
+			transaction.replace(R.id.container, fragment);									//remove() と add() を同時に行うメソッドで、主に画面遷移のために利用します。
+			// 同時に addToBackStack() を呼んでいない場合、遷移元の Fragment は Activity との関連付けが解除されますが、呼んでいる場合は View だけが破棄されている状態になり、同一Fragmentを再利用可能です。
+			dbMsg += ">>";
 			transaction.commit();																// 最後にcommitを使用することで変更を反映します
+			dbMsg += "終了";
 			myLog(TAG , dbMsg);
 		} catch (IllegalStateException er) {
 			myErrorLog(TAG , dbMsg + "で" + er.toString());
@@ -472,17 +568,33 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
 			myErrorLog(TAG , dbMsg + "で" + er.toString());
 		}
 	}
-	
+
+//	/***
+//	 * Fragmentの内部のViewリソースの整理を行う
+//	 */
+////	@Override
+//	public void onDestroyView() {
+////		super.onDestroyView();
+//		final String TAG = "onDestroyView";
+//		String dbMsg = "[QrFragment]" ;/////////////////////////////////////////////////
+//		Fragment fragment = (getFragmentManager().findFragmentById(R.id.container));
+//		FragmentTransaction ft = getSupportFragmentManager().beginTransaction();
+//		ft.remove(fragment);
+//		ft.commit();
+//		myLog(TAG , dbMsg);
+//	}
+
+
 	/////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 
-	public void callWebIntent(String dataURI) {
+	public void callWebIntent(String dataURI , Context context) {
 		final String TAG = "callWebIntent";
-		String dbMsg = "[MainActivity]" ;/////////////////////////////////////////////////
+		String dbMsg = "[MainActivity]dataURI=" + dataURI;/////////////////////////////////////////////////
 		try {
-			nowView = R.layout.activity_web; 					//表示中のview
-			Intent webIntent = new Intent(this , Web_Activity.class);
-//			dataURI = rootUrlStr;
-			dbMsg += "dataURI=" + dataURI;
+			nowView = 999;			//R.layout.activity_web; 					//表示中のview
+//			Intent webIntent = new Intent(MainActivity.this , WebActivity.class);                       //MainActivity.this
+			Intent webIntent = new Intent(context , WebActivity.class);                       //MainActivity.this
+//			Intent webIntent = new Intent(getApplicationContext() , WebActivity.class);                       //MainActivity.this
 			webIntent.putExtra("dataURI" , dataURI);                        //最初に表示するページのパス
 			startActivity(webIntent);
 			myLog(TAG , dbMsg);
