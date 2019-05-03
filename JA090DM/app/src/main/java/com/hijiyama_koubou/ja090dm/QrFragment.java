@@ -1,11 +1,14 @@
 package com.hijiyama_koubou.ja090dm;
 import android.app.Activity;
 import android.content.Intent;
+import android.content.SharedPreferences;
 import android.content.res.Configuration;
 import android.graphics.Bitmap;
+import android.graphics.drawable.Drawable;
+import android.os.Bundle;
+import android.preference.PreferenceManager;
 import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentTransaction;
-import android.os.Bundle;
 import android.util.AndroidRuntimeException;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -30,6 +33,7 @@ import java.util.HashMap;
 import java.util.List;
 
 public class QrFragment extends Fragment {
+	public static SharedPreferences sharedPref;
 	private LinearLayout scam_ll;
 	private DecoratedBarcodeView qrReaderView;
 	private ImageButton release_bt;
@@ -41,8 +45,7 @@ public class QrFragment extends Fragment {
 
 	private Button acsess_bt;
 	private Button rescan_bt;
-
-	private int cnt = 0;
+	private Drawable orgDrawable;
 	public String transitionType;
 
 	public static QrFragment newInstance(int count){
@@ -111,14 +114,13 @@ public class QrFragment extends Fragment {
 			dbMsg += ",qrReaderView=" + qrReaderView;
 			release_bt = ( ImageButton ) view.findViewById(R.id.release_bt);
 			release_bt.setVisibility(View.GONE);
-//			dbMsg += ",release_bt=" + release_bt;
 			coment_ll = ( LinearLayout ) view.findViewById(R.id.coment_ll);
 			dbMsg += ",coment_ll=" + coment_ll;
 			prevew_ll = ( LinearLayout ) view.findViewById(R.id.prevew_ll);
 			acsess_bt = ( Button ) view.findViewById(R.id.acsess_bt);
 			rescan_bt = ( Button ) view.findViewById(R.id.rescan_bt);
-//			prevew_ll.setVisibility(View.GONE);
 			qr_result_iv = ( ImageView ) view.findViewById(R.id.qr_result_iv);
+			orgDrawable = qr_result_iv.getDrawable();
 			qr_result_tv = ( TextView ) view.findViewById(R.id.qr_result_tv);
 
 			laterCreate();
@@ -215,23 +217,23 @@ public class QrFragment extends Fragment {
 						Button button = ( Button ) v;
 						String dataURI = ( String ) button.getText();
 						dbMsg += ",dataURI=" + dataURI;
+						sharedPref = PreferenceManager.getDefaultSharedPreferences(getContext());
+						transitionType = sharedPref.getString("transition_type_list_key" , transitionType);      //切替直後の反映
 						dbMsg += " ,transitionType=" + transitionType;
-
 						MainActivity MA = new MainActivity();
-//						MA.qrFromMain(dataURI , transitionType);
-						
+
 						if( transitionType.equals(getString(R.string.transition_actvity))) {
-//							MA.callWebIntent(dataURI , getContext());
-							///上記のメソッドをここで実行/////////////////////////////////
-							MA.nowView =9999;					// R.layout.activity_web; 					//表示中のview
-							Intent webIntent = new Intent(getContext() , WebActivity.class);                       //getContext()が必要			MainActivity.this
+//							Intent webIntent = new Intent(getActivity(). , WebActivity.class);       //getContext()が必要			MainActivity.this
+//					       //getContext、getActivity、送り先でjava.lang.NullPointerException: Attempt to invoke virtual method 'android.app.ActivityThread$ApplicationThread android.app.ActivityThread.getApplicationThread()' on a null object reference
+//							MA.callWebIntent(dataURI , webIntent);
+							///callWebIntentのメソッドをここで実行/////////////////////////////////
+							MA.nowView = R.layout.activity_web; 					//表示中のview
+							Intent webIntent = new Intent(getContext() , WebActivity.class);		//getContext()が必要			MainActivity.this
 							webIntent.putExtra("dataURI" , dataURI);                        //最初に表示するページのパス
 							startActivity(webIntent);
 						}else if( transitionType.equals(getString(R.string.transition_fragment))) {
 							FragmentTransaction transaction = getActivity().getSupportFragmentManager().beginTransaction();	// Fragumenntからの呼出しにはgetActivity が必要
 							MA.setWebFragument(dataURI , transaction);
-						}else if( transitionType == MA.transitionInflater){
-
 						}
 						myLog(TAG , dbMsg);
 					} catch (Exception er) {
@@ -246,8 +248,8 @@ public class QrFragment extends Fragment {
 					final String TAG = "rescan_bt[MA]";
 					String dbMsg = "";
 					try {
-						reStart();    //☆再スキャンできないのでリスタート
-//						startCapture();
+//						reStart();    //☆再スキャンできないのでリスタート
+						startCapture();
 						myLog(TAG , dbMsg);
 					} catch (Exception er) {
 						myErrorLog(TAG , dbMsg + ";でエラー発生；" + er);
@@ -289,6 +291,7 @@ public class QrFragment extends Fragment {
 		final String TAG = "reStart[MA}";
 		String dbMsg = "[QrFragment]";
 		try {
+			startCapture();
 //			Intent intent = new Intent();
 //			intent.setClass(this , this.getClass());
 //			this.startActivity(intent);
@@ -305,6 +308,9 @@ public class QrFragment extends Fragment {
 		try {
 			prevew_ll.setVisibility(View.GONE);
 			coment_ll.setVisibility(View.VISIBLE);
+			qr_result_tv.setVisibility(View.VISIBLE);
+			qr_result_iv.setImageDrawable(orgDrawable);
+
 			qrReaderView.decodeSingle(new BarcodeCallback() {
 				@Override
 				public void barcodeResult(BarcodeResult barcodeResult) {
