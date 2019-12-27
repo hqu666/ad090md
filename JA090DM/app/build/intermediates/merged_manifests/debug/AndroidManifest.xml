@@ -110,11 +110,6 @@
             android:hardwareAccelerated="true"
             android:screenOrientation="user"
             android:theme="@android:style/Theme.NoTitleBar.Fullscreen" />
-
-        <provider
-            android:name="com.android.tools.ir.server.InstantRunContentProvider"
-            android:authorities="com.hijiyama_koubou.ja090dm.com.android.tools.ir.server.InstantRunContentProvider"
-            android:multiprocess="true" />
     </application>
 
 </manifest>
