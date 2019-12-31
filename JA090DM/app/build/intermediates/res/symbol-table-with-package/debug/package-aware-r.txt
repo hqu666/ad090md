@@ -1383,6 +1383,7 @@ id container
 id content
 id contentPanel
 id content_ll
+id continue_bt
 id coordinator
 id cos
 id custom
@@ -1917,6 +1918,7 @@ string common_yomikonde_imasu
 string companyUrlStr
 string conection_setting
 string connect
+string continue_titol
 string description
 string disconnect
 string dtd_input_msg

@@ -29,6 +29,7 @@ import com.journeyapps.barcodescanner.BarcodeEncoder;
 import com.journeyapps.barcodescanner.BarcodeResult;
 import com.journeyapps.barcodescanner.DecoratedBarcodeView;
 
+import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 
@@ -43,10 +44,14 @@ public class QrFragment extends Fragment {
 	private ImageView qr_result_iv;
 	private TextView qr_result_tv;
 
+	private Button continue_bt;		//連続読み取り
 	private Button acsess_bt;
 	private Button rescan_bt;
 	private Drawable orgDrawable;
 	public String transitionType;
+	public boolean isContinue = false;
+	public ArrayList<String> readCords = new ArrayList<String>();
+
 
 	public static QrFragment newInstance(int count){
 		final String TAG = "QrFragment";
@@ -117,8 +122,73 @@ public class QrFragment extends Fragment {
 			coment_ll = ( LinearLayout ) view.findViewById(R.id.coment_ll);
 			dbMsg += ",coment_ll=" + coment_ll;
 			prevew_ll = ( LinearLayout ) view.findViewById(R.id.prevew_ll);
+			continue_bt = ( Button ) view.findViewById(R.id.continue_bt);
+			continue_bt.setOnClickListener(new View.OnClickListener() {
+				@Override
+				public void onClick(View v) {                    // ボタンがクリックされた時に呼び出されます
+					final String TAG = "continue_bt";
+					String dbMsg = "[onViewCreated]";
+					try {
+						isContinue = true;
+						startCapture();
+						myLog(TAG , dbMsg);
+					} catch (Exception er) {
+						myErrorLog(TAG , dbMsg + ";でエラー発生；" + er);
+					}
+				}
+			});
+
 			acsess_bt = ( Button ) view.findViewById(R.id.acsess_bt);
+			acsess_bt.setOnClickListener(new View.OnClickListener() {
+				@Override
+				public void onClick(View v) {    // ボタンがクリックされた時に呼び出されます
+					final String TAG = "acsess_bt";
+					String dbMsg = "[onViewCreated]";
+					try {
+						Button button = ( Button ) v;
+						String dataURI = ( String ) button.getText();
+						dbMsg += ",dataURI=" + dataURI;
+						sharedPref = PreferenceManager.getDefaultSharedPreferences(getContext());
+						transitionType = sharedPref.getString("transition_type_list_key" , transitionType);      //切替直後の反映
+						dbMsg += " ,transitionType=" + transitionType;
+						MainActivity MA = new MainActivity();
+
+						if( transitionType.equals(getString(R.string.transition_actvity))) {
+//							Intent webIntent = new Intent(getActivity(). , WebActivity.class);       //getContext()が必要			MainActivity.this
+//					       //getContext、getActivity、送り先でjava.lang.NullPointerException: Attempt to invoke virtual method 'android.app.ActivityThread$ApplicationThread android.app.ActivityThread.getApplicationThread()' on a null object reference
+//							MA.callWebIntent(dataURI , webIntent);
+							///callWebIntentのメソッドをここで実行/////////////////////////////////
+							MA.nowView = R.layout.activity_web; 					//表示中のview
+							Intent webIntent = new Intent(getContext() , WebActivity.class);		//getContext()が必要			MainActivity.this
+							webIntent.putExtra("dataURI" , dataURI);                        //最初に表示するページのパス
+							startActivity(webIntent);
+						}else if( transitionType.equals(getString(R.string.transition_fragment))) {
+							FragmentTransaction transaction = getActivity().getSupportFragmentManager().beginTransaction();	// Fragumenntからの呼出しにはgetActivity が必要
+							MA.setWebFragument(dataURI , transaction);
+						}
+						myLog(TAG , dbMsg);
+					} catch (Exception er) {
+						myErrorLog(TAG , dbMsg + ";でエラー発生；" + er);
+					}
+				}
+			});
+
 			rescan_bt = ( Button ) view.findViewById(R.id.rescan_bt);
+			rescan_bt.setOnClickListener(new View.OnClickListener() {
+				@Override
+				public void onClick(View v) {                    // ボタンがクリックされた時に呼び出されます
+					final String TAG = "rescan_bt";
+					String dbMsg = "[onViewCreated]";
+					try {
+						isContinue = false;
+						startCapture();
+						myLog(TAG , dbMsg);
+					} catch (Exception er) {
+						myErrorLog(TAG , dbMsg + ";でエラー発生；" + er);
+					}
+				}
+			});
+
 			qr_result_iv = ( ImageView ) view.findViewById(R.id.qr_result_iv);
 			orgDrawable = qr_result_iv.getDrawable();
 			qr_result_tv = ( TextView ) view.findViewById(R.id.qr_result_tv);
@@ -129,7 +199,6 @@ public class QrFragment extends Fragment {
 			myErrorLog(TAG , dbMsg + ";でエラー発生；" + er);
 		}
 	}
-
 
 	@Override
 	public void onAttach(Activity activity) {
@@ -194,69 +263,6 @@ public class QrFragment extends Fragment {
 				dbMsg += "=縦向き";
 			}
 
-			release_bt.setOnClickListener(new View.OnClickListener() {
-				@Override
-				public void onClick(View v) {                    // ボタンがクリックされた時に呼び出されます
-					final String TAG = "release_bt[MA]";
-					String dbMsg = "[QrFragment]";
-					try {
-						startCapture();
-						myLog(TAG , dbMsg);
-					} catch (Exception er) {
-						myErrorLog(TAG , dbMsg + ";でエラー発生；" + er);
-					}
-				}
-			});
-
-			acsess_bt.setOnClickListener(new View.OnClickListener() {
-				@Override
-				public void onClick(View v) {    // ボタンがクリックされた時に呼び出されます
-					final String TAG = "acsess_bt[MA]";
-					String dbMsg = "[QrFragment]";
-					try {
-						Button button = ( Button ) v;
-						String dataURI = ( String ) button.getText();
-						dbMsg += ",dataURI=" + dataURI;
-						sharedPref = PreferenceManager.getDefaultSharedPreferences(getContext());
-						transitionType = sharedPref.getString("transition_type_list_key" , transitionType);      //切替直後の反映
-						dbMsg += " ,transitionType=" + transitionType;
-						MainActivity MA = new MainActivity();
-
-						if( transitionType.equals(getString(R.string.transition_actvity))) {
-//							Intent webIntent = new Intent(getActivity(). , WebActivity.class);       //getContext()が必要			MainActivity.this
-//					       //getContext、getActivity、送り先でjava.lang.NullPointerException: Attempt to invoke virtual method 'android.app.ActivityThread$ApplicationThread android.app.ActivityThread.getApplicationThread()' on a null object reference
-//							MA.callWebIntent(dataURI , webIntent);
-							///callWebIntentのメソッドをここで実行/////////////////////////////////
-							MA.nowView = R.layout.activity_web; 					//表示中のview
-							Intent webIntent = new Intent(getContext() , WebActivity.class);		//getContext()が必要			MainActivity.this
-							webIntent.putExtra("dataURI" , dataURI);                        //最初に表示するページのパス
-							startActivity(webIntent);
-						}else if( transitionType.equals(getString(R.string.transition_fragment))) {
-							FragmentTransaction transaction = getActivity().getSupportFragmentManager().beginTransaction();	// Fragumenntからの呼出しにはgetActivity が必要
-							MA.setWebFragument(dataURI , transaction);
-						}
-						myLog(TAG , dbMsg);
-					} catch (Exception er) {
-						myErrorLog(TAG , dbMsg + ";でエラー発生；" + er);
-					}
-				}
-			});
-
-			rescan_bt.setOnClickListener(new View.OnClickListener() {
-				@Override
-				public void onClick(View v) {                    // ボタンがクリックされた時に呼び出されます
-					final String TAG = "rescan_bt[MA]";
-					String dbMsg = "";
-					try {
-//						reStart();    //☆再スキャンできないのでリスタート
-						startCapture();
-						myLog(TAG , dbMsg);
-					} catch (Exception er) {
-						myErrorLog(TAG , dbMsg + ";でエラー発生；" + er);
-					}
-				}
-			});
-
 			//onActivityResult で結果を受け取るパターン  /////////////////////////////////////////////////////////////////
 //			new IntentIntegrator(getActivity()).initiateScan();   				//これだけでもQRコードアクティビティを形成して、onActivityResultで内容を取得できる
 //			DecoratedBarcodeView qrReaderView = findViewById(R.id.decoratedBarcodeView);
@@ -287,26 +293,11 @@ public class QrFragment extends Fragment {
 		}
 	}
 
-	public void reStart() {
-		final String TAG = "reStart[MA}";
-		String dbMsg = "[QrFragment]";
-		try {
-			startCapture();
-//			Intent intent = new Intent();
-//			intent.setClass(this , this.getClass());
-//			this.startActivity(intent);
-//			this.finish();
-			myLog(TAG , dbMsg);
-		} catch (Exception er) {
-			myErrorLog(TAG , dbMsg + ";でエラー発生；" + er);
-		}
-	}
-
 	private void startCapture() {
 		final String TAG = "startCapture]";                        //
 		String dbMsg = "[QrFragment]";
 		try {
-			prevew_ll.setVisibility(View.GONE);
+//			prevew_ll.setVisibility(View.GONE);
 			coment_ll.setVisibility(View.VISIBLE);
 			qr_result_tv.setVisibility(View.VISIBLE);
 			qr_result_iv.setImageDrawable(orgDrawable);
@@ -316,35 +307,66 @@ public class QrFragment extends Fragment {
 				public void barcodeResult(BarcodeResult barcodeResult) {
 					final String TAG = "barcodeResult";
 					String dbMsg = "[QrFragment]QRコードが詠み込めた";
+
+				//	readCords
 					try {
-						String dataURI = barcodeResult.getText();
+						String dataURI = barcodeResult.getText();	//よくあある用途でURLとして読み取る
 						dbMsg += ",dataURI=" + dataURI;
-						coment_ll.setVisibility(View.VISIBLE);
-						try {
-							BarcodeEncoder barcodeEncoder = new BarcodeEncoder();
-							HashMap hints = new HashMap();
-
-							//文字コードの指定
-							hints.put(EncodeHintType.CHARACTER_SET, "shiftjis");
-
-							hints.put(EncodeHintType.ERROR_CORRECTION, ErrorCorrectionLevel.M);									//誤り訂正レベルを指定:/L 7% /M 15%が復元可能 /Q 25%が復元可能 /H 30%が復元可能
-							int size = qr_result_iv.getHeight();
-							dbMsg += " ,size=" + size;
-							Bitmap bitmap = barcodeEncoder.encodeBitmap(dataURI, BarcodeFormat.QR_CODE , size, size, hints);	//QRコードをBitmapで作成
-							qr_result_iv.setImageBitmap(bitmap);			//作成したQRコードを画面上に配置
-						} catch (WriterException e) {
-							throw new AndroidRuntimeException("Barcode Error.", e);
+						boolean isAdd = true;
+						for(String rCrod : readCords) {			//読み取っているコードの中に
+							if(rCrod.equals(dataURI)){			//同じコードが有れば
+								isAdd = false;					//処理中断
+								break;
+							}
 						}
+						if(isAdd){								//重複がなければ
+							readCords.add(dataURI);				//追加
+							dbMsg += ">>追加";
+						}
+					//	coment_ll.setVisibility(View.VISIBLE);
+						if(isContinue){
+							qr_result_iv.setVisibility(View.GONE);
+							rescan_bt.setVisibility(View.GONE);
+							if(isAdd){								//追加が有れば
+								String wStr = "";
+								int wCount = 0;
+								for(String rCrod : readCords) {            //読み取っているコード
+									wCount++;
+									wStr += "(" + wCount + ")" + rCrod + "\n";
+								}
+								dbMsg += " ,wStr=" + wStr;
+								qr_result_tv.setText(wStr);
+							}
+							startCapture();
+						}else{
+							qr_result_iv.setVisibility(View.VISIBLE);
+							rescan_bt.setVisibility(View.VISIBLE);
+							try {
+								BarcodeEncoder barcodeEncoder = new BarcodeEncoder();
+								HashMap hints = new HashMap();
 
-						if ( dataURI.startsWith("http") ) {
-							qr_result_tv.setVisibility(View.GONE);
-							release_bt.setVisibility(View.GONE);
-							prevew_ll.setVisibility(View.VISIBLE);
-							acsess_bt.setText(dataURI);
-						} else {
-							acsess_bt.setVisibility(View.GONE);
-							qr_result_tv.setVisibility(View.VISIBLE);
-							qr_result_tv.setText(dataURI);
+								//文字コードの指定
+								hints.put(EncodeHintType.CHARACTER_SET, "shiftjis");
+
+								hints.put(EncodeHintType.ERROR_CORRECTION, ErrorCorrectionLevel.M);									//誤り訂正レベルを指定:/L 7% /M 15%が復元可能 /Q 25%が復元可能 /H 30%が復元可能
+								int size = qr_result_iv.getHeight();
+								dbMsg += " ,size=" + size;
+								Bitmap bitmap = barcodeEncoder.encodeBitmap(dataURI, BarcodeFormat.QR_CODE , size, size, hints);	//QRコードをBitmapで作成
+								qr_result_iv.setImageBitmap(bitmap);			//作成したQRコードを画面上に配置
+							} catch (WriterException e) {
+								throw new AndroidRuntimeException("Barcode Error.", e);
+							}
+
+							if ( dataURI.startsWith("http") ) {
+								qr_result_tv.setVisibility(View.GONE);
+								release_bt.setVisibility(View.GONE);
+								prevew_ll.setVisibility(View.VISIBLE);
+								acsess_bt.setText(dataURI);
+							} else {
+								acsess_bt.setVisibility(View.GONE);
+								qr_result_tv.setVisibility(View.VISIBLE);
+								qr_result_tv.setText("読み取ったコードは　" + dataURI);
+							}
 						}
 						myLog(TAG , dbMsg);
 					} catch (Exception er) {
