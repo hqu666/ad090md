@@ -130,6 +130,7 @@ public class QrFragment extends Fragment {
 					String dbMsg = "[onViewCreated]";
 					try {
 						isContinue = true;
+						dbMsg = "連続読取開始";
 						startCapture();
 						myLog(TAG , dbMsg);
 					} catch (Exception er) {
