@@ -9,33 +9,51 @@
 	tools:context=".TopActivity">
 
 	<TextView
-		android:id="@+id/textView2"
-		android:layout_width="wrap_content"
+		android:id="@+id/top_view_titol"
+		android:layout_width="match_parent"
 		android:layout_height="wrap_content"
+		android:background="@color/zxing_custom_possible_result_points"
 		android:gravity="center"
 		android:text="TextView"
 		android:textAlignment="center"
+		android:textColor="@color/browser_actions_text_color"
+		android:textSize="24sp"
 		tools:layout_editor_absoluteX="176dp"
 		tools:layout_editor_absoluteY="277dp"
-		tools:text="トップ画面"/>
+		tools:text="@string/menu_top_view" />
 
+	<TextView
+		android:id="@+id/top_view_capsion"
+		android:layout_width="match_parent"
+		android:layout_height="wrap_content"
+		android:layout_margin="16px"
+		android:text="TextView"
+		android:textAlignment="viewStart"
+		android:textSize="14sp"
+		tools:layout_editor_absoluteX="176dp"
+		tools:layout_editor_absoluteY="277dp"
+		tools:text="@string/capsion_top_view" />
 	<Button
 		android:id="@+id/qr_act_bt"
 		android:layout_width="match_parent"
 		android:layout_height="wrap_content"
-		android:text="@string/menu_qr_read"/>
+		android:layout_margin="16px"
+		android:text="@string/menu_qr_read" />
 
 	<TextView
-		android:id="@+id/main_result_tv"
-		android:layout_width="match_parent"
-		android:layout_height="wrap_content"
-		android:text="TextView"/>
-
-	<LinearLayout
-		android:id="@+id/content_ll"
+		android:id="@+id/top_view_result_tv"
 		android:layout_width="match_parent"
 		android:layout_height="match_parent"
-		android:orientation="vertical">
-	</LinearLayout>
+		android:layout_weight="5"
+		android:padding="16px"
+		android:text="TextView"
+		android:verticalScrollbarPosition="right" />
+
+	<Button
+		android:id="@+id/web_act_bt"
+		android:layout_width="match_parent"
+		android:layout_height="wrap_content"
+		android:layout_margin="16px"
+		android:text="@string/menu_call_web" />
 
 </LinearLayout>

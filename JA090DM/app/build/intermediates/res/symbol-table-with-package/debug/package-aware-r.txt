@@ -1382,9 +1382,10 @@ id coment_ll
 id container
 id content
 id contentPanel
-id content_ll
 id continue_bt
 id coordinator
+id cord_reader_capsion
+id cord_reader_titol
 id cos
 id custom
 id customPanel
@@ -1478,7 +1479,6 @@ id line3
 id linear
 id listMode
 id list_item
-id main_result_tv
 id masked
 id match_parent
 id md_call_top
@@ -1526,7 +1526,7 @@ id native_video_fullscreen_card_title
 id native_video_fullscreen_close
 id native_video_fullscreen_replay_area
 id native_video_fullscreen_videoview
-id nav_camera
+id nav_barcord
 id nav_gallery
 id nav_slideshow
 id nav_view
@@ -1642,7 +1642,6 @@ id text2
 id textSpacerNoButtons
 id textSpacerNoTitle
 id textStart
-id textView2
 id text_input_password_toggle
 id textinput_counter
 id textinput_error
@@ -1655,6 +1654,9 @@ id toggle
 id toolbar
 id top
 id topPanel
+id top_view_capsion
+id top_view_result_tv
+id top_view_titol
 id touch_outside
 id transitionToEnd
 id transitionToStart
@@ -1673,6 +1675,7 @@ id vertical
 id view_offset_helper
 id visible
 id wd_web_menu
+id web_act_bt
 id web_dl
 id web_menu_backpage
 id web_menu_bookmark_get
@@ -1871,6 +1874,7 @@ string bms_msg1
 string bms_msg2
 string bottom_sheet_behavior
 string btf_re_scan
+string capsion_top_view
 string character_counter_content_description
 string character_counter_pattern
 string common_again
@@ -1940,6 +1944,7 @@ string menu_qr_read
 string menu_quit
 string menu_setting
 string menu_stand_alone
+string menu_top_view
 string menu_web_reconect
 string message_user_joined
 string message_user_left

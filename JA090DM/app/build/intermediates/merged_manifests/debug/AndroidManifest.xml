@@ -90,6 +90,11 @@
         <!-- <activity android:name=".TopActivity"/> -->
         <activity android:name="com.hijiyama_koubou.ja090dm.MyPreferencesActivty" />
         <activity
+            android:name="com.hijiyama_koubou.ja090dm.QRActivity"
+            android:theme="@style/AppTheme" >
+			android:screenOrientation="portrait"
+        </activity>
+        <activity
             android:name="com.hijiyama_koubou.ja090dm.WebActivity"
             android:theme="@style/AppTheme" >
         </activity>

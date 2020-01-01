@@ -48,13 +48,15 @@
 	<string name="description">icon</string>
 
 	<string name="btf_re_scan">再読取</string>
-	<string name="menu_qr_read">QRコードから接続</string>
+	<string name="menu_top_view">トップ画面</string>
+	<string name="menu_qr_read">バーコードリーダー</string>
 	<string name="menu_call_main">メイン画面として接続</string>
 	<string name="menu_stand_alone">スタート</string>
 	<string name="menu_call_top">トップ画面</string>
 	<string name="menu_call_web">ウェブ</string>
 	<string name="menu_call_web2">別画面ウェブ</string>
 
+	<string name="capsion_top_view">下のボタンをタップすると別の画面を呼び出し、結果を持ち帰ります。</string>
 
 	<string name="menu_setting">設定</string>
 	<string name="menu_quit">終了</string>

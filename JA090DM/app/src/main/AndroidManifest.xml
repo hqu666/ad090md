@@ -57,6 +57,11 @@
 		<!--<activity android:name=".TopActivity"/>-->
  		<activity android:name=".MyPreferencesActivty"/>
 		<activity
+			android:name=".QRActivity"
+			android:theme="@style/AppTheme">
+			android:screenOrientation="portrait"
+		</activity>
+		<activity
 			android:name=".WebActivity"
 			android:theme="@style/AppTheme">
 		</activity>

@@ -23,6 +23,7 @@ import com.google.zxing.BarcodeFormat;
 import com.google.zxing.EncodeHintType;
 import com.google.zxing.ResultPoint;
 import com.google.zxing.WriterException;
+import com.google.zxing.integration.android.IntentIntegrator;
 import com.google.zxing.qrcode.decoder.ErrorCorrectionLevel;
 import com.journeyapps.barcodescanner.BarcodeCallback;
 import com.journeyapps.barcodescanner.BarcodeEncoder;
@@ -36,7 +37,7 @@ import java.util.List;
 public class QrFragment extends Fragment {
 	public static SharedPreferences sharedPref;
 	private LinearLayout scam_ll;
-	private DecoratedBarcodeView qrReaderView;
+	private DecoratedBarcodeView qrReaderView;			//コードリーダーview
 	private ImageButton release_bt;
 	private LinearLayout coment_ll;
 
@@ -115,8 +116,6 @@ public class QrFragment extends Fragment {
 		try {
 			scam_ll = ( LinearLayout ) view.findViewById(R.id.scam_ll);
 			dbMsg += ",scam_ll=" + scam_ll;
-			qrReaderView = ( DecoratedBarcodeView ) view.findViewById(R.id.decoratedBarcodeView);
-			dbMsg += ",qrReaderView=" + qrReaderView;
 			release_bt = ( ImageButton ) view.findViewById(R.id.release_bt);
 			release_bt.setVisibility(View.GONE);
 			coment_ll = ( LinearLayout ) view.findViewById(R.id.coment_ll);
@@ -194,6 +193,9 @@ public class QrFragment extends Fragment {
 			orgDrawable = qr_result_iv.getDrawable();
 			qr_result_tv = ( TextView ) view.findViewById(R.id.qr_result_tv);
 
+			qrReaderView = ( DecoratedBarcodeView ) view.findViewById(R.id.decoratedBarcodeView);
+			dbMsg += ",qrReaderView=" + qrReaderView;
+
 			laterCreate();
 			myLog(TAG , dbMsg);
 		} catch (Exception er) {
@@ -265,8 +267,6 @@ public class QrFragment extends Fragment {
 			}
 
 			//onActivityResult で結果を受け取るパターン  /////////////////////////////////////////////////////////////////
-//			new IntentIntegrator(getActivity()).initiateScan();   				//これだけでもQRコードアクティビティを形成して、onActivityResultで内容を取得できる
-//			DecoratedBarcodeView qrReaderView = findViewById(R.id.decoratedBarcodeView);
 			startCapture();
 		myLog(TAG , dbMsg);
 		} catch (Exception er) {
@@ -295,21 +295,22 @@ public class QrFragment extends Fragment {
 	}
 
 	private void startCapture() {
-		final String TAG = "startCapture]";                        //
+		final String TAG = "startCapture";                        //
 		String dbMsg = "[QrFragment]";
 		try {
+//			new IntentIntegrator(QrFragment.this.getActivity()).initiateScan();
+
 //			prevew_ll.setVisibility(View.GONE);
 			coment_ll.setVisibility(View.VISIBLE);
 			qr_result_tv.setVisibility(View.VISIBLE);
 			qr_result_iv.setImageDrawable(orgDrawable);
-
 			qrReaderView.decodeSingle(new BarcodeCallback() {
 				@Override
 				public void barcodeResult(BarcodeResult barcodeResult) {
 					final String TAG = "barcodeResult";
-					String dbMsg = "[QrFragment]QRコードが詠み込めた";
+					String dbMsg = "[QrFragment]QRコード読み取り";
 
-				//	readCords
+					//	readCords
 					try {
 						String dataURI = barcodeResult.getText();	//よくあある用途でURLとして読み取る
 						dbMsg += ",dataURI=" + dataURI;
@@ -322,9 +323,11 @@ public class QrFragment extends Fragment {
 						}
 						if(isAdd){								//重複がなければ
 							readCords.add(dataURI);				//追加
-							dbMsg += ">>追加";
+							dbMsg += ">>追加" + readCords.size() + "件目";
+						}else{
+							dbMsg += ">>重複";
 						}
-					//	coment_ll.setVisibility(View.VISIBLE);
+						//	coment_ll.setVisibility(View.VISIBLE);
 						if(isContinue){
 							qr_result_iv.setVisibility(View.GONE);
 							rescan_bt.setVisibility(View.GONE);
@@ -338,6 +341,7 @@ public class QrFragment extends Fragment {
 								dbMsg += " ,wStr=" + wStr;
 								qr_result_tv.setText(wStr);
 							}
+							dbMsg += ">>再読み込み";
 							startCapture();
 						}else{
 							qr_result_iv.setVisibility(View.VISIBLE);
@@ -368,6 +372,28 @@ public class QrFragment extends Fragment {
 								qr_result_tv.setVisibility(View.VISIBLE);
 								qr_result_tv.setText("読み取ったコードは　" + dataURI);
 							}
+							//		qrReaderView?.decodeSingle(object : BarcodeCallback {
+							//			override fun barcodeResult(result: BarcodeResult?) {
+							//				stopCapture()
+							//				if (result == null) {
+							//					// no result
+							//					Log.w(TAG, "No result")
+							//					return
+							//				}
+							//				Log.i(TAG, "QRCode Result: ${result.text}")
+							//				val bytes = result.resultMetadata[ResultMetadataType.BYTE_SEGMENTS] as? List<*>
+							//				val data = bytes?.get(0) as? ByteArray ?: return
+							//
+							//																  // print result
+							//																  val resultString = StringBuffer()
+							//				data.map { byte ->
+							//					resultString.append(String.format("0x%02X,", byte))
+							//				}
+							//				Log.i(TAG, resultString.toString())
+							//			}
+							//			override fun possibleResultPoints(resultPoints: MutableList<ResultPoint>?) { }
+							//		})
+							//		qrReaderView?.resume()
 						}
 						myLog(TAG , dbMsg);
 					} catch (Exception er) {
@@ -379,7 +405,7 @@ public class QrFragment extends Fragment {
 
 				@Override
 				public void possibleResultPoints(List< ResultPoint > list) {
-					final String TAG = "possibleResultPoints[MA]";
+					final String TAG = "possibleResultPoints";
 					String dbMsg = "";
 					try {
 //						dbMsg += "list = " + list.size() + "件";
@@ -392,28 +418,6 @@ public class QrFragment extends Fragment {
 					}
 				}
 			});
-//		qrReaderView?.decodeSingle(object : BarcodeCallback {
-//			override fun barcodeResult(result: BarcodeResult?) {
-//				stopCapture()
-//				if (result == null) {
-//					// no result
-//					Log.w(TAG, "No result")
-//					return
-//				}
-//				Log.i(TAG, "QRCode Result: ${result.text}")
-//				val bytes = result.resultMetadata[ResultMetadataType.BYTE_SEGMENTS] as? List<*>
-//				val data = bytes?.get(0) as? ByteArray ?: return
-//
-//																  // print result
-//																  val resultString = StringBuffer()
-//				data.map { byte ->
-//					resultString.append(String.format("0x%02X,", byte))
-//				}
-//				Log.i(TAG, resultString.toString())
-//			}
-//			override fun possibleResultPoints(resultPoints: MutableList<ResultPoint>?) { }
-//		})
-//		qrReaderView?.resume()
 
 			myLog(TAG , dbMsg);
 		} catch (Exception er) {
@@ -442,6 +446,7 @@ public class QrFragment extends Fragment {
 
 /**
  * AndroidアプリでQRコードの読取、生成をする     https://qiita.com/11Kirby/items/0f496fe80df84875c132
+ * QRコードの読取、生成をする [Android]         https://qiita.com/hoshiume11/items/0f496fe80df84875c132
  **/
 
 

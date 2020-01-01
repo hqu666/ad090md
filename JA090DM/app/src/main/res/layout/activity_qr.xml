@@ -8,6 +8,32 @@
 	android:orientation="vertical"
 	tools:context=".MainActivity">
 
+	<TextView
+		android:id="@+id/cord_reader_titol"
+		android:layout_width="match_parent"
+		android:layout_height="wrap_content"
+		android:background="@color/zxing_custom_possible_result_points"
+		android:gravity="center"
+		android:text="TextView"
+		android:textAlignment="center"
+		android:textColor="@color/browser_actions_text_color"
+		android:textSize="24sp"
+		tools:layout_editor_absoluteX="176dp"
+		tools:layout_editor_absoluteY="277dp"
+		tools:text="@string/menu_qr_read" />
+
+	<TextView
+		android:id="@+id/cord_reader_capsion"
+		android:layout_width="match_parent"
+		android:layout_height="wrap_content"
+		android:layout_margin="16px"
+		android:text="TextView"
+		android:textAlignment="viewStart"
+		android:textSize="14sp"
+		tools:layout_editor_absoluteX="176dp"
+		tools:layout_editor_absoluteY="277dp"
+		tools:text="連続読取をタップすると複数のバーコードを連続して読み取り、画面下のメッセージエリアに読み取ったコードをリストアップします。タップしなければ一つ読み込めたところでその内容をQRコード化します。" />
+
 	<LinearLayout
 		android:id="@+id/scam_ll"
 		android:layout_width="match_parent"
@@ -20,7 +46,7 @@
 			android:layout_width="match_parent"
 			android:layout_height="wrap_content"
 			android:layout_margin="8dp"
-			android:layout_weight="8"
+			android:layout_weight="6"
 			android:padding="8dp"
 			app:layout_constraintBottom_toTopOf="@+id/release_bt"
 			app:layout_constraintEnd_toEndOf="parent"
