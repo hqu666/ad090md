@@ -17,6 +17,7 @@ import android.support.v4.widget.DrawerLayout;
 import android.support.v7.app.ActionBarDrawerToggle;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
+import android.view.LayoutInflater;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
@@ -24,6 +25,7 @@ import android.view.ViewGroup;
 import android.webkit.WebView;
 import android.widget.Button;
 import android.widget.EditText;
+import android.widget.FrameLayout;
 import android.widget.LinearLayout;
 import android.widget.TextView;
 import android.widget.Toast;
@@ -40,37 +42,40 @@ import net.nend.android.NendAdView;
 import java.util.ArrayList;
 
 public class MainActivity extends AppCompatActivity implements NavigationView.OnNavigationItemSelectedListener {
+//	public Const CONST = new Const();
+
+
 	private Toolbar toolbar;
 	private LinearLayout ad_layout;
 	private PublisherAdView adView;
-	private ViewGroup content_ll;
-//	private LinearLayout content_ll;
+//	private ViewGroup content_ll;						//layout/activity_top.xml　で
+	private FrameLayout container;						//layout/app_bar_main.xml   でフラギュメントの読み込み
+	private LinearLayout top_ll;						//機動画面
+
 	private LinearLayout nend_layout;
 	private NendAdView nendAdView;
 
-//	private TextView top_view_result_tv;
-//	private Button qr_act_bt;
-//	private Button web_act_bt;
+	TopFragment TF = new TopFragment();											// Fragmentを作成します
 
-	//	private WebView webView;
-//	private EditText url_et;
+	public String rootUrlStr  ="https://www.yahoo.co.jp/";
 	private String urlStr ="https://www.yahoo.co.jp/";
 	private String AdUnitID ="";			//"ca-app-pub-3940256099942544/6300978111";
 
-	private String rootUrlStr  ="https://www.yahoo.co.jp/";
 	private int topView = R.layout.activity_top;
 	public int nowView = topView;
+	public TextView top_view_result_tv;
+
 	public Fragment nowFragment = null;
 
 	public String transitionActivity ;
 	public String transitionFragment;
 	public String transitionInflater ;
-	public String transitionType;
+	public String transitionType;	//actvity,ragment,inflaterの三択
+
 	public String orginTitol = "";
 
-	public int frpmMain = 1;
-	public int backFrom = frpmMain;
-
+	public int fromMain = 1;
+	public int backFrom = fromMain;
 
 	public void checkMyPermission() {
 		final String TAG = "checkMyPermission";
@@ -95,7 +100,7 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
 				dbMsg += "isNeedParmissionReqest=" + isNeedParmissionReqest;
 				if ( isNeedParmissionReqest ) {
 					dbMsg += "::許諾処理へ";
-					requestPermissions(PERMISSIONS , REQUEST_PREF);
+					requestPermissions(PERMISSIONS , Const.REQUEST_PREF);
 					return;
 				}else{
 					dbMsg += "::readPrefへ";
@@ -127,39 +132,50 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
 //			prefs.readPref(this.getApplicationContext());
 			this.transitionType = prefs.transitionType;
 			dbMsg += ",transitionType=" + transitionType;
-			this.rootUrlStr = prefs.rootUrlStr;
+			rootUrlStr = prefs.rootUrlStr;
 			dbMsg += ",rootUrlStr=" + rootUrlStr;
 			myLog(TAG , dbMsg);
 		} catch (Exception er) {
 			myErrorLog(TAG , dbMsg + ";でエラー発生；" + er);
 		}
 	}
-	static final int REQUEST_PREF = 100;                          //Prefarensからの戻り
-	static final int REQUEST_CORDREADER = REQUEST_PREF + 10;      //コードリーダー
+//	static final int REQUEST_PREF = 100;                          //Prefarensからの戻り
+//	static final int REQUEST_CORDREADER = REQUEST_PREF + 10;      //コードリーダー
 
 	@Override
 	protected void onActivityResult(int requestCode , int resultCode , Intent data) {
 		final String TAG = "onActivityResult";
 		String dbMsg = "[MainActivity]";
+		top_ll.setVisibility(View.VISIBLE);		//起動画面表示
 		dbMsg += "requestCode=" + requestCode + ",resultCode=" + resultCode;
 		try {
-			switch ( requestCode ) {
-				case REQUEST_PREF:                                //Prefarensからの戻り
+			switch ( requestCode ) {				//??131183,65647
+				case Const.REQUEST_PREF:                                //Prefarensからの戻り
+					dbMsg += "Prefarenceアクティビティ呼び出し";
 					readPref();
 					break;
-				case REQUEST_CORDREADER:
+				case Const.CAll_CORDREADER:
+					dbMsg += "CordReaderアクティビティ呼び出し";
+					callBarCordReaderActivty();
+					break;
+				case Const.REQUEST_CORDREADER:
+					dbMsg += "CordReaderアクティビティから戻り";
+					String wStr = "";
 					String rStr = data.getStringExtra("readCords");
 					dbMsg += "rStr=" + rStr;
-					String[] cords = rStr.split(",", 0);
-					String wStr = "";
-					int wCount = 0;
-					for (int i = 0 ; i < cords.length ; i++){
-						wStr += "(" + (i + 1) + ")" + cords[i] + "\n";
+					if(rStr.equals("")){
+						wStr = "読み取れませんでした。";
+					}else{
+						wStr = "読み取ったコードは" + "\n";
+						String[] cords = rStr.split(",", 0);
+						int wCount = 0;
+						for (int i = 0 ; i < cords.length ; i++){
+							wStr += "(" + (i + 1) + ")" + cords[i] + "\n";
+						}
 					}
 					dbMsg += ",wStr=" + wStr;
-
-					TextView top_view_result_tv = (TextView) findViewById(R.id.top_view_result_tv);	//グローバルでは定義できない
 					top_view_result_tv.setText(wStr);
+				//	TF.write2result_(wStr);						//resultエリアにメッセージを書き込む
 					break;
 
 				case 49374:                                //   QR
@@ -199,7 +215,7 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
 		try {
 			dbMsg = "requestCode=" + requestCode;
 			switch ( requestCode ) {
-				case REQUEST_PREF:
+				case Const.REQUEST_PREF:
 					readPref();
 					break;
 			}
@@ -309,12 +325,13 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
 					dbMsg = ">>トップ画面";
 					topRedrow();
 					break;
-				case R.id.nav_barcord:
-					dbMsg = ">>バーコード";
-					nowView = R.layout.activity_qr;
-					Intent barcordIntent = new Intent(MainActivity.this.getApplicationContext() , QRActivity.class);                       //MainActivity.this
-					startActivityForResult(barcordIntent,REQUEST_CORDREADER);
-					break;
+//				case R.id.nav_barcord:
+//					dbMsg = ">>バーコード";
+//					callBarCordReaderActivty();
+////					nowView = R.layout.activity_qr;
+////					Intent barcordIntent = new Intent(MainActivity.this.getApplicationContext() , QRActivity.class);                       //MainActivity.this
+////					startActivityForResult(barcordIntent,Const.REQUEST_CORDREADER);
+//					break;
 				case R.id.md_call_web2:
 //				case R.id.mm_call_web2:
 					dbMsg = ">>別画面web";
@@ -334,7 +351,7 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
 					dbMsg = ">>設定";
 					nowView = R.xml.preferences; 					//表示中のview
 					Intent settingsIntent = new Intent(MainActivity.this , MyPreferencesActivty.class);
-					startActivityForResult(settingsIntent , REQUEST_PREF);//		StartActivity(intent);
+					startActivityForResult(settingsIntent , Const.REQUEST_PREF);//		StartActivity(intent);
 					break;
 				case R.id.md_quit:
 				case R.id.mm_quit:
@@ -397,7 +414,8 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
 
 			NavigationView navigationView = ( NavigationView ) findViewById(R.id.nav_view);
 			navigationView.setNavigationItemSelectedListener(this);
-
+			container = (FrameLayout)findViewById(R.id.container);		//フラギュメントの読み込み
+			top_ll = (LinearLayout)findViewById(R.id.top_ll);			//機動画面
 			//広告表示//////////////////////////////////////////////////
 			ad_layout = findViewById(R.id.ad_layout);
 			nend_layout = findViewById(R.id.nend_layout);
@@ -474,7 +492,6 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
 		}
 	}
 
-
 	/** Called before the activity is destroyed */
 	@Override
 	protected void onDestroy() {
@@ -491,7 +508,7 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
 		super.onDestroy();
 	}
 
-	////////////////////////////////////////////////////////////////////////////
+	//画面読み込み//////////////////////////////////////////////////////////////////////////
 	public void topRedrow() {
 		final String TAG = "topRedrow";
 		String dbMsg = "[MainActivity]" ;
@@ -499,9 +516,9 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
 			nowView = topView; 					// topRedrow で切り替えると別fragmentからの戻りで　この1viewに戻した後でquitを呼ぶので終了してしまう
 
 ////			if( transitionType == transitionActivity) {
-////			setTopView();
+			setTopView();
 ////			}else if( transitionType == transitionFragment){
-				setTopFragument();
+//				setTopFragument();
 ////			}else if( transitionType == transitionInflater){
 ////
 ////			}
@@ -512,43 +529,78 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
 	}
 
 	private final static String QR_KEY_NAME = "transitionType";
+
+	/**廃棄予定*/
 	public void setTopFragument() {
 		final String TAG = "setTopFragument";
 		String dbMsg = "[MainActivity]" ;/////////////////////////////////////////////////
 		try {
 			dbMsg += "　nowView= " + nowView;
 //			FragmentTransaction transaction = getSupportFragmentManager().beginTransaction();	// Fragmentの追加や削除といった変更を行う際は、Transactionを利用します
-//			if(nowFragment != null){
-//				transaction.remove(nowFragment);														//java.lang.IllegalStateException: Activity has been destroyed 対策
-//				transaction.commit();
+////			if(nowFragment != null){
+////				transaction.remove(nowFragment);														//java.lang.IllegalStateException: Activity has been destroyed 対策
+////				transaction.commit();
+////			}
+////			QrFragment fragment = new QrFragment();											// Fragmentを作成します
+//			nowFragment = NextFragment.newInstance("TopFragment");			//TF;
+//			if(nowFragment == TF){
+//				dbMsg += ",nowFragment == TF ";
+//			}else{
+//				dbMsg += ",nowFragment != TF ";
 //			}
-			TopFragment fragment = new TopFragment();											// Fragmentを作成します
-//			QrFragment fragment = new QrFragment();											// Fragmentを作成します
-			nowFragment = fragment;
+//			transaction.replace(R.id.container, nowFragment);
+//			transaction.commit();
+
+//			NextFragment NF = new NextFragment();
+//			NF.setTargetFragment(TF, Const.CAll_CORDREADER);
 			Bundle args = new Bundle();															// Fragmentに渡す値はBundleという型でやり取りする
 			args.putString("transitionType", transitionType);													// Key/Pairの形で値をセットする
-			fragment.setArguments(args);														// Fragmentに値をセットする
+			TF.setArguments(args);														// Fragmentに値をセットする
 			FragmentTransaction transaction = getSupportFragmentManager().beginTransaction();	// Fragmentの追加や削除といった変更を行う際は、Transactionを利用します
-			transaction.replace(R.id.container, fragment);
+			transaction.replace(R.id.container, TF);
 			transaction.commit();																// 最後にcommitを使用することで変更を反映します
 			dbMsg += ",orginTitol=" + orginTitol;
 			toolbar.setTitle(orginTitol);
 
-			Button qr_act_bt = (Button)findViewById(R.id.qr_act_bt);
+			myLog(TAG , dbMsg);
+		} catch (Exception er) {
+			myErrorLog(TAG , dbMsg + "で" + er.toString());
+		}
+	}
+
+	/**
+	 * 機動画面を読み込み機能定義する
+	 * classが無い小規模viewはレイアウトの呼び込み
+	 * */
+	public void setTopView() {
+		final String TAG = "setTopView";
+		String dbMsg = "[MainActivity]" ;/////////////////////////////////////////////////
+		try {
+			ViewGroup viewGroup = findViewById(R.id.top_ll); //二重に宣言しているが、このメソッド内ではinflateの
+			Context context = getApplicationContext();
+			LayoutInflater inflater = LayoutInflater.from(context);// LayoutInflater inflater = (LayoutInflater)context.getSystemService(Context.LAYOUT_INFLATER_SERVICE);
+			inflater.inflate(R.layout.activity_top, viewGroup);
+			TextView top_view_titol = (TextView) findViewById(R.id.top_view_titol);
+			top_view_titol.setText(getString(R.string.menu_top_view));
+			TextView top_view_capsion = (TextView) findViewById(R.id.top_view_capsion);
+			top_view_capsion.setText(getString(R.string.capsion_top_view));
+
+			top_view_result_tv = (TextView) findViewById(R.id.top_view_result_tv);
+			Button qr_act_bt = (Button) findViewById(R.id.qr_act_bt);
 			qr_act_bt.setOnClickListener(new View.OnClickListener() {
 				@Override
 				public void onClick(View v) {                    // ボタンがクリックされた時に呼び出されます
-					final String TAG = "setOnClickListener";
+					final String TAG = "onClick";
 					String dbMsg = "[MainActivity.qr_act_bt]";
 					try {
-						nowView = R.layout.activity_qr;
-						Intent barcordIntent = new Intent(MainActivity.this.getApplicationContext() , QRActivity.class);                       //MainActivity.this
-						startActivityForResult(barcordIntent,REQUEST_CORDREADER);						myLog(TAG , dbMsg);
+						callBarCordReaderActivty();
+						myLog(TAG , dbMsg);
 					} catch (Exception er) {
 						myErrorLog(TAG , dbMsg + ";でエラー発生；" + er);
 					}
 				}
 			});
+
 			Button web_act_bt = (Button) findViewById(R.id.web_act_bt);
 			web_act_bt.setOnClickListener(new View.OnClickListener() {
 				@Override
@@ -565,12 +617,29 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
 					}
 				}
 			});
-
+			nowView = R.layout.activity_top;					//表示中のview
 			myLog(TAG , dbMsg);
 		} catch (Exception er) {
 			myErrorLog(TAG , dbMsg + "で" + er.toString());
 		}
 	}
+
+	/**
+	 * バーコードリーダーを別アクティビティで呼び出す
+	 * */
+	public void callBarCordReaderActivty() {
+		final String TAG = "callBarCordReaderActivty";
+		String dbMsg = "[MainActivity]" ;
+		try {
+			nowView = R.layout.activity_qr;
+			Intent barcordIntent = new Intent(MainActivity.this.getApplicationContext() , QRActivity.class);                       //MainActivity.this
+			startActivityForResult(barcordIntent,Const.REQUEST_CORDREADER);						myLog(TAG , dbMsg);
+			myLog(TAG , dbMsg);
+		} catch (Exception er) {
+			myErrorLog(TAG , dbMsg + "で" + er.toString());
+		}
+	}
+
 
 	/**
 	 * fragmentから戻されるとグローバル関数が参照できなくなる
@@ -620,6 +689,8 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
 			dbMsg += ">>";
 			transaction.commit();																// 最後にcommitを使用することで変更を反映します
 			dbMsg += "終了";
+			top_ll.setVisibility(View.GONE);		//起動画面を表示非にして全面をフラギェメントに
+
 			myLog(TAG , dbMsg);
 		} catch (IllegalStateException er) {
 			myErrorLog(TAG , dbMsg + "で" + er.toString());
@@ -664,25 +735,6 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
 		}
 	}
 
-
-	//classが無い小規模viewはレイアウトの呼び込み ///////////////////////////////////
-	public void setTopView() {
-		final String TAG = "setTopView";
-		String dbMsg = "[MainActivity]" ;/////////////////////////////////////////////////
-		try {
-			nowView = topView; 					//表示中のview
-			//		content_ll = findViewById(R.id.content_ll);
-
-//			content_ll.removeAllViews();
-//  			Context context = getApplicationContext();
-//			LayoutInflater inflater = LayoutInflater.from(context); // LayoutInflater inflater = (LayoutInflater)context.getSystemService(Context.LAYOUT_INFLATER_SERVICE);
-//			inflater.inflate(R.layout.activity_top, content_ll);
-//			nowView = R.layout.activity_top;
-			myLog(TAG , dbMsg);
-		} catch (Exception er) {
-			myErrorLog(TAG , dbMsg + "で" + er.toString());
-		}
-	}
 
 	public void setWebView() {
 			final String TAG = "setWebView";

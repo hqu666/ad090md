@@ -1,6 +1,8 @@
 package com.hijiyama_koubou.ja090dm;
+/**inflateでトップ画面を読み込めたのでこのクラスは廃棄予定*/
 
 import android.app.Activity;
+import android.content.Context;
 import android.content.Intent;
 import android.os.Bundle;
 import android.preference.PreferenceManager;
@@ -19,11 +21,15 @@ import com.journeyapps.barcodescanner.DecoratedBarcodeView;
 
 public class TopFragment  extends Fragment {
 
+    public Const CONST = new Const();
+    public Context context;
+
     private TextView top_view_titol;
     private TextView top_view_capsion;
-//    private TextView top_view_result_tv;
-//    private Button qr_act_bt;
-//    private Button web_act_bt;
+    private TextView top_view_result_tv;
+    private Button qr_act_bt;
+    private Button web_act_bt;
+
 
     public String transitionType;
 
@@ -80,6 +86,7 @@ public class TopFragment  extends Fragment {
 
     /**
      * Viewが生成し終わった時に呼ばれるメソッド
+     * ここで生成されたリソースへの参照を読み取っておく
      * */
     @Override
     public void onViewCreated(View view, Bundle savedInstanceState) {
@@ -92,7 +99,42 @@ public class TopFragment  extends Fragment {
             top_view_capsion = (TextView) view.findViewById(R.id.top_view_capsion);
             top_view_capsion.setText(getString(R.string.capsion_top_view));
 
-//            top_view_result_tv = (TextView) view.findViewById(R.id.top_view_result_tv);
+            top_view_result_tv = (TextView) view.findViewById(R.id.top_view_result_tv);
+            qr_act_bt = (Button) view.findViewById(R.id.qr_act_bt);
+            qr_act_bt.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View v) {                    // ボタンがクリックされた時に呼び出されます
+                    final String TAG = "onClick";
+                    String dbMsg = "[TopFragment.qr_act_bt]";
+                    try {
+                        TopFragment.this.submit(Const.CAll_CORDREADER);
+////                        getActivity().getClass().nowView = R.layout.activity_qr;
+//                        Intent barcordIntent = new Intent(context , QRActivity.class);
+//                        dbMsg += ".REQUEST_CORDREADER=" + Const.REQUEST_CORDREADER;
+//                        startActivityForResult(barcordIntent,Const.REQUEST_CORDREADER); //で呼び出せるがrequestCodeが反映されない
+                        myLog(TAG , dbMsg);
+                    } catch (Exception er) {
+                        myErrorLog(TAG , dbMsg + ";でエラー発生；" + er);
+                    }
+                }
+            });
+
+            web_act_bt = (Button) view.findViewById(R.id.web_act_bt);
+			web_act_bt.setOnClickListener(new View.OnClickListener() {
+				@Override
+				public void onClick(View v) {                    // ボタンがクリックされた時に呼び出されます
+					final String TAG = "setOnClickListener";
+					String dbMsg = "[MainActivity.web_act_bt]";
+					try {
+//						nowView = R.layout.activity_web;
+//						String dataURI = rootUrlStr;
+//						dbMsg += "dataURI=" + dataURI;
+//						callWebIntent(dataURI , MainActivity.this);
+					} catch (Exception er) {
+						myErrorLog(TAG , dbMsg + ";でエラー発生；" + er);
+					}
+				}
+			});
 
             myLog(TAG , dbMsg);
         } catch (Exception er) {
@@ -100,11 +142,34 @@ public class TopFragment  extends Fragment {
         }
     }
 
+
+    void submit(int resultCode) {
+        final String TAG = "submit";
+        String dbMsg = "[TopFragment]";
+        try {
+            Fragment target = getTargetFragment();
+            if (target == null) {
+                dbMsg = "target = nul";
+                return;
+            }
+
+            Intent data = new Intent();
+            data.putExtra(Intent.EXTRA_TEXT, resultCode);
+            target.onActivityResult(getTargetRequestCode(), Activity.RESULT_OK, data);
+            myLog(TAG , dbMsg);
+        } catch (Exception er) {
+            myErrorLog(TAG , dbMsg + ";でエラー発生；" + er);
+        }
+    }
+    /**
+     * このフラギュメントが読みだされた時
+     * */
     @Override
-    public void onAttach(Activity activity) {
-        super.onAttach(activity);
+    public void onAttach(Context context) {
+        super.onAttach(context);
         final String TAG = "onAttach";
         String dbMsg = "[TopFragment]" ;/////////////////////////////////////////////////
+        this.context = context;
         myLog(TAG , dbMsg);
     }
 
@@ -146,8 +211,32 @@ public class TopFragment  extends Fragment {
         }
         super.onPause();
     }
+    ///////////////////////////////////////////////////////////////////////////////////
+    /**
+     * resultエリアにメッセージを書き込む
+     * */
+    public void write2result_(String wStr) {
+        final String TAG = "write2result_";
+        String dbMsg = "[TopFragment]";
+        try {
+            dbMsg += ",wStr=" + wStr;
+            top_view_result_tv.setText(wStr);
+            myLog(TAG , dbMsg);
+        } catch (Exception er) {
+            myErrorLog(TAG , dbMsg + ";でエラー発生；" + er);
+        }
+    }
 
-
+    public void crick2CordReadBT_(String wStr) {
+        final String TAG = "crick2CordReadBT_";
+        String dbMsg = "[TopFragment]";
+        try {
+             top_view_result_tv.setText(wStr);
+            myLog(TAG , dbMsg);
+        } catch (Exception er) {
+            myErrorLog(TAG , dbMsg + ";でエラー発生；" + er);
+        }
+    }
     ///////////////////////////////////////////////////////////////////////////////////
     public void messageShow(String titolStr , String mggStr) {
         Util UTIL = new Util();

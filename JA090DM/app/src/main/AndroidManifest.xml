@@ -58,8 +58,8 @@
  		<activity android:name=".MyPreferencesActivty"/>
 		<activity
 			android:name=".QRActivity"
-			android:theme="@style/AppTheme">
 			android:screenOrientation="portrait"
+			android:theme="@style/AppTheme">
 		</activity>
 		<activity
 			android:name=".WebActivity"

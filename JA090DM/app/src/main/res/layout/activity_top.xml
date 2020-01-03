@@ -44,7 +44,7 @@
 		android:id="@+id/top_view_result_tv"
 		android:layout_width="match_parent"
 		android:layout_height="match_parent"
-		android:layout_weight="5"
+		android:layout_weight="1"
 		android:padding="16px"
 		android:text="TextView"
 		android:verticalScrollbarPosition="right" />
@@ -55,5 +55,11 @@
 		android:layout_height="wrap_content"
 		android:layout_margin="16px"
 		android:text="@string/menu_call_web" />
+
+	<LinearLayout
+		android:id="@+id/content_ll"
+		android:layout_width="match_parent"
+		android:layout_height="wrap_content"
+		android:orientation="vertical"></LinearLayout>
 
 </LinearLayout>
