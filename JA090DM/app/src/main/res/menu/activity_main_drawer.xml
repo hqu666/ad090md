@@ -5,6 +5,10 @@
 
 	<group android:checkableBehavior="single">
 		<item
+			android:id="@+id/md_call_top"
+			android:icon="@drawable/ic_menu_gallery"
+			android:title="@string/menu_call_top"/>
+		<item
 			android:id="@+id/nav_camera"
 			android:icon="@drawable/ic_menu_camera"
 			android:title="Import"/>
@@ -17,31 +21,36 @@
 			android:icon="@drawable/ic_menu_slideshow"
 			android:title="Slideshow"/>
 		<item
-			android:id="@+id/nav_manage"
-			android:icon="@drawable/ic_menu_manage"
-			android:title="Tools"/>
+			android:id="@+id/md_call_web2"
+			android:icon="@drawable/ic_menu_send"
+			android:title="@string/menu_call_web2"/>
+		<item
+			android:id="@+id/md_call_web"
+			android:icon="@drawable/ic_menu_send"
+			android:title="@string/menu_call_web"/>
 	</group>
 
 	<item android:title="Communicate">
 		<menu>
+			<!--<item-->
+				<!--android:id="@+id/nav_share"-->
+				<!--android:icon="@drawable/ic_menu_share"-->
+				<!--android:title="Share"/>-->
+			<!--<item-->
+				<!--android:id="@+id/nav_send"-->
+				<!--android:icon="@drawable/ic_menu_send"-->
+				<!--android:title="Send"/>-->
+
 			<item
-				android:id="@+id/nav_share"
-				android:icon="@drawable/ic_menu_share"
-				android:title="Share"/>
+				android:id="@+id/md_prefarence"
+				android:icon="@drawable/ic_menu_manage"
+				android:title="@string/menu_setting"/>
 			<item
-				android:id="@+id/nav_send"
-				android:icon="@drawable/ic_menu_send"
-				android:title="Send"/>
+				android:id="@+id/md_quit"
+				android:icon="@android:drawable/ic_lock_power_off"
+				android:title="@string/menu_quit"/>
+
 		</menu>
 	</item>
-
-	<item
-		android:id="@+id/md_prefarence"
-		android:icon="@drawable/ic_menu_manage"
-		android:title="@string/menu_setting"/>
-	<item
-		android:id="@+id/md_quit"
-		android:icon="@android:drawable/ic_lock_power_off"
-		android:title="@string/menu_quit"/>
 
 </menu>
