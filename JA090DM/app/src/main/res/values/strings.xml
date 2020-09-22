@@ -48,13 +48,15 @@
 	<string name="description">icon</string>
 
 	<string name="btf_re_scan">再読取</string>
-	<string name="menu_qr_read">QRコードから接続</string>
+	<string name="menu_top_view">トップ画面</string>
+	<string name="menu_qr_read">バーコードリーダー</string>
 	<string name="menu_call_main">メイン画面として接続</string>
 	<string name="menu_stand_alone">スタート</string>
 	<string name="menu_call_top">トップ画面</string>
 	<string name="menu_call_web">ウェブ</string>
 	<string name="menu_call_web2">別画面ウェブ</string>
 
+	<string name="capsion_top_view">下のボタンをタップすると別の画面を呼び出し、結果を持ち帰ります。</string>
 
 	<string name="menu_setting">設定</string>
 	<string name="menu_quit">終了</string>
@@ -93,7 +95,7 @@
 	<string name="wv_menu_bookmark_set">登録</string>
 	<string name="wv_menu_bookmark_select">選択</string>
 	<string name="mm_other">その他</string>
-	<string name="wv_menu_rescaling">サイズ合わせ</string>
+	<string name="wv_menu_rescaling">continue</string>
 	<string name="wv_menu_zoom_enable">ズーム有効</string>
 
 	<string name="action_leave">Leave</string>
@@ -132,6 +134,7 @@
 	<string name="aout_judge_msg1">トレース後は判定ボタンをタップして下さい。</string>
 	<string name="aout_judge_msg2">トレース後に自動判定を行います。</string>
 	<string name="about_text">URLを認識するとボタンに変わり、読み取ったQRコードを表示します。</string>
+	<string name="continue_titol">連続読取</string>
 
 	<string name="pref_transition_titol">遷移方法</string>
 	<string name="transition_actvity">activity</string>

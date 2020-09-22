@@ -2,19 +2,32 @@ package com.hijiyama_koubou.ja090dm;
 
 import android.content.Intent;
 import android.content.res.Configuration;
+import android.graphics.Bitmap;
+import android.graphics.drawable.Drawable;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
+import android.util.AndroidRuntimeException;
 import android.view.KeyEvent;
 import android.view.View;
 import android.widget.Button;
 import android.widget.ImageButton;
+import android.widget.ImageView;
 import android.widget.LinearLayout;
+import android.widget.TextView;
 
+import com.google.zxing.BarcodeFormat;
+import com.google.zxing.EncodeHintType;
 import com.google.zxing.ResultPoint;
+import com.google.zxing.WriterException;
+import com.google.zxing.integration.android.IntentIntegrator;
+import com.google.zxing.qrcode.decoder.ErrorCorrectionLevel;
 import com.journeyapps.barcodescanner.BarcodeCallback;
+import com.journeyapps.barcodescanner.BarcodeEncoder;
 import com.journeyapps.barcodescanner.BarcodeResult;
 import com.journeyapps.barcodescanner.DecoratedBarcodeView;
 
+import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.List;
 
 public class QRActivity extends AppCompatActivity {
@@ -24,15 +37,21 @@ public class QRActivity extends AppCompatActivity {
 	private LinearLayout coment_ll;
 
 	private LinearLayout prevew_ll;
-	//	private ImageView preveiw_iv;
+	private Button continue_bt;		//連続読み取り
 	private Button acsess_bt;
 	private Button rescan_bt;
+	private TextView qr_result_tv;
+	private ImageView qr_result_iv;
+	private Drawable orgDrawable;
+
+	public boolean isContinue = false;
+	public ArrayList<String> readCords = new ArrayList<String>();
 
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
-		final String TAG = "onCreate[QRA]";
-		String dbMsg = "";
+		final String TAG = "onCreate";
+		String dbMsg = "[QRActivity]";
 		try {
 			setContentView(R.layout.activity_qr);
 			scam_ll = ( LinearLayout ) findViewById(R.id.scam_ll);
@@ -41,17 +60,50 @@ public class QRActivity extends AppCompatActivity {
 			coment_ll = ( LinearLayout ) findViewById(R.id.coment_ll);
 
 			prevew_ll = ( LinearLayout ) findViewById(R.id.prevew_ll);
-//			preveiw_iv = (ImageView ) findViewById(R.id.preveiw_iv);
+			continue_bt = ( Button ) findViewById(R.id.continue_bt);
+			continue_bt.setOnClickListener(new View.OnClickListener() {
+				@Override
+				public void onClick(View v) {                    // ボタンがクリックされた時に呼び出されます
+					final String TAG = "continue_bt";
+					String dbMsg = "[onViewCreated.QRActivity]";
+					try {
+						isContinue = true;
+						dbMsg = "連続読取開始";
+						qr_result_iv.setVisibility(View.GONE);
+						rescan_bt.setVisibility(View.GONE);
+
+						startCapture();
+						myLog(TAG , dbMsg);
+					} catch (Exception er) {
+						myErrorLog(TAG , dbMsg + ";でエラー発生；" + er);
+					}
+				}
+			});
 			acsess_bt = ( Button ) findViewById(R.id.acsess_bt);
 			rescan_bt = ( Button ) findViewById(R.id.rescan_bt);
-			prevew_ll.setVisibility(View.GONE);
-			laterCreate();
-			//onActivityResult で結果を受け取るパターン
-//					new IntentIntegrator(MainActivity.this).initiateScan();   				//これだけでもQRコードアクティビティを形成して、onActivityResultで内容を取得できる
+			rescan_bt.setOnClickListener(new View.OnClickListener() {
+				@Override
+				public void onClick(View v) {                    // ボタンがクリックされた時に呼び出されます
+					final String TAG = "rescan_bt";
+					String dbMsg = "[onViewCreated]";
+					try {
+						isContinue = false;
+						startCapture();
+						myLog(TAG , dbMsg);
+					} catch (Exception er) {
+						myErrorLog(TAG , dbMsg + ";でエラー発生；" + er);
+					}
+				}
+			});
 
-//		DecoratedBarcodeView qrReaderView = findViewById(R.id.decoratedBarcodeView);
-//		startCapture()
-//		new IntentIntegrator(QRActivity.this).initiateScan();
+//			prevew_ll.setVisibility(View.GONE);
+			qr_result_iv = ( ImageView ) findViewById(R.id.qr_result_iv);
+			orgDrawable = qr_result_iv.getDrawable();
+			qr_result_tv = ( TextView ) findViewById(R.id.qr_result_tv);
+
+			qrReaderView = ( DecoratedBarcodeView ) findViewById(R.id.decoratedBarcodeView);
+			laterCreate();
+
 			myLog(TAG , dbMsg);
 		} catch (Exception er) {
 			myErrorLog(TAG , dbMsg + ";でエラー発生；" + er);
@@ -61,8 +113,8 @@ public class QRActivity extends AppCompatActivity {
 	@Override
 	protected void onResume() {
 		super.onResume();
-		final String TAG = "onResume[QRA]";
-		String dbMsg = "";
+		final String TAG = "onResume";
+		String dbMsg = "[QRA]";
 		try {
 			qrReaderView.resume();
 			myLog(TAG , dbMsg);
@@ -73,8 +125,8 @@ public class QRActivity extends AppCompatActivity {
 
 	@Override
 	protected void onPause() {
-		final String TAG = "onPause[QRA]";
-		String dbMsg = "";
+		final String TAG = "onPause";
+		String dbMsg = "[QRActivity]";
 		try {
 			qrReaderView.pause();
 			myLog(TAG , dbMsg);
@@ -86,8 +138,9 @@ public class QRActivity extends AppCompatActivity {
 
 	@Override
 	protected void onActivityResult(int requestCode , int resultCode , Intent data) {
-		final String TAG = "onActivityResult[QRA]";
-		String dbMsg = "requestCode=" + requestCode + ",resultCode=" + resultCode;
+		final String TAG = "onActivityResult";
+		String dbMsg = "[QRActivity]";
+		dbMsg += "requestCode=" + requestCode + ",resultCode=" + resultCode;
 		try {
 //			IntentResult result = IntentIntegrator.parseActivityResult(requestCode, resultCode, data);
 //			if(result != null) {
@@ -109,8 +162,8 @@ public class QRActivity extends AppCompatActivity {
 	/////////////////////////////////////////////////////////////////////////////////////////////////////////////
 	@Override
 	public boolean onKeyDown(int keyCode , KeyEvent event) {
-		final String TAG = "onKeyDown[QRA]";
-		String dbMsg = "開始";
+		final String TAG = "onKeyDown";
+		String dbMsg = "[QRActivity]";
 		try {
 			dbMsg = "keyCode=" + keyCode;//+",getDisplayLabel="+String.valueOf(MyEvent.getDisplayLabel())+",getAction="+MyEvent.getAction();////////////////////////////////
 			myLog(TAG , dbMsg);
@@ -198,20 +251,24 @@ public class QRActivity extends AppCompatActivity {
 		}
 	}
 
+
+	/**
+	 * この画面を終了する前に読み取ったコード配列を文字列化
+	 * **/
 	public void callQuit() {
-		final String TAG = "callQuit[MA]";
-		String dbMsg = "";
+		final String TAG = "callQuit";
+		String dbMsg = "[QRActivity]";
 		try {
-//			sharedPref = PreferenceManager.getDefaultSharedPreferences(MainActivity.this);            //	getActivity().getBaseContext()
-//			myEditor = sharedPref.edit();
-////			myEditor.putString("peer_id_key" , "");      //使用した
-////			boolean kakikomi = myEditor.commit();
+			Intent intent = new Intent();
+			String wStr = "";
+			for(String rCrod : readCords) {            //読み取っているコード
+				wStr +=  rCrod + ",";
+			}
+
+
+			intent.putExtra("readCords", wStr);
+			setResult(RESULT_OK, intent);
 			this.finish();
-//			if ( Build.VERSION.SDK_INT >= Build.VERSION_CODES.LOLLIPOP ) {
-//				finishAndRemoveTask();                      //アプリケーションのタスクを消去する事でデバッガーも停止する。
-//			} else {
-//				moveTaskToBack(true);                       //ホームボタン相当でアプリケーション全体が中断状態
-//			}
 			myLog(TAG , dbMsg);
 		} catch (Exception er) {
 			myErrorLog(TAG , dbMsg + ";でエラー発生；" + er);
@@ -232,79 +289,160 @@ public class QRActivity extends AppCompatActivity {
 		}
 	}
 
+
 	private void startCapture() {
-		final String TAG = "startCapture[MA]";                        //
-		String dbMsg = "";
+		final String TAG = "startCapture";                        //
+		String dbMsg = "[QRActivity]";
 		try {
-			prevew_ll.setVisibility(View.GONE);
+//			DecoratedBarcodeView qrReaderView = findViewById(R.id.decoratedBarcodeView);
+//			new IntentIntegrator(QRActivity.this).initiateScan();
+
 			coment_ll.setVisibility(View.VISIBLE);
-//						release_bt.setVisibility(View.VISIBLE);
-			qrReaderView.decodeSingle(new BarcodeCallback() {
-				@Override
-				public void barcodeResult(BarcodeResult barcodeResult) {
-					final String TAG = "barcodeResult[MA]";
-					String dbMsg = "";
-					try {
-						String dataURI = barcodeResult.getText();
-						dbMsg = ",dataURI=" + dataURI;
-						if ( dataURI.startsWith("http") ) {
-							coment_ll.setVisibility(View.GONE);
-							release_bt.setVisibility(View.GONE);
-//						acsess_bt.setVisibility(View.VISIBLE);
-//						scam_ll.setVisibility(View.GONE);
-							prevew_ll.setVisibility(View.VISIBLE);
-//					preveiw_iv = (ImageView ) findViewById(R.id.preveiw_iv);
-							acsess_bt.setText(dataURI);
+			qr_result_tv.setVisibility(View.VISIBLE);
+			qr_result_iv.setImageDrawable(orgDrawable);
 
-//						Bitmap bitmap = barcodeEncoder.encodeBitmap(data,BarcodeFormat.QR_CODE, size, size);
+			if(isContinue) {
+				qrReaderView.decodeContinuous(new BarcodeCallback() {
+					@Override
+					public void barcodeResult(BarcodeResult barcodeResult) {
+						final String TAG = "decodeContinuous";
+						String dbMsg = "[QRActivity]QRコード連続読み取り";
+						try {
+							qrReaderView.pause();
 
-//						navi_head_sub_tv.setText(dataURI);
+							String dataURI = barcodeResult.getText();	//よくあある用途でURLとして読み取る
+							dbMsg += ",dataURI=" + dataURI;
+							boolean isAdd = true;
+							for(String rCrod : readCords) {			//読み取っているコードの中に
+								if(rCrod.equals(dataURI)){			//同じコードが有れば
+									isAdd = false;					//処理中断
+									break;
+								}
+							}
+							if(isAdd){								//重複がなければ
+								readCords.add(dataURI);				//追加
+								dbMsg += ">>追加" + readCords.size() + "件目";
+							}else{
+								dbMsg += ">>重複";
+							}
+							//	coment_ll.setVisibility(View.VISIBLE);
+							if(isAdd){								//追加が有れば
+								String wStr = "";
+								int wCount = 0;
+								for(String rCrod : readCords) {            //読み取っているコード
+									wCount++;
+									wStr += "(" + wCount + ")" + rCrod + "\n";
+								}
+								dbMsg += " ,wStr=" + wStr;
+								qr_result_tv.setText(wStr);
+							}
+							dbMsg += ">>再読み込み";
+							myLog(TAG , dbMsg);
+							qrReaderView.resume();		//読み取り開始
+//							startCapture();
+							myLog(TAG , dbMsg);
+						} catch (Exception er) {
+							myErrorLog(TAG , dbMsg + ";でエラー発生；" + er);
 						}
-						myLog(TAG , dbMsg);
-					} catch (Exception er) {
-						myErrorLog(TAG , dbMsg + ";でエラー発生；" + er);
-
 					}
 
-				}
-
-				@Override
-				public void possibleResultPoints(List< ResultPoint > list) {
-					final String TAG = "possibleResultPoints[MA]";
-					String dbMsg = "";
-					try {
+					@Override
+					public void possibleResultPoints(List< ResultPoint > list) {
+						final String TAG = "possibleResultPoints";
+						String dbMsg = "";
+						try {
 //						dbMsg += "list = " + list.size() + "件";
 //						for (Object  rStr: list){
 //							dbMsg += "\n = " + rStr;
 //						}
 //						myLog(TAG , dbMsg);
-					} catch (Exception er) {
-						myErrorLog(TAG , dbMsg + ";でエラー発生；" + er);
+						} catch (Exception er) {
+							myErrorLog(TAG , dbMsg + ";でエラー発生；" + er);
+						}
 					}
-				}
-			});
-//		qrReaderView?.decodeSingle(object : BarcodeCallback {
-//			override fun barcodeResult(result: BarcodeResult?) {
-//				stopCapture()
-//				if (result == null) {
-//					// no result
-//					Log.w(TAG, "No result")
-//					return
-//				}
-//				Log.i(TAG, "QRCode Result: ${result.text}")
-//				val bytes = result.resultMetadata[ResultMetadataType.BYTE_SEGMENTS] as? List<*>
-//				val data = bytes?.get(0) as? ByteArray ?: return
-//
-//																  // print result
-//																  val resultString = StringBuffer()
-//				data.map { byte ->
-//					resultString.append(String.format("0x%02X,", byte))
-//				}
-//				Log.i(TAG, resultString.toString())
-//			}
-//			override fun possibleResultPoints(resultPoints: MutableList<ResultPoint>?) { }
-//		})
-//		qrReaderView?.resume()
+
+				});
+			}else{
+				qrReaderView.decodeSingle(new BarcodeCallback() {
+					@Override
+					public void barcodeResult(BarcodeResult barcodeResult) {
+						final String TAG = "decodeSingle";
+						String dbMsg = "[QRActivity]QRコード読み取り";
+						try {
+							qrReaderView.pause();
+
+							String dataURI = barcodeResult.getText();	//よくあある用途でURLとして読み取る
+							dbMsg += ",dataURI=" + dataURI;
+							boolean isAdd = true;
+							for(String rCrod : readCords) {			//読み取っているコードの中に
+								if(rCrod.equals(dataURI)){			//同じコードが有れば
+									isAdd = false;					//処理中断
+									break;
+								}
+							}
+							if(isAdd){								//重複がなければ
+								readCords.add(dataURI);				//追加
+								dbMsg += ">>追加" + readCords.size() + "件目";
+							}else{
+								dbMsg += ">>重複";
+							}
+
+								qr_result_iv.setVisibility(View.VISIBLE);
+								rescan_bt.setVisibility(View.VISIBLE);
+								try {
+									BarcodeEncoder barcodeEncoder = new BarcodeEncoder();
+									HashMap hints = new HashMap();
+
+									//文字コードの指定
+									hints.put(EncodeHintType.CHARACTER_SET, "shiftjis");
+
+									hints.put(EncodeHintType.ERROR_CORRECTION, ErrorCorrectionLevel.M);									//誤り訂正レベルを指定:/L 7% /M 15%が復元可能 /Q 25%が復元可能 /H 30%が復元可能
+									int size = qr_result_iv.getHeight();
+									dbMsg += " ,size=" + size;
+									Bitmap bitmap = barcodeEncoder.encodeBitmap(dataURI, BarcodeFormat.QR_CODE , size, size, hints);	//QRコードをBitmapで作成
+									qr_result_iv.setImageBitmap(bitmap);			//作成したQRコードを画面上に配置
+								} catch (WriterException e) {
+									throw new AndroidRuntimeException("Barcode Error.", e);
+								}
+
+								if ( dataURI.startsWith("http") ) {
+									qr_result_tv.setVisibility(View.GONE);
+									release_bt.setVisibility(View.GONE);
+									prevew_ll.setVisibility(View.VISIBLE);
+									acsess_bt.setText(dataURI);
+								} else {
+									acsess_bt.setVisibility(View.GONE);
+									qr_result_tv.setVisibility(View.VISIBLE);
+									qr_result_tv.setText("読み取ったコードは　" + dataURI);
+								}
+
+							myLog(TAG , dbMsg);
+						} catch (Exception er) {
+							myErrorLog(TAG , dbMsg + ";でエラー発生；" + er);
+
+						}
+
+					}
+
+					@Override
+					public void possibleResultPoints(List< ResultPoint > list) {
+						final String TAG = "possibleResultPoints";
+						String dbMsg = "";
+						try {
+//						dbMsg += "list = " + list.size() + "件";
+//						for (Object  rStr: list){
+//							dbMsg += "\n = " + rStr;
+//						}
+//						myLog(TAG , dbMsg);
+						} catch (Exception er) {
+							myErrorLog(TAG , dbMsg + ";でエラー発生；" + er);
+						}
+					}
+				});						//リスナ登録
+
+			}
+
+
 
 			myLog(TAG , dbMsg);
 		} catch (Exception er) {

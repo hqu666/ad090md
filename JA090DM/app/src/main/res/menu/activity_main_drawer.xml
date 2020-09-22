@@ -7,11 +7,11 @@
 		<item
 			android:id="@+id/md_call_top"
 			android:icon="@drawable/ic_menu_gallery"
-			android:title="@string/menu_call_top"/>
+			android:title="@string/menu_top_view"/>
 		<item
-			android:id="@+id/nav_camera"
+			android:id="@+id/nav_barcord"
 			android:icon="@drawable/ic_menu_camera"
-			android:title="Import"/>
+			android:title="@string/menu_qr_read"/>
 		<item
 			android:id="@+id/nav_gallery"
 			android:icon="@drawable/ic_menu_gallery"

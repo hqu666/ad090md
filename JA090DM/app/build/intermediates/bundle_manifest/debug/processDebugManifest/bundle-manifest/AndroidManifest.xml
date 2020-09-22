@@ -90,6 +90,11 @@
         <!-- <activity android:name=".TopActivity"/> -->
         <activity android:name="com.hijiyama_koubou.ja090dm.MyPreferencesActivty" />
         <activity
+            android:name="com.hijiyama_koubou.ja090dm.QRActivity"
+            android:screenOrientation="portrait"
+            android:theme="@style/AppTheme" >
+        </activity>
+        <activity
             android:name="com.hijiyama_koubou.ja090dm.WebActivity"
             android:theme="@style/AppTheme" >
         </activity>
@@ -111,11 +116,6 @@
             android:authorities="com.hijiyama_koubou.ja090dm.mobileadsinitprovider"
             android:exported="false"
             android:initOrder="100" />
-
-        <activity
-            android:name="com.google.android.gms.common.api.GoogleApiActivity"
-            android:exported="false"
-            android:theme="@android:style/Theme.Translucent.NoTitleBar" />
 
         <meta-data
             android:name="com.google.android.gms.version"
