@@ -1,9 +1,9 @@
 -- Merging decision tree log ---
 manifest
-ADDED from /Users/hqu666/Documents/Develop/an/workSpace/ad090md/JA090DM/app/src/main/AndroidManifest.xml:2:1-65:12
-INJECTED from /Users/hqu666/Documents/Develop/an/workSpace/ad090md/JA090DM/app/src/main/AndroidManifest.xml:2:1-65:12
-INJECTED from /Users/hqu666/Documents/Develop/an/workSpace/ad090md/JA090DM/app/src/main/AndroidManifest.xml:2:1-65:12
-INJECTED from /Users/hqu666/Documents/Develop/an/workSpace/ad090md/JA090DM/app/src/main/AndroidManifest.xml:2:1-65:12
+ADDED from /Users/hqu666/Documents/Develop/an/workSpace/ad090md/JA090DM/app/src/main/AndroidManifest.xml:2:1-70:12
+INJECTED from /Users/hqu666/Documents/Develop/an/workSpace/ad090md/JA090DM/app/src/main/AndroidManifest.xml:2:1-70:12
+INJECTED from /Users/hqu666/Documents/Develop/an/workSpace/ad090md/JA090DM/app/src/main/AndroidManifest.xml:2:1-70:12
+INJECTED from /Users/hqu666/Documents/Develop/an/workSpace/ad090md/JA090DM/app/src/main/AndroidManifest.xml:2:1-70:12
 MERGED from [android.arch.navigation:navigation-ui:1.0.0] /Users/hqu666/.gradle/caches/transforms-2/files-2.1/1e0221397745a331cf92eb6328204ba6/navigation-ui-1.0.0/AndroidManifest.xml:17:1-22:12
 MERGED from [com.android.support:design:28.0.0] /Users/hqu666/.gradle/caches/transforms-2/files-2.1/0e8846c1e204e79a65a49499cf5cacc7/design-28.0.0/AndroidManifest.xml:17:1-24:12
 MERGED from [com.android.support.constraint:constraint-layout:2.0.1] /Users/hqu666/.gradle/caches/transforms-2/files-2.1/46004820cab87543f1baf027040f7a07/constraint-layout-2.0.1/AndroidManifest.xml:2:1-11:12
@@ -57,20 +57,20 @@ MERGED from [com.android.support:localbroadcastmanager:28.0.0] /Users/hqu666/.gr
 MERGED from [com.android.support:print:28.0.0] /Users/hqu666/.gradle/caches/transforms-2/files-2.1/f9b4407e2d6f9e6d73e2e41e2d02eb35/print-28.0.0/AndroidManifest.xml:17:1-22:12
 MERGED from [com.android.support:interpolator:28.0.0] /Users/hqu666/.gradle/caches/transforms-2/files-2.1/d7fd0a6b82dbac033f938c982be39bd3/interpolator-28.0.0/AndroidManifest.xml:17:1-22:12
 MERGED from [com.google.android.gms:play-services-ads-base:17.2.0] /Users/hqu666/.gradle/caches/transforms-2/files-2.1/7ee9b14e091c473d4d7f2ccc2f160053/play-services-ads-base-17.2.0/AndroidManifest.xml:2:1-9:12
-INJECTED from /Users/hqu666/Documents/Develop/an/workSpace/ad090md/JA090DM/app/src/main/AndroidManifest.xml:2:1-65:12
-INJECTED from /Users/hqu666/Documents/Develop/an/workSpace/ad090md/JA090DM/app/src/main/AndroidManifest.xml:2:1-65:12
-INJECTED from /Users/hqu666/Documents/Develop/an/workSpace/ad090md/JA090DM/app/src/main/AndroidManifest.xml:2:1-65:12
+INJECTED from /Users/hqu666/Documents/Develop/an/workSpace/ad090md/JA090DM/app/src/main/AndroidManifest.xml:2:1-70:12
+INJECTED from /Users/hqu666/Documents/Develop/an/workSpace/ad090md/JA090DM/app/src/main/AndroidManifest.xml:2:1-70:12
+INJECTED from /Users/hqu666/Documents/Develop/an/workSpace/ad090md/JA090DM/app/src/main/AndroidManifest.xml:2:1-70:12
 	package
 		ADDED from /Users/hqu666/Documents/Develop/an/workSpace/ad090md/JA090DM/app/src/main/AndroidManifest.xml:3:5-42
 		INJECTED from /Users/hqu666/Documents/Develop/an/workSpace/ad090md/JA090DM/app/src/main/AndroidManifest.xml
 		INJECTED from /Users/hqu666/Documents/Develop/an/workSpace/ad090md/JA090DM/app/src/main/AndroidManifest.xml
 	android:versionName
 		INJECTED from /Users/hqu666/Documents/Develop/an/workSpace/ad090md/JA090DM/app/src/main/AndroidManifest.xml
-		ADDED from /Users/hqu666/Documents/Develop/an/workSpace/ad090md/JA090DM/app/src/main/AndroidManifest.xml:2:1-65:12
+		ADDED from /Users/hqu666/Documents/Develop/an/workSpace/ad090md/JA090DM/app/src/main/AndroidManifest.xml:2:1-70:12
 		INJECTED from /Users/hqu666/Documents/Develop/an/workSpace/ad090md/JA090DM/app/src/main/AndroidManifest.xml
 	android:versionCode
 		INJECTED from /Users/hqu666/Documents/Develop/an/workSpace/ad090md/JA090DM/app/src/main/AndroidManifest.xml
-		ADDED from /Users/hqu666/Documents/Develop/an/workSpace/ad090md/JA090DM/app/src/main/AndroidManifest.xml:2:1-65:12
+		ADDED from /Users/hqu666/Documents/Develop/an/workSpace/ad090md/JA090DM/app/src/main/AndroidManifest.xml:2:1-70:12
 		INJECTED from /Users/hqu666/Documents/Develop/an/workSpace/ad090md/JA090DM/app/src/main/AndroidManifest.xml
 	xmlns:android
 		ADDED from /Users/hqu666/Documents/Develop/an/workSpace/ad090md/JA090DM/app/src/main/AndroidManifest.xml:2:11-69
@@ -109,7 +109,7 @@ MERGED from [com.journeyapps:zxing-android-embedded:3.6.0] /Users/hqu666/.gradle
 	android:name
 		ADDED from /Users/hqu666/Documents/Develop/an/workSpace/ad090md/JA090DM/app/src/main/AndroidManifest.xml:12:19-59
 application
-ADDED from /Users/hqu666/Documents/Develop/an/workSpace/ad090md/JA090DM/app/src/main/AndroidManifest.xml:14:2-63:16
+ADDED from /Users/hqu666/Documents/Develop/an/workSpace/ad090md/JA090DM/app/src/main/AndroidManifest.xml:14:2-68:16
 MERGED from [com.android.support:design:28.0.0] /Users/hqu666/.gradle/caches/transforms-2/files-2.1/0e8846c1e204e79a65a49499cf5cacc7/design-28.0.0/AndroidManifest.xml:22:5-20
 MERGED from [com.android.support:design:28.0.0] /Users/hqu666/.gradle/caches/transforms-2/files-2.1/0e8846c1e204e79a65a49499cf5cacc7/design-28.0.0/AndroidManifest.xml:22:5-20
 MERGED from [com.android.support.constraint:constraint-layout:2.0.1] /Users/hqu666/.gradle/caches/transforms-2/files-2.1/46004820cab87543f1baf027040f7a07/constraint-layout-2.0.1/AndroidManifest.xml:9:5-20
@@ -202,12 +202,20 @@ activity#com.hijiyama_koubou.ja090dm.MyPreferencesActivty
 ADDED from /Users/hqu666/Documents/Develop/an/workSpace/ad090md/JA090DM/app/src/main/AndroidManifest.xml:58:4-52
 	android:name
 		ADDED from /Users/hqu666/Documents/Develop/an/workSpace/ad090md/JA090DM/app/src/main/AndroidManifest.xml:58:14-50
-activity#com.hijiyama_koubou.ja090dm.WebActivity
-ADDED from /Users/hqu666/Documents/Develop/an/workSpace/ad090md/JA090DM/app/src/main/AndroidManifest.xml:59:3-62:14
+activity#com.hijiyama_koubou.ja090dm.QRActivity
+ADDED from /Users/hqu666/Documents/Develop/an/workSpace/ad090md/JA090DM/app/src/main/AndroidManifest.xml:59:3-63:14
+	android:screenOrientation
+		ADDED from /Users/hqu666/Documents/Develop/an/workSpace/ad090md/JA090DM/app/src/main/AndroidManifest.xml:61:4-40
 	android:theme
-		ADDED from /Users/hqu666/Documents/Develop/an/workSpace/ad090md/JA090DM/app/src/main/AndroidManifest.xml:61:4-35
+		ADDED from /Users/hqu666/Documents/Develop/an/workSpace/ad090md/JA090DM/app/src/main/AndroidManifest.xml:62:4-35
 	android:name
-		ADDED from /Users/hqu666/Documents/Develop/an/workSpace/ad090md/JA090DM/app/src/main/AndroidManifest.xml:60:4-31
+		ADDED from /Users/hqu666/Documents/Develop/an/workSpace/ad090md/JA090DM/app/src/main/AndroidManifest.xml:60:4-30
+activity#com.hijiyama_koubou.ja090dm.WebActivity
+ADDED from /Users/hqu666/Documents/Develop/an/workSpace/ad090md/JA090DM/app/src/main/AndroidManifest.xml:64:3-67:14
+	android:theme
+		ADDED from /Users/hqu666/Documents/Develop/an/workSpace/ad090md/JA090DM/app/src/main/AndroidManifest.xml:66:4-35
+	android:name
+		ADDED from /Users/hqu666/Documents/Develop/an/workSpace/ad090md/JA090DM/app/src/main/AndroidManifest.xml:65:4-31
 uses-sdk
 INJECTED from /Users/hqu666/Documents/Develop/an/workSpace/ad090md/JA090DM/app/src/main/AndroidManifest.xml reason: use-sdk injection requested
 INJECTED from /Users/hqu666/Documents/Develop/an/workSpace/ad090md/JA090DM/app/src/main/AndroidManifest.xml

@@ -48,21 +48,11 @@ dependencies {
     //追加ライブラリー2;zxingのQRリーダー
     implementation 'com.journeyapps:zxing-android-embedded:3.6.0'
     //play-servicesは配布されていない
-<<<<<<< HEAD
 //    implementation 'com.android.support:support-media-compat:28.0.0'
 //    //    appcompat-v7が通らなくなった場合
 //    implementation 'com.android.support:animated-vector-drawable:28.0.0'
 //    implementation 'com.android.support:customtabs:28.0.0'
     implementation 'com.google.android.gms:play-services-location:16.0.0'
-=======
-    implementation 'com.android.support:support-media-compat:28.0.0'
-    //    appcompat-v7が通らなくなった場合
-    implementation 'com.android.support:animated-vector-drawable:28.0.0'
-    implementation 'com.android.support:customtabs:28.0.0'
-//    implementation 'com.google.android.gms:play-services-location:17.2.0'
->>>>>>> a6254fcd6faeb7b74df5a69d6a763fa9e1ac38db
     testImplementation 'junit:junit:4.13-beta-2'
-//    androidTestImplementation 'com.android.support.test:runner:1.0.2'
-//    androidTestImplementation 'com.android.support.test.espresso:espresso-core:3.0.2'
     implementation project(':nendSDK-5.1.0')
 }
